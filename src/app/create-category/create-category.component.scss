@@ -1,0 +1,32 @@
+@import "src/styles/global";
+@import "src/styles/fonts";
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+
+}
+
+label{
+  @extend  .main-text__body-l;
+}
+
+h1{
+  @extend .desktop__poppins-h1;
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-container{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 24px;
+}

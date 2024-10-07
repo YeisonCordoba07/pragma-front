@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-secondary-icon-button',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./secondary-icon-button.component.scss']
 })
 export class SecondaryIconButtonComponent implements OnInit {
+  @Input() buttonText: string = "Button";
 
   constructor() { }
 

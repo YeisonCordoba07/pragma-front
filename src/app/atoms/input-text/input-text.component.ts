@@ -6,7 +6,9 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./input-text.component.scss']
 })
 export class InputTextComponent implements OnInit {
-  @Input() placeholder_text: string | undefined;
+  @Input() placeholderText: string = "";
+  @Input() idInput: string | undefined;
+
 
   constructor() { }
 

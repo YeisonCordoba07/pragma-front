@@ -6,6 +6,7 @@ input{
   border: 1px solid $color-border;
   border-radius: 2px;
   @extend .main-text__body-xs;
+  margin-bottom: 20px;
 }
 
 input:focus{
@@ -16,3 +17,5 @@ input:disabled{
   background-color: $color-disabled;
   color: $color-border;
 }
+
+

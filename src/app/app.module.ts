@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
 import { InputTextComponent } from './atoms/input-text/input-text.component';
 import { SecondaryIconButtonComponent } from './atoms/secondary-icon-button/secondary-icon-button.component';
+import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
+
+
+import { CreateCategoryComponent } from './create-category/create-category.component'; // Importar FormsModule
 
 
 @NgModule({
@@ -13,11 +17,14 @@ import { SecondaryIconButtonComponent } from './atoms/secondary-icon-button/seco
     AppComponent,
     IconButtonComponent,
     InputTextComponent,
-    SecondaryIconButtonComponent
+    SecondaryIconButtonComponent,
+    SaveIconComponent,
+    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

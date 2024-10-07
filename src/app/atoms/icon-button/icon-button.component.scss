@@ -1,15 +1,18 @@
 @import "src/styles/global";
+@import "src/styles/fonts";
+
 
 button{
   display: flex;
   align-items: center;
-  padding: 8px 52px;
+  padding: 12px 52px;
   gap: 8px;
   border-style: none;
   border-radius: 4px;
   background-color:$color-purple;
   color: white;
   transition-duration: 200ms;
+  @extend .main-text__body-m-regular;
 }
 
 button:hover {
