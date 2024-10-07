@@ -1,0 +1,30 @@
+@import "src/styles/global";
+
+button{
+  display: flex;
+  align-items: center;
+  padding: 8px 52px;
+  gap: 8px;
+
+  border-radius: 4px;
+  border: 2px solid $color-purple;
+  background-color:$color-white;
+  color: $color-purple;
+  transition-duration: 200ms;
+}
+
+button:hover {
+  border-color:$color-purple-hover;
+  color:$color-purple-hover;
+  transform: scale(1.1);
+}
+
+button:active {
+  border-color:$color-purple-click;
+  color:$color-purple-click;
+}
+
+button:disabled {
+  border-color:$color-disabled;
+  color:$color-disabled;
+}

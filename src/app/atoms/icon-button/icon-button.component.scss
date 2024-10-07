@@ -1,8 +1,4 @@
-
-$color-purple: #9D3FE7;
-$color-purple-hover: #AE60EB;
-$color-purple-click: #6A17AB;
-$color-disabled: #D4D2D5;
+@import "src/styles/global";
 
 button{
   display: flex;
@@ -18,6 +14,7 @@ button{
 
 button:hover {
   background-color:$color-purple-hover;
+  transform: scale(1.1);
 }
 
 button:active {

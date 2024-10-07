@@ -10,7 +10,7 @@ $color-disabled: #D4D2D5;
 $color-spacer: #D9D1E0;
 $color-spacer_light: #E5E0EB;
 $color-bg_light_grey: #F5F3F7;
-$color-white: #D9D1E0;
+$color-white: #FFFFFF;
 
 // Color Informing
 $color-error: #D51A52;
@@ -25,6 +25,10 @@ $color-purple-click: #6A17AB;
 
 *{
   box-sizing: border-box;
+}
+
+:root {
+  --color-purple: #{$color-purple};
 }
 
 
