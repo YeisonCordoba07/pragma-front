@@ -1,0 +1,105 @@
+// DESKTOP FONTS ---------------------------------------------
+.desktop__poppins-h1{
+  //styleName: Desktop Headlines/H1;
+  font-family: "Poppins", sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 56.32px;
+  text-align: left;
+  color: $color-black;
+}
+
+.desktop__poppins-h2{
+  //styleName: Desktop Headlines/H2;
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  color: $color-black;
+}
+
+.desktop__poppins-h3{
+  //styleName: Desktop Headlines/H3;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27.28px;
+  text-align: left;
+  color: $color-black;
+}
+
+.desktop__poppins-h4{
+  //styleName: Desktop Headlines/H4;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 23.76px;
+  text-align: left;
+  color: $color-black;
+}
+
+
+
+
+// MAIN TEXT -------------------------------------------------
+
+.main-text__body-l{
+  //styleName: Body txt/body_L;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28.8px;
+  text-align: left;
+  color: $color-black;
+}
+
+.main-text__body-m{
+  //styleName: Body txt/body-M;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 23.76px;
+  text-align: left;
+  color: $color-black;
+}
+
+.main-text__body-m-regular{
+  //styleName: Body txt/body-M-Regular;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.76px;
+  text-align: left;
+  color: $color-black;
+}
+
+.main-text__body-s{
+  //styleName: Body txt/body-S;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 23.68px;
+  text-align: left;
+  color: $color-black;
+}
+
+.main-text__body-s-regular{
+  //styleName: Body txt/body-S-Regular;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23.68px;
+  text-align: left;
+  color: $color-black;
+}
+
+.main-text__body-xs{
+  //styleName: Body txt/body-XS;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  text-align: left;
+  color: $color-black;
+}
