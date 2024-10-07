@@ -24,6 +24,11 @@ section{
   align-items: center;
 }
 
+.form-container{
+  display: flex;
+  flex-direction: column;
+}
+
 .buttons-container{
   display: flex;
   flex-direction: row;
