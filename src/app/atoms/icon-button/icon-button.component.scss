@@ -1,0 +1,29 @@
+
+$color-purple: #9D3FE7;
+$color-purple-hover: #AE60EB;
+$color-purple-click: #6A17AB;
+$color-disabled: #D4D2D5;
+
+button{
+  display: flex;
+  align-items: center;
+  padding: 8px 52px;
+  gap: 8px;
+  border-style: none;
+  border-radius: 4px;
+  background-color:$color-purple;
+  color: white;
+  transition-duration: 200ms;
+}
+
+button:hover {
+  background-color:$color-purple-hover;
+}
+
+button:active {
+  background-color:$color-purple-click;
+}
+
+button:disabled {
+  background-color:$color-disabled;
+}
