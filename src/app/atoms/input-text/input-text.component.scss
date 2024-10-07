@@ -1,0 +1,18 @@
+@import "src/styles/global";
+@import "src/styles/fonts";
+
+input{
+  padding: 12px;
+  border: 1px solid $color-border;
+  border-radius: 2px;
+  @extend .main-text__body-xs;
+}
+
+input:focus{
+  outline-color: $color-purple;
+}
+
+input:disabled{
+  background-color: $color-disabled;
+  color: $color-border;
+}
