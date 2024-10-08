@@ -1,5 +1,6 @@
-@import "src/styles/global";
+@import "../../styles/global-colors";
 @import "src/styles/fonts";
+@import "src/styles/global";
 
 form{
   display: flex;
@@ -7,7 +8,13 @@ form{
   gap: 8px;
   align-items: center;
 
+  padding: 25px;
+  @extend .shadow__medium;
+  @extend .corner-radius__large;
+
 }
+
+
 
 label{
   @extend  .main-text__body-l;

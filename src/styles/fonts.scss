@@ -1,4 +1,4 @@
-@import "src/styles/global";
+@import "global-colors";
 // DESKTOP FONTS ---------------------------------------------
 .desktop__poppins-h1{
   //styleName: Desktop Headlines/H1;
@@ -8,6 +8,7 @@
   line-height: 56.32px;
   text-align: left;
   color: $color-black;
+  margin-bottom: 40px;
 }
 
 .desktop__poppins-h2{
@@ -18,6 +19,7 @@
   line-height: 36px;
   text-align: left;
   color: $color-black;
+  margin-bottom: 32px;
 }
 
 .desktop__poppins-h3{
@@ -28,6 +30,7 @@
   line-height: 27.28px;
   text-align: left;
   color: $color-black;
+  margin-bottom: 28px;
 }
 
 .desktop__poppins-h4{
@@ -38,6 +41,7 @@
   line-height: 23.76px;
   text-align: left;
   color: $color-black;
+  margin-bottom: 16px;
 }
 
 

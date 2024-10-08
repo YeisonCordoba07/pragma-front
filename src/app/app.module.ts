@@ -3,27 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
+import { PrimaryIconButtonComponent } from './atoms/buttons/primary-icon-button/primary-icon-button.component';
 import { InputTextComponent } from './atoms/input-text/input-text.component';
-import { SecondaryIconButtonComponent } from './atoms/secondary-icon-button/secondary-icon-button.component';
+import { SecondaryIconButtonComponent } from './atoms/buttons/secondary-icon-button/secondary-icon-button.component';
 import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
 
 
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
-import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component'; // Importar FormsModule
+import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
+import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
+import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component'; // Importar FormsModule
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    IconButtonComponent,
+    PrimaryIconButtonComponent,
     InputTextComponent,
     SecondaryIconButtonComponent,
     SaveIconComponent,
     CreateCategoryComponent,
     NavigationBarElementComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    PrimaryButtonComponent,
+    SecondaryButtonComponent
   ],
   imports: [
     BrowserModule,
