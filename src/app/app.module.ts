@@ -13,7 +13,8 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
 import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
 import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
-import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component'; // Importar FormsModule
+import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
+import { FooterComponent } from './footer/footer.component'; // Importar FormsModule
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secon
     NavigationBarElementComponent,
     NavigationBarComponent,
     PrimaryButtonComponent,
-    SecondaryButtonComponent
+    SecondaryButtonComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
