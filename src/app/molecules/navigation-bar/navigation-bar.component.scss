@@ -1,0 +1,23 @@
+@import "src/styles/global";
+
+.nav-container{
+  background-color: $color-black;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100vh;
+
+}
+ul{
+  margin:0;
+  padding:0;
+}
+
+.nav-header-container{
+  width: 95%;
+  height: 72px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

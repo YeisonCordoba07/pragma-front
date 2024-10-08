@@ -9,7 +9,9 @@ import { SecondaryIconButtonComponent } from './atoms/secondary-icon-button/seco
 import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
 
 
-import { CreateCategoryComponent } from './create-category/create-category.component'; // Importar FormsModule
+import { CreateCategoryComponent } from './create-category/create-category.component';
+import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
+import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component'; // Importar FormsModule
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
     InputTextComponent,
     SecondaryIconButtonComponent,
     SaveIconComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    NavigationBarElementComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,

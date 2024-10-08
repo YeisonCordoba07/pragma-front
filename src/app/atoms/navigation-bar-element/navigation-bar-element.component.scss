@@ -1,0 +1,30 @@
+@import "src/styles/fonts";
+
+li{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 300px;
+  height: 40px;
+  padding-left: 24px;
+  list-style: none;
+  background-color: $color-hint_text;
+  align-items: center;
+  position: relative;
+
+}
+
+span{
+  @extend .main-text__body-m;
+  color: $color-white;
+}
+
+.vertical-divider{
+  background-color: $color-spacer;
+  height: 100%;
+  width: 5px;
+  position: absolute;
+  top:0;
+  left: 0;
+}
