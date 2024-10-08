@@ -20,10 +20,33 @@ footer{
   padding: 30px;
 }
 
-
-.footer-list{
-  list-style: none;
+.footer-container > div:nth-child(1){
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
 }
+
+.footer-container > div:nth-child(2){
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.footer-list > li{
+  color: $color-white;
+  list-style: none;
+  @extend .main-text__body-m-regular;
+}
+
+.footer-logo{
+  width: 180px;
+  height: 100px;
+}
+
+
+
 
 .buttons-container{
   display: flex;
@@ -42,8 +65,9 @@ footer{
   font-size: 20px;
   font-weight: 700;
   line-height: 20px;
-  text-align: left;
+  text-align: end;
 }
+
 .footer-date{
   text-align: end;
 }
@@ -52,26 +76,29 @@ footer{
   text-align: end;
   color: $color-white;
 }
+
 .footer-email-text{
   text-align: end;
   color: $color-white;
+  margin: 0;
 }
-
 
 .icon-container{
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   justify-content: flex-end;
 }
+
+
 
 
 .cc-container{
   display: flex;
   align-items: center;
-  border-top: 1px solid $color-border;
   padding: 20px;
   justify-content: space-around;
+  border-top: 1px solid $color-border;
   color: $color-white;
 }
 
@@ -79,7 +106,6 @@ footer{
   font-size: 14px;
   font-weight: 400;
   line-height: 19.6px;
-  text-align: left;
   @extend .main-text__body-xs;
 }
 
@@ -88,26 +114,6 @@ footer{
   font-size: 12px;
   font-weight: 400;
   line-height: 14.4px;
-  text-align: left;
 }
 
-.footer-container > div:nth-child(1){
-  display: flex;
-  flex-direction: row;
 
-  justify-content: space-evenly;
-  width: 50%;
-}
-
-.footer-logo{
-   width: 180px;
-   height: 100px;
-}
-
-.footer-container > div:nth-child(2){
-  display: flex;
-  flex-direction: row;
-
-  justify-content: space-evenly;
-  width: 50%;
-}

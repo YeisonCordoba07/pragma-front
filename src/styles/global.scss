@@ -144,8 +144,8 @@
   gap: 8px;
 
   border-radius: 4px;
-  border: 2px solid $color-purple;
-  background-color:$color-white;
+  border: 1px solid $color-purple;
+  background-color:inherit;
   color: $color-purple;
   transition-duration: 200ms;
   @extend .main-text__body-m-regular
