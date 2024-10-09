@@ -12,14 +12,16 @@
         idInput="name"
         (valueChange)="updateCategoryValues('name', $event)">
       </app-input-text>
-      <div *ngIf="nameError" class="error-message">{{ nameError }}</div>
+      <div *ngIf="nameError" class="error">{{ nameError }}</div>
+
 
       <label for="description">Description: </label>
       <app-input-text
         idInput="description"
         (valueChange)="updateCategoryValues('description', $event)">
       </app-input-text>
-      <div *ngIf="descriptionError" class="error-message">{{ descriptionError }}</div>
+      <div *ngIf="descriptionError" class="error">{{ descriptionError }}</div>
+      <div *ngIf="categoryStatus" class="category-status">{{ categoryStatus }}</div>
 
     </div>
 
@@ -28,13 +30,8 @@
           <app-primary-icon-button
                   type="submit"
                   buttonText="Create"
-                  [disabled]="nameError || descriptionError">
+                  [disabled]="nameError || descriptionError"></app-primary-icon-button>
 
-          </app-primary-icon-button>
-
-          <app-secondary-button
-                  type="button"
-                  buttonText="Cancel"></app-secondary-button>
       </div>
 
   </form>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,9 @@ export class CategoryService {
       'Authorization': `Bearer ${token}`}
     );
 
-    return this.http.post<any>(this.createCategoryURL, category, { headers });
+    return this.http.post<any>(this.createCategoryURL, category, {
+      headers,
+      observe: "response"
+    });
   }
 }

@@ -13,6 +13,7 @@ export class CreateCategoryComponent implements OnInit {
 
   public nameError: string = "";
   public descriptionError: string = "";
+  public categoryStatus: string = "";
 
 
   constructor(private dataService: CategoryService) {
@@ -64,13 +65,19 @@ export class CreateCategoryComponent implements OnInit {
       // POST REQUEST TO CREATE CATEGORY
       this.dataService.createCategory(newCategory, this.token).subscribe(
         response => {
-          console.log("Categoría creada con éxito:", response);
+          if (response.status === 201) {
+            console.log("Categoría creada con éxito:", response);
+            this.categoryStatus = "Categoria creada exitosamente";
+          } else {
+            console.error("Error al crear la categoría: Código de estado inesperado", response.status);
+            this.categoryStatus = "... al crear categoria";
+          }
         },
         error => {
           console.error("Error al crear la categoría:", error);
+          this.categoryStatus = "Error al enviar la solicitud";
         }
       );
     }
-
   }
 }
