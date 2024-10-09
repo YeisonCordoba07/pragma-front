@@ -6,18 +6,23 @@
 
     <div class="form-container">
       <label for="name">Nombre: </label>
-      <app-input-text idInput="name"></app-input-text>
+      <app-input-text
+        idInput="name"
+        (valueChange)="receiveName($event)"
+      ></app-input-text>
 
       <label for="description">Description: </label>
-      <app-input-text idInput="description"></app-input-text>
+      <app-input-text
+        idInput="description"
+        (valueChange)="receiveDescription($event)"></app-input-text>
 
     </div>
 
 
     <div class="buttons-container">
-      <app-primary-icon-button buttonText="Create"></app-primary-icon-button>
-      <app-secondary-button buttonText="Cancel"></app-secondary-button>
-
+      <app-primary-icon-button
+        (click)="createCategory()"
+        buttonText="Create"></app-primary-icon-button>
     </div>
 
   </form>

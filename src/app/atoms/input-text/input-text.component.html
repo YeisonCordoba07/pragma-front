@@ -1,1 +1,8 @@
-<input type="text" [placeholder]="placeholderText" [id]="idInput" required/>
+<input
+  type="text"
+  [placeholder]="placeholderText"
+  [id]="idInput"
+  [(ngModel)]="inputValue"
+  (input)="sendValue()"
+
+  required/>

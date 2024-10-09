@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,9 @@ import { NavigationBarElementComponent } from './atoms/navigation-bar-element/na
 import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
 import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
-import { FooterComponent } from './footer/footer.component'; // Importar FormsModule
+import { FooterComponent } from './footer/footer.component';
+import {FormsModule} from "@angular/forms"; // Importar FormsModule
+
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import { FooterComponent } from './footer/footer.component'; // Importar FormsMo
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
