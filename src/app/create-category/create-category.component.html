@@ -1,10 +1,12 @@
 <section>
 
-  <h1>Create category</h1>
 
   <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
 
+    <h2>Create category</h2>
+
     <div class="form-container">
+
       <label for="name">Nombre: </label>
       <app-input-text
         idInput="name"
@@ -20,11 +22,15 @@
     </div>
 
 
-    <div class="buttons-container">
-      <app-primary-icon-button
-        type="submit"
-        buttonText="Create"></app-primary-icon-button>
-    </div>
+      <div class="buttons-container">
+          <app-primary-icon-button
+                  type="submit"
+                  buttonText="Create"></app-primary-icon-button>
+
+          <app-secondary-button
+                  type="button"
+                  buttonText="Cancel"></app-secondary-button>
+      </div>
 
   </form>
 

@@ -7,15 +7,18 @@ input{
   border-radius: 2px;
   @extend .main-text__body-xs;
   margin-bottom: 20px;
+  width: 100%;
+
+  &:focus{
+    outline-color: $color-purple;
+  }
+
+  &:disabled{
+    background-color: $color-disabled;
+    color: $color-border;
+  }
+
 }
 
-input:focus{
-  outline-color: $color-purple;
-}
-
-input:disabled{
-  background-color: $color-disabled;
-  color: $color-border;
-}
 
 
