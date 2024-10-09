@@ -30,17 +30,18 @@
   border-radius: 2px;
   position: relative;
   background-color: $color-white;
-}
-.corner-radius__small::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
-  border-radius: 4px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 4px;
+  }
 }
 
 
@@ -49,19 +50,20 @@
   position: relative;
   background-color: $color-white;
   border-radius: 6px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 8px;
+  }
 }
 
-.corner-radius__medium::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
-  border-radius: 8px;
-}
 
 
 
@@ -69,19 +71,20 @@
   border-radius: 10px;
   position: relative;
   background-color: $color-white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 12px;
+  }
 }
 
-.corner-radius__large::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
-  border-radius: 12px;
-}
 
 
 
@@ -89,19 +92,20 @@
   border-radius: 22px;
   position: relative;
   background-color: $color-white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 24px;
+  }
 }
 
-.corner-radius__huge::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
-  border-radius: 24px;
-}
 
 
 
@@ -110,7 +114,7 @@
 .main-buttons{
   display: flex;
   align-items: center;
-  padding: 12px 52px;
+  padding: 4px 12px;
   gap: 8px;
   border-style: none;
   border-radius: 4px;
@@ -118,51 +122,54 @@
   color: white;
   transition-duration: 200ms;
   @extend .main-text__body-m-regular;
+
+  &:hover {
+    background-color:$color-purple-hover;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    background-color:$color-purple-click;
+  }
+
+  &:disabled {
+    background-color:$color-disabled;
+  }
+
 }
 
-.main-buttons:hover {
-  background-color:$color-purple-hover;
-  transform: scale(1.1);
-}
-
-.main-buttons:active {
-  background-color:$color-purple-click;
-}
-
-.main-buttons:disabled {
-  background-color:$color-disabled;
-}
 
 
 
 
 // SECONDARY BUTTON ---------------------------------------
-.secondary-buttons{
+.secondary-buttons {
   display: flex;
   align-items: center;
-  padding: 12px 52px;
+  padding: 4px 12px;
   gap: 8px;
 
   border-radius: 4px;
   border: 1px solid $color-purple;
-  background-color:inherit;
+  background-color: inherit;
   color: $color-purple;
   transition-duration: 200ms;
-  @extend .main-text__body-m-regular
+  @extend .main-text__body-m-regular;
+
+  &:hover {
+    border-color: $color-purple-hover;
+    color: $color-purple-hover;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    border-color:$color-purple-click;
+    color:$color-purple-click;
+  }
+
+  &:disabled {
+    border-color:$color-disabled;
+    color:$color-disabled;
+  }
 }
 
-.secondary-buttons:hover {
-  border-color:$color-purple-hover;
-  color:$color-purple-hover;
-  transform: scale(1.1);
-}
-
-.secondary-buttons:active {
-  border-color:$color-purple-click;
-  color:$color-purple-click;
-}
-
-.secondary-buttons:disabled {
-  border-color:$color-disabled;
-  color:$color-disabled;
-}

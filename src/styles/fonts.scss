@@ -1,46 +1,50 @@
 @import "global-colors";
 // DESKTOP FONTS ---------------------------------------------
 .desktop__poppins-h1{
-  //styleName: Desktop Headlines/H1;
   font-family: "Poppins", sans-serif;
-  font-size: 44px;
-  font-weight: 500;
-  line-height: 56.32px;
+  //styleName: Mob Headlines/Mob H1;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 35.96px;
   text-align: left;
-  color: $color-black;
+
+  color: inherit;
   margin-bottom: 40px;
 }
 
 .desktop__poppins-h2{
-  //styleName: Desktop Headlines/H2;
   font-family: "Poppins", sans-serif;
-  font-size: 30px;
-  font-weight: 500;
-  line-height: 36px;
+  //styleName: Mob Headlines/Mob H2;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28.16px;
   text-align: left;
-  color: $color-black;
+
+  color: inherit;
   margin-bottom: 32px;
 }
 
 .desktop__poppins-h3{
-  //styleName: Desktop Headlines/H3;
   font-family: "Poppins", sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 27.28px;
+  //styleName: Mob Headlines/Mob H3;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 24.32px;
   text-align: left;
-  color: $color-black;
+
+  color: inherit;
   margin-bottom: 28px;
 }
 
 .desktop__poppins-h4{
-  //styleName: Desktop Headlines/H4;
   font-family: "Poppins", sans-serif;
-  font-size: 18px;
+  //styleName: Mob Headlines/Mob H4;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 23.76px;
+  line-height: 20.48px;
   text-align: left;
-  color: $color-black;
+
+  color: inherit;
   margin-bottom: 16px;
 }
 
