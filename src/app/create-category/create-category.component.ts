@@ -8,24 +8,11 @@ import {DataService} from 'src/app/services/data.service';
 })
 export class CreateCategoryComponent implements OnInit {
   category: any[] = [];
+  private categoryName: string = "";
+  private categoryDescription: string = '';  // Almacena el valor recibido del hijo
+  private token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
 
   constructor(private dataService: DataService) {
-  }
-
-  token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
-
-
-  private categoryDescription: string = '';  // Almacena el valor recibido del hijo
-  private categoryName: string = "";
-
-  receiveName(value: string) {
-    this.categoryName = value;  // Actualiza el valor recibido
-    console.log('Valor Name recibido del hijo:', value);
-  }
-
-  receiveDescription(value: string) {
-    this.categoryDescription = value;  // Actualiza el valor recibido
-    console.log('Valor Descripcion recibido del hijo:', value);
   }
 
 
@@ -38,9 +25,29 @@ export class CreateCategoryComponent implements OnInit {
       (error) => {
         console.log("ERROR GET CATEGORY", error);
       }
-    )
-
+    );
   }
+
+
+  receiveName(value: string) {
+    this.categoryName = value;  // Actualiza el valor recibido
+    console.log('Valor Name recibido del hijo:', value);
+  }
+
+  receiveDescription(value: string) {
+    this.categoryDescription = value;  // Actualiza el valor recibido
+    console.log('Valor Descripcion recibido del hijo:', value);
+  }
+
+  updateCategoryValues(type: 'name' | 'description', value: string) {
+    if (type === 'name') {
+      this.categoryName = value;
+    } else {
+      this.categoryDescription = value;
+    }
+    console.log(`Valor ${type} recibido del hijo:`, value);
+  }
+
 
   createCategory() {
     const newCategory = {

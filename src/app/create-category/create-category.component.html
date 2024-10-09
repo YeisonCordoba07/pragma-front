@@ -2,26 +2,27 @@
 
   <h1>Create category</h1>
 
-  <form action="">
+  <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
 
     <div class="form-container">
       <label for="name">Nombre: </label>
       <app-input-text
         idInput="name"
-        (valueChange)="receiveName($event)"
-      ></app-input-text>
+        (valueChange)="updateCategoryValues('name', $event)">
+      </app-input-text>
 
       <label for="description">Description: </label>
       <app-input-text
         idInput="description"
-        (valueChange)="receiveDescription($event)"></app-input-text>
+        (valueChange)="updateCategoryValues('description', $event)">
+      </app-input-text>
 
     </div>
 
 
     <div class="buttons-container">
       <app-primary-icon-button
-        (click)="createCategory()"
+        type="submit"
         buttonText="Create"></app-primary-icon-button>
     </div>
 

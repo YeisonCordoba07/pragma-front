@@ -17,7 +17,7 @@ export class InputTextComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendValue(){
+  onInputChange(){
     this.valueChange.emit(this.inputValue);
   }
 
