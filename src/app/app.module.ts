@@ -16,7 +16,8 @@ import { NavigationBarComponent } from './molecules/navigation-bar/navigation-ba
 import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
 import { FooterComponent } from './footer/footer.component';
-import {FormsModule} from "@angular/forms"; // Importar FormsModule
+import {FormsModule} from "@angular/forms";
+import { HeaderComponent } from './header/header.component'; // Importar FormsModule
 
 
 
@@ -32,7 +33,8 @@ import {FormsModule} from "@angular/forms"; // Importar FormsModule
     NavigationBarComponent,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
