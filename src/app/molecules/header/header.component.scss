@@ -1,5 +1,5 @@
-@import "../../../styles/global-colors";
-@import "../../../styles/fonts";
+@import "src/styles/global-colors";
+@import "src/styles/fonts";
 
 .header{
   width: 100vw;
@@ -45,6 +45,7 @@
 }
 
 .header-element{
+  //display: none;
   display: flex;
   position: absolute;
   right: 0;
@@ -54,6 +55,8 @@
   width: 0;
 
   &__active{
+    //display: flex;
     width: 90vw;
+
   }
 }
