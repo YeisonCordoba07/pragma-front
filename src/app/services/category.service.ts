@@ -19,6 +19,8 @@ export class CategoryService {
     return this.http.get<any>(this.getCategoriesURL, {headers});
   }
 
+
+
   createCategory(category: { name: string; description: string }, token:string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
