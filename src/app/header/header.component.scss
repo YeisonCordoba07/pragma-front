@@ -18,8 +18,16 @@
   border-radius: 20px 20px 0 0;
   border-bottom: 2px solid $color-border;
 }
-img{
-  height: 100%;
+
+.header-container > button{
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .img-person-logo {
