@@ -10,14 +10,14 @@ import { SecondaryIconButtonComponent } from './atoms/buttons/secondary-icon-but
 import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
 
 
-import { CreateCategoryComponent } from './create-category/create-category.component';
+import { CreateCategoryComponent } from './page/create-category/create-category.component';
 import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
 import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
 import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './molecules/footer/footer.component';
 import {FormsModule} from "@angular/forms";
-import { HeaderComponent } from './header/header.component'; // Importar FormsModule
+import { HeaderComponent } from './molecules/header/header.component'; // Importar FormsModule
 
 
 

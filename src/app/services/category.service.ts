@@ -5,16 +5,16 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class CategoryService {
   private getCategoriesURL = "http://localhost:8080/category/getAll?page=0&size=3&sortBy=name&ascending=true";
   private createCategoryURL = 'http://localhost:8080/category';
 
   constructor(private http: HttpClient) { }
 
 
-  getPosts(token: string): Observable<any> {
+  getCategories(token: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`  // Encabezado Authorization con el token
+      'Authorization': `Bearer ${token}`
     });
     return this.http.get<any>(this.getCategoriesURL, {headers});
   }
