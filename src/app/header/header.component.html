@@ -16,5 +16,6 @@
 
   <app-navigation-bar
     [ngClass]="{'header-element__active' : active}"
+    (closeNav)="setActive()"
     class="header-element"></app-navigation-bar>
 </header>

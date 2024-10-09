@@ -28,6 +28,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .img-person-logo {
@@ -47,6 +48,7 @@
   display: flex;
   position: absolute;
   right: 0;
+  top: 0;
   transition-duration: 0.5s;
   transition-timing-function: ease;
   width: 0;
