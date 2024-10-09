@@ -2,6 +2,13 @@
   <div class="header-container">
     <img class="img-person-logo" src="assets/icons/person_logo.svg" alt="">
     <img class="img-logo-pragma" src="assets/icons/logo_pragma_mobile.svg" alt="">
-    <img class="img-menu"src="assets/icons/logo_menu.svg" alt="">
+    <button (click)="setActive()">
+      <img class="img-menu"src="assets/icons/logo_menu.svg" alt="">
+
+    </button>
   </div>
+
+  <app-navigation-bar
+    [ngClass]="{'header-element__active' : active}"
+    class="header-element"></app-navigation-bar>
 </header>

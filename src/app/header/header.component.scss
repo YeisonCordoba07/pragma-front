@@ -4,6 +4,8 @@
 .header{
   width: 100vw;
   z-index: 9;
+  position: relative;
+  transition-duration: 1s;
 }
 
 .header-container{
@@ -31,4 +33,17 @@ img{
 .img-menu{
   width: 32px;
   height: 32px;
+}
+
+.header-element{
+  display: flex;
+  position: absolute;
+  right: 0;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  width: 0;
+
+  &__active{
+    width: 90vw;
+  }
 }
