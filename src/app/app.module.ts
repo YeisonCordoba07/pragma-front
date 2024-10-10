@@ -17,7 +17,8 @@ import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-b
 import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
 import { FooterComponent } from './molecules/footer/footer.component';
 import {FormsModule} from "@angular/forms";
-import { HeaderComponent } from './molecules/header/header.component'; // Importar FormsModule
+import { HeaderComponent } from './molecules/header/header.component';
+import {NgOptimizedImage} from "@angular/common"; // Importar FormsModule
 
 
 
@@ -36,12 +37,13 @@ import { HeaderComponent } from './molecules/header/header.component'; // Import
     FooterComponent,
     HeaderComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        NgOptimizedImage
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -31,21 +31,8 @@
   background-color: transparent;
 }
 
-.img-person-logo {
-  width: 24px;
-  height: 24px;
-}
-.img-logo-pragma{
-  width: 87px;
-  height: 32px;
-}
-.img-menu{
-  width: 32px;
-  height: 32px;
-}
 
 .header-element{
-  //display: none;
   display: flex;
   position: absolute;
   right: 0;
@@ -55,8 +42,6 @@
   width: 0;
 
   &__active{
-    //display: flex;
     width: 90vw;
-
   }
 }
