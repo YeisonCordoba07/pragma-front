@@ -3,35 +3,53 @@
 
   <div class="table-container">
 
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
-    </tr>
-    </thead>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+      </tr>
+      </thead>
 
 
-    <tbody>
-    <tr *ngFor="let category of categories">
-      <td>{{ category.id }}</td>
-      <td>{{ category.name }}</td>
-      <td>{{ category.description }}</td>
-    </tr>
-    </tbody>
-  </table>
+      <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+      </tr>
+      </tbody>
+    </table>
 
   </div>
 
   <!-- Paginación -->
-  <div class="pagination">
-    Página {{ page + 1 }} de {{ totalPages }}
-    (Total de elementos: {{ totalElements }})
-  </div>
 
   <div class="pagination-controls">
-    <button (click)="prevPage()" [disabled]="page === 0">Anterior</button>
-    <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Siguiente</button>
+    <button
+      (click)="prevPage()"
+      [disabled]="page === 0"
+      class="right-button">
+
+      <img src="assets/icons/left_arrow.svg" alt="">
+
+    </button>
+
+
+    <div class="pagination">
+      {{ page + 1 }} de {{ totalPages }}
+      (Total de elementos: {{ totalElements }})
+    </div>
+
+
+    <button
+      (click)="nextPage()"
+      [disabled]="page >= totalPages - 1"
+      class="left-button">
+
+      <img src="assets/icons/right_arrow.svg" alt="">
+
+    </button>
   </div>
 </div>
