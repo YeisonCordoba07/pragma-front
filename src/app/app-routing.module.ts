@@ -6,7 +6,7 @@ import {GetCategoriesComponent} from "./page/get-categories/get-categories.compo
 
 const routes: Routes = [
   { path: 'home', component: AppComponent }, // Ruta para el componente principal
-  { path: 'second-page', component: CreateCategoryComponent }, // Ruta para la segunda página
+  { path: 'create-category', component: CreateCategoryComponent }, // Ruta para la segunda página
   { path: "get-categories", component: GetCategoriesComponent }
 ];
 
