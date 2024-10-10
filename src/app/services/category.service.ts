@@ -6,10 +6,10 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
   providedIn: 'root'
 })
 export class CategoryService {
-  private getCategoriesURL = "http://localhost:8080/category/getAll?page=0&size=3&sortBy=name&ascending=true";
-  private createCategoryURL = 'http://localhost:8080/category';
+  private readonly getCategoriesURL = "http://localhost:8080/category/getAll?page=0&size=3&sortBy=name&ascending=true";
+  private readonly createCategoryURL = 'http://localhost:8080/category';
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
 
   getCategories(token: string): Observable<any> {
@@ -19,6 +19,14 @@ export class CategoryService {
     return this.http.get<any>(this.getCategoriesURL, {headers});
   }
 
+  getCategories2(page: number, size: number, token: string): Observable<any> {
+    const url = `http://localhost:8080/category/getAll?page=${page}&size=${size}&sortBy=name&ascending=true`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(url, { headers });
+  }
 
 
   createCategory(category: { name: string; description: string }, token:string): Observable<any> {

@@ -18,7 +18,8 @@ import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secon
 import { FooterComponent } from './molecules/footer/footer.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
-import {NgOptimizedImage} from "@angular/common"; // Importar FormsModule
+import {NgOptimizedImage} from "@angular/common";
+import { GetCategoriesComponent } from './page/get-categories/get-categories.component'; // Importar FormsModule
 
 
 
@@ -35,7 +36,8 @@ import {NgOptimizedImage} from "@angular/common"; // Importar FormsModule
     PrimaryButtonComponent,
     SecondaryButtonComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    GetCategoriesComponent
   ],
     imports: [
         BrowserModule,
