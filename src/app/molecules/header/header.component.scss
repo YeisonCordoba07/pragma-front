@@ -33,7 +33,7 @@
 
 
 .header-element{
-  display: flex;
+  display: none;
   position: absolute;
   right: 0;
   top: 0;
@@ -43,5 +43,6 @@
 
   &__active{
     width: 90vw;
+    display: flex;
   }
 }

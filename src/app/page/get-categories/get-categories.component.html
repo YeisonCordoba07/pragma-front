@@ -1,5 +1,7 @@
-<div *ngIf="categories.length > 0">
+<div *ngIf="categories.length > 0" class="categories-container">
   <h2 class="desktop__poppins-h1">Todas las categorias</h2>
+
+  <div class="table-container">
 
   <table>
     <thead>
@@ -19,6 +21,8 @@
     </tr>
     </tbody>
   </table>
+
+  </div>
 
   <!-- Paginación -->
   <div class="pagination">

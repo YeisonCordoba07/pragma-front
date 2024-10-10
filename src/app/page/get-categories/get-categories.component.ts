@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category.service";
 
 @Component({
@@ -11,7 +11,7 @@ export class GetCategoriesComponent implements OnInit {
 
   categories: any[] = [];
   page: number = 0;
-  size: number = 3;
+  size: number = 5;
   totalElements: number = 0;
   totalPages: number = 0;
 
