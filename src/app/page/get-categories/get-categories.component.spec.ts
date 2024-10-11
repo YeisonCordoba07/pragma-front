@@ -57,7 +57,6 @@ describe('GetCategoriesComponent', () => {
     expect(selectElement.nativeElement.options.length).toBe(2); // Ascendente y Descendente
   });
 
-
   it('should render a table with categories', () => {
     component.categories = [
       { id: 1, name: 'Category 1', description: 'Description 1' },
