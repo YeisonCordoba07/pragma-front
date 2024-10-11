@@ -1,11 +1,16 @@
-<script src="navigation-bar.component.spec.ts"></script>
+
 <div class="nav-container">
+
+
   <div class="nav-header-container">
     <img src="assets/icons/purple_person_logo.svg" alt="">
 
-    <button (click)="closeNav.emit()">
-      <img src="assets/icons/close_line.svg" alt="">
-    </button>
+    <app-icon-button
+      imgSrc="assets/icons/close_line.svg"
+      imgAlt="Cerrar"
+      (onClick)="closeNav.emit()">
+    </app-icon-button>
+
   </div>
 
   <ul>
@@ -26,4 +31,5 @@
     <img src="assets/icons/logout.svg" alt="">
     <p>Log out</p>
   </div>
+
 </div>

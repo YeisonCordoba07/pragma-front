@@ -17,9 +17,15 @@
       imgAlt="pragma logo"
     ></app-icon-link>
 
-    <button (click)="setActive()">
-      <img class="img-menu" ngSrc="assets/icons/logo_menu.svg" alt="" width="32" height="32">
-    </button>
+
+    <app-icon-button
+      imgSrc="assets/icons/logo_menu.svg"
+      imgAlt="menu logo"
+      imgWidth="32"
+      imgHeight="32"
+      (onClick)="setActive()">
+    </app-icon-button>
+
 
   </div>
 

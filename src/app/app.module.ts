@@ -21,7 +21,8 @@ import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
-import { IconLinkComponent } from './icon-link/icon-link.component'; // Importar FormsModule
+import { IconLinkComponent } from './icon-link/icon-link.component';
+import { IconButtonComponent } from './icon-button/icon-button.component'; // Importar FormsModule
 
 
 
@@ -40,7 +41,8 @@ import { IconLinkComponent } from './icon-link/icon-link.component'; // Importar
     FooterComponent,
     HeaderComponent,
     GetCategoriesComponent,
-    IconLinkComponent
+    IconLinkComponent,
+    IconButtonComponent
   ],
     imports: [
         BrowserModule,
