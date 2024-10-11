@@ -3,6 +3,8 @@ module.exports = {
     setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
     testPathIgnorePatterns: ['/node_modules/', '/dist/'],
     collectCoverage: true,
-    coverageReporters: ['html']
+    coverageReporters: ['html'],
+    moduleNameMapper: {
+      '^src/(.*)$': '<rootDir>/src/$1'
+    },
   };
-  

@@ -25,7 +25,7 @@ export class GetCategoriesComponent implements OnInit {
 
     // GET REQUEST
   loadCategories(): void {
-    this.categoryService.getCategories2(this.page, this.size, this.token).subscribe(
+    this.categoryService.getCategories(this.page, this.size, this.token).subscribe(
       (response) => {
         this.categories = response.content;
         this.page = response.page;

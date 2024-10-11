@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from 'src/app/services/category.service';
 
+
 @Component({
   selector: 'app-create-category',
   templateUrl: './create-category.component.html',
@@ -16,21 +17,11 @@ export class CreateCategoryComponent implements OnInit {
   public categoryStatus: string = "";
 
 
-  constructor(private readonly dataService: CategoryService) {
+  constructor(private readonly categoryService: CategoryService) {
   }
 
 
   ngOnInit(): void {
-
-    // SOLICITUD GET
-    /*this.dataService.getPosts(this.token).subscribe(
-      (response) => {
-        console.log("DATA", response);
-      },
-      (error) => {
-        console.log("ERROR GET CATEGORY", error);
-      }
-    );*/
   }
 
 
@@ -63,7 +54,7 @@ export class CreateCategoryComponent implements OnInit {
       console.log("DESCRIPTION: ", newCategory.description);
 
       // POST REQUEST TO CREATE CATEGORY
-      this.dataService.createCategory(newCategory, this.token).subscribe(
+      this.categoryService.createCategory(newCategory, this.token).subscribe(
         response => {
           if (response.status === 201) {
             console.log("Categoría creada con éxito:", response);

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationBarComponent } from './navigation-bar.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
@@ -8,7 +9,8 @@ describe('NavigationBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ]
+      declarations: [ NavigationBarComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
