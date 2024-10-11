@@ -20,7 +20,8 @@ import { FooterComponent } from './molecules/footer/footer.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
-import { GetCategoriesComponent } from './page/get-categories/get-categories.component'; // Importar FormsModule
+import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
+import { IconLinkComponent } from './icon-link/icon-link.component'; // Importar FormsModule
 
 
 
@@ -38,7 +39,8 @@ import { GetCategoriesComponent } from './page/get-categories/get-categories.com
     SecondaryButtonComponent,
     FooterComponent,
     HeaderComponent,
-    GetCategoriesComponent
+    GetCategoriesComponent,
+    IconLinkComponent
   ],
     imports: [
         BrowserModule,
