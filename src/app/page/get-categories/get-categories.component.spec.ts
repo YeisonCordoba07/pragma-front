@@ -4,40 +4,93 @@ import { GetCategoriesComponent } from './get-categories.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-
-class MockCategoryService {
-  getCategories = jest.fn(); // Simulamos el metodo del servicio
-}
+import { By } from '@angular/platform-browser';
+import {FormsModule} from "@angular/forms";
 
 
 describe('GetCategoriesComponent', () => {
   let component: GetCategoriesComponent;
   let fixture: ComponentFixture<GetCategoriesComponent>;
-  let categoryService: MockCategoryService;
+  let categoryServiceMock: any;
 
   beforeEach(async () => {
-
+    categoryServiceMock = {
+      getCategories: jest.fn().mockReturnValue(of({
+        content: [
+          { id: 1, name: 'Category 1', description: 'Description 1' },
+          { id: 2, name: 'Category 2', description: 'Description 2' },
+        ],
+        page: 0,
+        size: 10,
+        totalElements: 2,
+        totalPages: 1,
+      })),
+    };
 
 
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, FormsModule],
       declarations: [ GetCategoriesComponent ],
-      providers: [{ provide: CategoryService, useClass: MockCategoryService }]
+      providers: [{ provide: CategoryService, useValue: categoryServiceMock }]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(GetCategoriesComponent);
     component = fixture.componentInstance;
-    categoryService = TestBed.inject(CategoryService) as unknown as MockCategoryService;
     fixture.detectChanges();
   });
 
-  /*it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
 
+  it('should render the select element for sorting', () => {
+    component.categories = [
+      { id: 1, name: 'Category 1', description: 'Description 1' }
+    ]; // Asigna categorías para activar el *ngIf
+    fixture.detectChanges(); // Refresca la vista para que la plantilla se renderice correctamente
+
+    const selectElement = fixture.debugElement.query(By.css('#orderSelect'));
+    expect(selectElement).toBeTruthy(); // Verifica si el select existe
+    expect(selectElement.nativeElement.options.length).toBe(2); // Ascendente y Descendente
+  });
+
+
+  it('should render a table with categories', () => {
+    component.categories = [
+      { id: 1, name: 'Category 1', description: 'Description 1' },
+      { id: 2, name: 'Category 2', description: 'Description 2' },
+    ];
+    fixture.detectChanges();
+
+    const tableRows = fixture.debugElement.queryAll(By.css('tbody tr'));
+    expect(tableRows.length).toBe(2);
+
+    const firstRowColumns = tableRows[0].queryAll(By.css('td'));
+    expect(firstRowColumns[0].nativeElement.textContent).toContain('1');
+    expect(firstRowColumns[1].nativeElement.textContent).toContain('Category 1');
+    expect(firstRowColumns[2].nativeElement.textContent).toContain('Description 1');
+  });
+
+  it('should disable the prev button on the first page', () => {
+    component.page = 0;
+    fixture.detectChanges();
+
+    const prevButton = fixture.debugElement.query(By.css('.right-button')).nativeElement;
+    expect(prevButton.disabled).toBe(true);
+  });
+
+  it('should disable the next button on the last page', () => {
+    component.page = 0;
+    component.totalPages = 1;
+    fixture.detectChanges();
+
+    const nextButton = fixture.debugElement.query(By.css('.left-button')).nativeElement;
+    expect(nextButton.disabled).toBe(true);
+  });
+/*
 
   it('should load categories on init', () => {
     const mockCategoriesResponse = {

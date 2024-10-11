@@ -7,6 +7,7 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  align-items: center;
 }
 
 .categories-container > h2{
@@ -19,6 +20,11 @@
   height: 400px;
   max-height: 80vw;
   overflow: auto;
+
+  @media (min-width: 1024px) {
+    width: 800px;
+    max-width: 800px;
+  }
 }
 
 table {

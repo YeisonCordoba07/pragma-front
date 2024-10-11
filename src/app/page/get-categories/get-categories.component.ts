@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category.service";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-get-categories',
@@ -25,23 +26,22 @@ export class GetCategoriesComponent implements OnInit {
 
 
     // GET REQUEST
-  loadCategories(): void {
-    this.categoryService.getCategories(this.page, this.size, this.token, this.ascending).subscribe(
-      (response) => {
-        if (response) {
-          this.categories = response.content;
-          this.page = response.page;
-          this.size = response.size;
-          this.totalElements = response.totalElements;
-          this.totalPages = response.totalPages;
-        } else {
-          console.error('No se recibieron datos de la API.');
-        }
-      },
-      (error) => {
-        console.error("Error al obtener las categorías:", error);
+  async loadCategories(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.categoryService.getCategories(this.page, this.size, this.token, this.ascending));
+
+      if (response) {
+        this.categories = response.content;
+        this.page = response.page;
+        this.size = response.size;
+        this.totalElements = response.totalElements;
+        this.totalPages = response.totalPages;
+      } else {
+        console.error('No se recibieron datos de la API.');
       }
-    );
+    } catch (error) {
+      console.error('Error al obtener las categorías:', error);
+    }
   }
 
   prevPage(): void {

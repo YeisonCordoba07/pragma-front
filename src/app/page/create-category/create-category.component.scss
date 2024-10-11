@@ -9,6 +9,12 @@ section{
   justify-content: center;
   align-items: center;
   width: 100vw;
+
+  @media (min-width: 1024px) {
+    width: 500px;
+    max-width: 500px;
+  }
+
 }
 
 form{
