@@ -20,7 +20,6 @@ export class NavigationBarElementComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.isActived = this.router.url === this.pageUrl;
     });
-    console.log("ROUTER: ",this.router.url);
   }
 
   onClick() {
