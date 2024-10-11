@@ -9,8 +9,16 @@
   </div>
 
   <ul>
-    <app-navigation-bar-element elementText="Category" [isActived]="true"></app-navigation-bar-element>
-    <app-navigation-bar-element elementText="Brand"></app-navigation-bar-element>
+    <app-navigation-bar-element
+      elementText="Ver categorias"
+      [isActived]="true"
+      pageUrl="/get-categories"
+      (closeNav)="handleCloseNav()"></app-navigation-bar-element>
+
+    <app-navigation-bar-element
+      elementText="Crear categoria"
+      pageUrl="/create-category"
+      (closeNav)="handleCloseNav()"></app-navigation-bar-element>
   </ul>
 
   <div class="nav-container__session">

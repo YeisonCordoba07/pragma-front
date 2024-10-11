@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-navigation-bar-element',
@@ -10,9 +10,15 @@ export class NavigationBarElementComponent implements OnInit {
   @Input() isActived: boolean = false;
   @Input() elementText: string = "Menu #";
   @Input() elementIcon: string = "favicon.ico";
+  @Input() pageUrl: string = "/";
+  @Output() closeNav = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClick() {
+    this.closeNav.emit(); // Emitir el evento al hacer clic
+  }
 }
