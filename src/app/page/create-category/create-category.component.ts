@@ -24,6 +24,8 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     // No necessary
+    this.nameError = "Nombre no puede estar vacio";
+    this.descriptionError = "Descripcion no puede estar vacia";
   }
 
 
