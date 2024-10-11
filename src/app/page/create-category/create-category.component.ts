@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from 'src/app/services/category.service';
+import {lastValueFrom} from "rxjs";
 
 
 @Component({
@@ -22,6 +23,8 @@ export class CreateCategoryComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // No necessary
+
   }
 
 
@@ -44,31 +47,28 @@ export class CreateCategoryComponent implements OnInit {
   }
 
 
-  createCategory() {
+  async createCategory() {
     if (!this.nameError && !this.descriptionError) {
       const newCategory = {
         name: this.categoryName,
         description: this.categoryDescription
       };
-      console.log("NOMBRE: ", newCategory.name);
-      console.log("DESCRIPTION: ", newCategory.description);
+      //console.log("NOMBRE: ", newCategory.name);
+      //console.log("DESCRIPTION: ", newCategory.description);
 
       // POST REQUEST TO CREATE CATEGORY
-      this.categoryService.createCategory(newCategory, this.token).subscribe(
-        response => {
-          if (response.status === 201) {
-            console.log("Categoría creada con éxito:", response);
-            this.categoryStatus = "Categoria creada exitosamente";
-          } else {
-            console.error("Error al crear la categoría: Código de estado inesperado", response.status);
-            this.categoryStatus = "... al crear categoria";
-          }
-        },
-        error => {
-          console.error("Error al crear la categoría:", error);
-          this.categoryStatus = "Error al enviar la solicitud";
+      try {
+        // POST REQUEST TO CREATE CATEGORY USING async/await
+        const response = await lastValueFrom(this.categoryService.createCategory(newCategory, this.token));
+
+        if (response.status === 201) {
+          this.categoryStatus = "Categoria creada exitosamente";
+        } else {
+          this.categoryStatus = "... al crear categoria";
         }
-      );
+      } catch (error) {
+        this.categoryStatus = "Error al enviar la solicitud";
+      }
     }
   }
 }
