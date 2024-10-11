@@ -21,8 +21,8 @@ import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
-import { IconLinkComponent } from './icon-link/icon-link.component';
-import { IconButtonComponent } from './icon-button/icon-button.component'; // Importar FormsModule
+import { IconLinkComponent } from './atoms/icon-link/icon-link.component';
+import { IconButtonComponent } from './atoms/icon-button/icon-button.component'; // Importar FormsModule
 
 
 

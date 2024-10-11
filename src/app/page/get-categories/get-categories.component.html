@@ -1,6 +1,14 @@
 <div *ngIf="categories.length > 0" class="categories-container">
   <h2 class="desktop__poppins-h1">Todas las categorias</h2>
 
+  <div class="sort-container">
+    <h3>Ordenar: </h3>
+    <select id="orderSelect" [(ngModel)]="ascending" (change)="loadCategories()">
+      <option [value]="true">Ascendente</option>
+      <option [value]="false">Descendente</option>
+    </select>
+
+  </div>
   <div class="table-container">
 
     <table>
@@ -25,6 +33,7 @@
   </div>
 
   <!-- Paginación -->
+
 
   <div class="pagination-controls">
     <button

@@ -3,7 +3,7 @@
 
   <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
 
-    <h2>Create category</h2>
+    <h2>Crear categoria</h2>
 
     <div class="form-container">
 
@@ -15,7 +15,7 @@
       <div *ngIf="nameError" class="error">{{ nameError }}</div>
 
 
-      <label for="description">Description: </label>
+      <label for="description">Descripción: </label>
       <app-input-text
         idInput="description"
         (valueChange)="updateCategoryValues('description', $event)">

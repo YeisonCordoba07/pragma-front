@@ -14,6 +14,7 @@ export class GetCategoriesComponent implements OnInit {
   size: number = 5;
   totalElements: number = 0;
   totalPages: number = 0;
+  ascending: boolean = true;
 
 
   constructor(private readonly categoryService: CategoryService) { }
@@ -25,7 +26,7 @@ export class GetCategoriesComponent implements OnInit {
 
     // GET REQUEST
   loadCategories(): void {
-    this.categoryService.getCategories(this.page, this.size, this.token).subscribe(
+    this.categoryService.getCategories(this.page, this.size, this.token, this.ascending).subscribe(
       (response) => {
         if (response) {
           this.categories = response.content;

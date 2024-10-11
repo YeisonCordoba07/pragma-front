@@ -13,8 +13,8 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
 
-  getCategories(page: number, size: number, token: string): Observable<any> {
-    const url = `http://localhost:8080/category/getAll?page=${page}&size=${size}&sortBy=name&ascending=true`;
+  getCategories(page: number, size: number, token: string, ascending: boolean): Observable<any> {
+    const url = `http://localhost:8080/category/getAll?page=${page}&size=${size}&sortBy=name&ascending=${ascending}`;
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

@@ -31,6 +31,9 @@ export class CreateCategoryComponent implements OnInit {
     if (type === "name") {
       if (value.length > 50) {
         this.nameError = "El nombre no puede tener más de 50 caracteres.";
+      }
+      else if(value.length === 0){
+        this.nameError = "El nombre no puede estar vacio.";
       } else {
         this.nameError = "";
         this.categoryName = value;
@@ -38,7 +41,9 @@ export class CreateCategoryComponent implements OnInit {
     } else if (type === "description") {
       if (value.length > 90) {
         this.descriptionError = "La descripción no puede tener más de 90 caracteres.";
-      } else {
+      }else if(value.length === 0){
+        this.nameError = "La descripción no puede estar vacio.";
+      }  else {
         this.descriptionError = "";
         this.categoryDescription = value;
       }
