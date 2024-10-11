@@ -78,21 +78,6 @@ tr:nth-child(even) {
   justify-content: center;
 }
 
-.right-button, .left-button{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  background-color: transparent;
-  border: none;
-}
-
-.right-button > img, .left-button > img{
-  width: 50px;
-  height: 50px;
-
-}
 
 .pagination{
   display: flex;

@@ -2,6 +2,7 @@
   <h2 class="desktop__poppins-h1">Todas las categorias</h2>
 
   <div class="sort-container">
+
     <h3>Ordenar: </h3>
     <select id="orderSelect" [(ngModel)]="ascending" (change)="loadCategories()">
       <option [value]="true">Ascendente</option>
@@ -9,6 +10,9 @@
     </select>
 
   </div>
+
+
+
   <div class="table-container">
 
     <table>
@@ -36,14 +40,13 @@
 
 
   <div class="pagination-controls">
-    <button
-      (click)="prevPage()"
-      [disabled]="page === 0"
-      class="right-button">
 
-      <img src="assets/icons/left_arrow.svg" alt="">
-
-    </button>
+    <app-icon-button
+    imgWidth="50"
+    imgHeight="50"
+    (onClick)="prevPage()"
+    imgSrc="assets/icons/left_arrow.svg"
+    ></app-icon-button>
 
 
     <div class="pagination">
@@ -51,14 +54,12 @@
       (Total de elementos: {{ totalElements }})
     </div>
 
+    <app-icon-button
+      imgWidth="50"
+      imgHeight="50"
+      (onClick)="nextPage()"
+      imgSrc="assets/icons/right_arrow.svg"
+    ></app-icon-button>
 
-    <button
-      (click)="nextPage()"
-      [disabled]="page >= totalPages - 1"
-      class="left-button">
-
-      <img src="assets/icons/right_arrow.svg" alt="">
-
-    </button>
   </div>
 </div>
