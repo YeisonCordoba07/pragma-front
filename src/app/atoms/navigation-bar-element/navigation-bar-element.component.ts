@@ -10,7 +10,7 @@ export class NavigationBarElementComponent implements OnInit {
 
   @Input() isActived: boolean = false;
   @Input() elementText: string = "Menu #";
-  @Input() elementIcon: string = "favicon.ico";
+  @Input() elementIcon: string = "assets/icons/purple_store.svg";
   @Input() pageUrl: string = "/";
   @Output() closeNav = new EventEmitter<void>();
 

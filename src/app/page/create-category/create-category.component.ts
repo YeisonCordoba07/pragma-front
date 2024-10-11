@@ -57,7 +57,8 @@ export class CreateCategoryComponent implements OnInit {
       // POST REQUEST TO CREATE CATEGORY
       try {
         // POST REQUEST TO CREATE CATEGORY USING async/await
-        const response = await lastValueFrom(this.categoryService.createCategory(newCategory, this.token));
+        const response = await lastValueFrom(
+          this.categoryService.createCategory(newCategory, this.token));
 
         if (response.status === 201) {
           this.categoryStatus = "Categoria creada exitosamente";

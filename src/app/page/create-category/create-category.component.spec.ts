@@ -76,35 +76,35 @@ describe('CreateCategoryComponent', () => {
     );
   });
 
-  it('should set categoryStatus on successful creation', () => {
+  it('should set categoryStatus on successful creation', async () => {
     component.updateCategoryValues('name', 'Valid Name');
     component.updateCategoryValues('description', 'Valid Description');
 
     categoryService.createCategory.mockReturnValue(of({ status: 201 })); // Simular respuesta exitosa
 
-    component.createCategory();
+    await component.createCategory();
 
     expect(component.categoryStatus).toBe('Categoria creada exitosamente');
   });
 
-  it('should set categoryStatus on unsuccessful creation', () => {
+  it('should set categoryStatus on unsuccessful creation', async () => {
     component.updateCategoryValues('name', 'Valid Name');
     component.updateCategoryValues('description', 'Valid Description');
 
     categoryService.createCategory.mockReturnValue(of({ status: 400 })); // Simular respuesta de error
 
-    component.createCategory();
+    await component.createCategory();
 
     expect(component.categoryStatus).toBe('... al crear categoria');
   });
 
-  it('should set categoryStatus on error', () => {
+  it('should set categoryStatus on error', async () => {
     component.updateCategoryValues('name', 'Valid Name');
     component.updateCategoryValues('description', 'Valid Description');
 
     categoryService.createCategory.mockReturnValue(throwError(() => new Error('Error'))); // Simular error
 
-    component.createCategory();
+    await component.createCategory();
 
     expect(component.categoryStatus).toBe('Error al enviar la solicitud');
   });

@@ -2,7 +2,7 @@
 
   <a [routerLink]="pageUrl" (click)="onClick()" >
 
-    <img src="favicon.ico" alt="" width="28" height="30">
+    <img [src]="elementIcon" alt="" width="28" height="30">
     <span>{{elementText}}</span>
     <div *ngIf="isActived" class="vertical-divider"></div>
 
