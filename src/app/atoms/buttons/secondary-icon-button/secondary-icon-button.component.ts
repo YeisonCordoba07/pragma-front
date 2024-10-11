@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SecondaryIconButtonComponent implements OnInit {
   @Input() buttonText: string = "Button";
+  @Input() disabled: boolean = false;
 
   constructor() { }
 

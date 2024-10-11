@@ -30,7 +30,7 @@
           <app-primary-icon-button
                   type="submit"
                   buttonText="Create"
-                  [disabled]="nameError || descriptionError"></app-primary-icon-button>
+                  [disabled]="nameError !== '' || descriptionError!== ''"></app-primary-icon-button>
 
       </div>
 
