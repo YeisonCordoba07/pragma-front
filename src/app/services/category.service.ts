@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Category} from "../../types/Category";
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CategoryService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Category>(url, { headers });
+    return this.http.get<any>(url, { headers });
   }
 
 

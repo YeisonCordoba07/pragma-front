@@ -27,11 +27,15 @@ export class GetCategoriesComponent implements OnInit {
   loadCategories(): void {
     this.categoryService.getCategories(this.page, this.size, this.token).subscribe(
       (response) => {
-        this.categories = response.content;
-        this.page = response.page;
-        this.size = response.size;
-        this.totalElements = response.totalElements;
-        this.totalPages = response.totalPages;
+        if (response) {
+          this.categories = response.content;
+          this.page = response.page;
+          this.size = response.size;
+          this.totalElements = response.totalElements;
+          this.totalPages = response.totalPages;
+        } else {
+          console.error('No se recibieron datos de la API.');
+        }
       },
       (error) => {
         console.error("Error al obtener las categorías:", error);
