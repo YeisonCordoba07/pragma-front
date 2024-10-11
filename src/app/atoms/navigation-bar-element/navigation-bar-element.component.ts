@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-bar-element',
@@ -13,9 +14,13 @@ export class NavigationBarElementComponent implements OnInit {
   @Input() pageUrl: string = "/";
   @Output() closeNav = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe(() => {
+      this.isActived = this.router.url === this.pageUrl;
+    });
+    console.log("ROUTER: ",this.router.url);
   }
 
   onClick() {

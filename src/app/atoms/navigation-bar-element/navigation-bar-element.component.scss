@@ -4,11 +4,13 @@ li{
   text-decoration: none;
   display: flex;
   list-style: none;
-  background-color: $color-hint_text;
+  background-color: $color-black;
   position: relative;
 
 }
-
+.active{
+  background-color: $color-hint_text;
+}
 a{
   display: flex;
   flex-direction: row;
@@ -17,6 +19,7 @@ a{
   height: 40px;
   padding-left: 24px;
   align-items: center;
+  text-decoration: none;
 }
 
 span{
