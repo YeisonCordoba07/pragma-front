@@ -24,7 +24,6 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     // No necessary
-
   }
 
 
@@ -53,8 +52,7 @@ export class CreateCategoryComponent implements OnInit {
         name: this.categoryName,
         description: this.categoryDescription
       };
-      //console.log("NOMBRE: ", newCategory.name);
-      //console.log("DESCRIPTION: ", newCategory.description);
+
 
       // POST REQUEST TO CREATE CATEGORY
       try {
