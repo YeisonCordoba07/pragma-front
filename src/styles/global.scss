@@ -111,15 +111,18 @@
 
 
 // PRIMARY BUTTON ------------------------------------------
-.main-buttons{
+.primary-buttons{
   display: flex;
   align-items: center;
+  justify-content: center;
+
   padding: 4px 12px;
   gap: 8px;
   border-style: none;
   border-radius: 4px;
-  background-color:$color-purple;
+
   color: white;
+  background-color:$color-purple;
   transition-duration: 200ms;
   @extend .main-text__body-m-regular;
 
@@ -146,13 +149,15 @@
 .secondary-buttons {
   display: flex;
   align-items: center;
+  justify-content: center;
+
   padding: 4px 12px;
   gap: 8px;
 
   border-radius: 4px;
+  color: $color-purple;
   border: 1px solid $color-purple;
   background-color: inherit;
-  color: $color-purple;
   transition-duration: 200ms;
   @extend .main-text__body-m-regular;
 

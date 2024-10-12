@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SecondaryIconButtonComponent } from './secondary-icon-button.component';
+import { MainButtonComponent } from './main-button.component';
 import {By} from "@angular/platform-browser";
 
-describe('SecondaryIconButtonComponent', () => {
-  let component: SecondaryIconButtonComponent;
-  let fixture: ComponentFixture<SecondaryIconButtonComponent>;
+describe('MainButtonComponent', () => {
+  let component: MainButtonComponent;
+  let fixture: ComponentFixture<MainButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SecondaryIconButtonComponent ]
+      declarations: [ MainButtonComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SecondaryIconButtonComponent);
+    fixture = TestBed.createComponent(MainButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

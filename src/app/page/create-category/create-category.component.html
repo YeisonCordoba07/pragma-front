@@ -1,6 +1,5 @@
 <section>
 
-
   <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
 
     <h2>Crear categoria</h2>
@@ -14,7 +13,6 @@
       </app-input-text>
       <div *ngIf="nameError" class="error">{{ nameError }}</div>
 
-
       <label for="description">Descripción: </label>
       <app-input-text
         idInput="description"
@@ -26,15 +24,15 @@
     </div>
 
 
-      <div class="buttons-container">
-          <app-primary-icon-button
-                  type="submit"
-                  buttonText="Create"
-                  [disabled]="nameError !== '' || descriptionError!== ''">
-
-          </app-primary-icon-button>
-
-      </div>
+    <div class="buttons-container">
+      <app-main-button
+        type="submit"
+        typeButton="primary"
+        imgSource="assets/icons/white_save_icon.svg"
+        buttonText="Create"
+        [disabled]="nameError !== '' || descriptionError!== ''">
+      </app-main-button>
+    </div>
 
   </form>
 

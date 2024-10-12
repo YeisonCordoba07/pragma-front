@@ -5,17 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PrimaryIconButtonComponent } from './atoms/buttons/primary-icon-button/primary-icon-button.component';
+
 import { InputTextComponent } from './atoms/input-text/input-text.component';
-import { SecondaryIconButtonComponent } from './atoms/buttons/secondary-icon-button/secondary-icon-button.component';
 import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
 
 
 import { CreateCategoryComponent } from './page/create-category/create-category.component';
 import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
 import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
-import { PrimaryButtonComponent } from './atoms/buttons/primary-button/primary-button.component';
-import { SecondaryButtonComponent } from './atoms/buttons/secondary-button/secondary-button.component';
+import { MainButtonComponent } from './atoms/main-button/main-button.component';
 import { FooterComponent } from './molecules/footer/footer.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
@@ -30,15 +28,13 @@ import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-
 @NgModule({
   declarations: [
     AppComponent,
-    PrimaryIconButtonComponent,
     InputTextComponent,
-    SecondaryIconButtonComponent,
     SaveIconComponent,
     CreateCategoryComponent,
     NavigationBarElementComponent,
     NavigationBarComponent,
-    PrimaryButtonComponent,
-    SecondaryButtonComponent,
+    MainButtonComponent,
+
     FooterComponent,
     HeaderComponent,
     GetCategoriesComponent,

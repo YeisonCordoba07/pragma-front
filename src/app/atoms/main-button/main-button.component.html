@@ -1,0 +1,15 @@
+<button
+  class="{{typeButton}}-buttons"
+  [ngClass]=""
+  [disabled]="disabled">
+
+  <img
+    *ngIf="imgSource !== ''"
+    [src]="imgSource"
+    alt="save icon"
+    width="20"
+    height="20"/>
+
+  <span>{{ buttonText }}</span>
+
+</button>
