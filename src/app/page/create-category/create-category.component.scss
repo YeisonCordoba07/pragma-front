@@ -9,24 +9,26 @@ section{
   justify-content: center;
   align-items: center;
   width: 100vw;
-
+  background-color: burlywood;
+  padding: 20px;
   @media (min-width: 1024px) {
-    width: 500px;
-    max-width: 500px;
+    padding: 20px;
   }
-
 }
 
 form{
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   gap: 8px;
   padding: 25px;
-  margin: 20px 0;
   align-items: start;
   @extend .shadow__medium;
   @extend .corner-radius__large;
+
+  @media (min-width: 1024px) {
+    width:500px;
+  }
 }
 
 h2{
