@@ -11,6 +11,7 @@ export class MainButtonComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() typeButton:  "primary" | "secondary" = "primary";
   @Input() imgSource: string = "";
+
   constructor() { }
 
   ngOnInit(): void {

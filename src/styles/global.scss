@@ -112,14 +112,8 @@
 
 // PRIMARY BUTTON ------------------------------------------
 .primary-buttons{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4px 12px;
-  gap: 8px;
-  border-style: none;
   border-radius: 4px;
+  border: 1px solid $color-purple;
 
   color: white;
   background-color:$color-purple;
@@ -137,28 +131,18 @@
 
   &:disabled {
     background-color:$color-disabled;
+    border-color: $color-disabled;
   }
 
 }
 
 
 
-
-
 // SECONDARY BUTTON ---------------------------------------
 .secondary-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4px 12px;
-  gap: 8px;
-
-  border-radius: 4px;
   color: $color-purple;
   border: 1px solid $color-purple;
   background-color: inherit;
-  transition-duration: 200ms;
   @extend .main-text__body-m-regular;
 
   &:hover {
@@ -177,4 +161,27 @@
     color:$color-disabled;
   }
 }
+
+
+.main-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border-radius: 4px;
+  transition-duration: 200ms;
+
+  padding: 4px 12px;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 8px 28px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 12px 52px;
+  }
+}
+
+
 
