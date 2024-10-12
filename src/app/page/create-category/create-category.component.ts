@@ -17,6 +17,17 @@ export class CreateCategoryComponent implements OnInit {
   public descriptionError: string = "";
   public categoryStatus: string = "";
 
+  showToast: boolean = false;
+  toastMessage: string = '';
+
+  showCustomToast(message: string) {
+    this.toastMessage = message;
+    this.showToast = true;
+
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000); // Duración del toast
+  }
 
   constructor(private readonly categoryService: CategoryService) {
   }
@@ -26,6 +37,7 @@ export class CreateCategoryComponent implements OnInit {
     // No necessary
     this.nameError = "Nombre no puede estar vacio";
     this.descriptionError = "Descripcion no puede estar vacia";
+    this.showCustomToast("Se creó la aplicación con exito");
   }
 
 
@@ -77,4 +89,11 @@ export class CreateCategoryComponent implements OnInit {
       }
     }
   }
+
+
+
+
+
+
+
 }
