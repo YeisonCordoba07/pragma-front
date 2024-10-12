@@ -22,7 +22,8 @@ import { HeaderComponent } from './molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
 import { IconLinkComponent } from './atoms/icon-link/icon-link.component';
-import { IconButtonComponent } from './atoms/icon-button/icon-button.component'; // Importar FormsModule
+import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
+import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-sort-direction.component'; // Importar FormsModule
 
 
 
@@ -42,7 +43,8 @@ import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
     HeaderComponent,
     GetCategoriesComponent,
     IconLinkComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    TableSortDirectionComponent
   ],
     imports: [
         BrowserModule,

@@ -58,4 +58,9 @@ export class GetCategoriesComponent implements OnInit {
     }
   }
 
+  changeAscending(): void{
+    this.ascending = !this.ascending;
+    this.loadCategories();
+  }
+
 }

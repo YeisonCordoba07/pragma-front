@@ -5,7 +5,7 @@
 .categories-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   padding: 20px;
   align-items: center;
 }
@@ -86,38 +86,3 @@ tr:nth-child(even) {
   align-items: center;
 }
 
-
-.sort-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  margin-top: 20px;
-  @extend .desktop__poppins-h4;
-}
-
-
-select{
-  display: flex;
-  padding: 12px 8px;
-  @extend .main-text__body-xs;
-  border: 1px solid $color-purple;
-  border-radius: 4px;
-
-  &::selection{
-    background-color: $color-purple;
-  }
-}
-
-option{
-  @extend .main-text__body-s;
-  &:hover{
-    background-color: $color-purple;
-  }
-  &:focus{
-    background-color: $color-purple;
-  }
-  &::selection{
-    background-color: $color-purple;
-  }
-}
