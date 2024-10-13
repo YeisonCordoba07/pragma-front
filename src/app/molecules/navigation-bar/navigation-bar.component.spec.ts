@@ -25,19 +25,32 @@ describe('NavigationBarComponent', () => {
   });
 
 
-  it('should render the close button with close icon', () => {
-    const closeButton = fixture.debugElement.query(By.css('button'));
-    expect(closeButton).toBeTruthy();
 
+  it('should emit the closeNav event when handleCloseNav is called', () => {
+    jest.spyOn(component.closeNav, 'emit');
+
+    component.handleCloseNav();
+
+    expect(component.closeNav.emit).toHaveBeenCalled();
   });
 
-  it('should emit closeNav event when close button is clicked', () => {
-    jest.spyOn(component.closeNav, 'emit'); // Espiar el metodo emit
+  it('should emit closeNav when the close button is clicked', () => {
+    jest.spyOn(component.closeNav, 'emit');
 
-    const closeButton = fixture.debugElement.query(By.css('button'));
-    closeButton.triggerEventHandler('click', null); // Simular el clic en el botón
+    const closeButton = fixture.debugElement.query(By.css('app-icon-button'));
+    closeButton.triggerEventHandler('onClick', null);
 
-    expect(component.closeNav.emit).toHaveBeenCalled(); // Verificar que se haya llamado a emit
+    expect(component.closeNav.emit).toHaveBeenCalled();
+  });
+
+
+  it('should call handleCloseNav when the navigation element emits closeNav', () => {
+    jest.spyOn(component, 'handleCloseNav');
+
+    const navElements = fixture.debugElement.queryAll(By.css('app-navigation-bar-element'));
+    navElements[0].triggerEventHandler('closeNav', null);
+
+    expect(component.handleCloseNav).toHaveBeenCalled();
   });
 
 });
