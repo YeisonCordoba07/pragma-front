@@ -1,26 +1,39 @@
-<div *ngIf="datos.length > 0" class="categories-container">
-  <h2 class="desktop__poppins-h1">{{ mainTitle }}as</h2>
+<div class="data-container">
 
-  <div class="table-container">
+  <!-- Data form -->
+  <app-form-data
+    mainTitle="Total marcas"
+    [datos]="datos">
+  </app-form-data>
 
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-      </tr>
-      </thead>
+  <!-- Sort by -->
+  <app-table-sort-direction
+    (ascendingChange)="changeAscending()">
+  </app-table-sort-direction>
 
-      <tbody>
-      <tr *ngFor="let dataElement of datos">
-        <td>{{ dataElement.id }}</td>
-        <td>{{ dataElement.name }}</td>
-        <td>{{ dataElement.description }}</td>
-      </tr>
-      </tbody>
-    </table>
+
+
+  <!-- Pagination + buttons -->
+  <div class="pagination-controls">
+
+    <app-icon-button
+      imgWidth="50"
+      imgHeight="50"
+      (onClick)="prevPage()"
+      imgSrc="assets/icons/left_arrow.svg">
+    </app-icon-button>
+
+    <div class="pagination">
+      {{ page + 1 }} de {{ totalPages }}
+      (Total de elementos: {{ totalElements }})
+    </div>
+
+    <app-icon-button
+      imgWidth="50"
+      imgHeight="50"
+      (onClick)="nextPage()"
+      imgSrc="assets/icons/right_arrow.svg">
+    </app-icon-button>
 
   </div>
-
 </div>
