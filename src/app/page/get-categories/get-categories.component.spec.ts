@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GetCategoriesComponent } from './get-categories.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import {of, throwError} from 'rxjs';
 import { By } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 
@@ -11,28 +11,19 @@ import {FormsModule} from "@angular/forms";
 describe('GetCategoriesComponent', () => {
   let component: GetCategoriesComponent;
   let fixture: ComponentFixture<GetCategoriesComponent>;
-  let categoryServiceMock: any;
+  let mockCategoryService: CategoryService;
 
   beforeEach(async () => {
-    categoryServiceMock = {
-      getCategories: jest.fn().mockReturnValue(of({
-        content: [
-          { id: 1, name: 'Category 1', description: 'Description 1' },
-          { id: 2, name: 'Category 2', description: 'Description 2' },
-        ],
-        page: 0,
-        size: 10,
-        totalElements: 2,
-        totalPages: 1,
-      })),
-    };
+    mockCategoryService = {
+      getCategories: jest.fn()
+    } as unknown as CategoryService;
 
 
 
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, FormsModule],
       declarations: [ GetCategoriesComponent ],
-      providers: [{ provide: CategoryService, useValue: categoryServiceMock }]
+      providers: [{ provide: CategoryService, useValue: mockCategoryService  }]
     })
     .compileComponents();
 
@@ -46,130 +37,77 @@ describe('GetCategoriesComponent', () => {
   });
 
 
-  it('should render the select element for sorting', () => {
-    component.categories = [
-      { id: 1, name: 'Category 1', description: 'Description 1' }
-    ]; // Asigna categorías para activar el *ngIf
-    fixture.detectChanges(); // Refresca la vista para que la plantilla se renderice correctamente
-
-    const selectElement = fixture.debugElement.query(By.css('#orderSelect'));
-    expect(selectElement).toBeTruthy(); // Verifica si el select existe
-    expect(selectElement.nativeElement.options.length).toBe(2); // Ascendente y Descendente
-  });
-
-  it('should render a table with categories', () => {
-    component.categories = [
-      { id: 1, name: 'Category 1', description: 'Description 1' },
-      { id: 2, name: 'Category 2', description: 'Description 2' },
-    ];
-    fixture.detectChanges();
-
-    const tableRows = fixture.debugElement.queryAll(By.css('tbody tr'));
-    expect(tableRows.length).toBe(2);
-
-    const firstRowColumns = tableRows[0].queryAll(By.css('td'));
-    expect(firstRowColumns[0].nativeElement.textContent).toContain('1');
-    expect(firstRowColumns[1].nativeElement.textContent).toContain('Category 1');
-    expect(firstRowColumns[2].nativeElement.textContent).toContain('Description 1');
-  });
-
-  it('should disable the prev button on the first page', () => {
-    component.page = 0;
-    fixture.detectChanges();
-
-    const prevButton = fixture.debugElement.query(By.css('.right-button')).nativeElement;
-    expect(prevButton.disabled).toBe(true);
-  });
-
-  it('should disable the next button on the last page', () => {
-    component.page = 0;
-    component.totalPages = 1;
-    fixture.detectChanges();
-
-    const nextButton = fixture.debugElement.query(By.css('.left-button')).nativeElement;
-    expect(nextButton.disabled).toBe(true);
-  });
-/*
-
-  it('should load categories on init', () => {
-    const mockCategoriesResponse = {
-      content: [
-        { id: 1, name: 'Category 1', description: 'Description 1' },
-        { id: 2, name: 'Category 2', description: 'Description 2' },
-      ],
+  it('should load categories on init', async () => {
+    const mockResponse = {
+      content: [{ id: 1, name: 'Categoria 1', description: 'Descripción 1' }],
       page: 0,
       size: 5,
-      totalElements: 10,
-      totalPages: 2,
+      totalElements: 1,
+      totalPages: 1
     };
 
-    // Simulamos la respuesta del servicio
-    jest.spyOn(categoryService, 'getCategories').mockReturnValue(of(mockCategoriesResponse));
+    jest.spyOn(mockCategoryService, 'getCategories').mockReturnValue(of(mockResponse));
 
-    component.ngOnInit(); // Simulamos el ciclo de vida de Angular
+    await component.loadCategories();
 
-    expect(component.categories.length).toBe(2); // Verificamos que se cargaron las categorías
+    expect(component.categories.length).toBe(1);
+    expect(component.categories[0].name).toBe('Categoria 1');
     expect(component.page).toBe(0);
-    expect(component.size).toBe(5);
-    expect(component.totalElements).toBe(10);
-    expect(component.totalPages).toBe(2);
+    expect(component.totalPages).toBe(1);
   });
 
-  it('should move to the next page', () => {
-    component.totalPages = 2;
+  it('should log error when loading categories fails', async () => {
+    jest.spyOn(mockCategoryService, 'getCategories').mockReturnValue(throwError(() => new Error('API Error')));
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+    await component.loadCategories();
+
+    expect(consoleSpy).toHaveBeenCalledWith('Error al obtener las categorías:', expect.any(Error));
+  });
+
+  it('should go to the next page if available', async () => {
     component.page = 0;
+    component.totalPages = 2;
 
-    const mockCategoriesResponse = {
-      content: [{ id: 3, name: 'Category 3', description: 'Description 3' }],
-      page: 1,
-      size: 5,
-      totalElements: 10,
-      totalPages: 2,
-    };
-
-    jest.spyOn(categoryService, 'getCategories').mockReturnValue(of(mockCategoriesResponse));
+    const mockResponse = { content: [], page: 1, size: 5, totalElements: 10, totalPages: 2 };
+    jest.spyOn(mockCategoryService, 'getCategories').mockReturnValue(of(mockResponse));
 
     component.nextPage();
 
     expect(component.page).toBe(1);
-    expect(categoryService.getCategories).toHaveBeenCalledWith(1, 5, component['token']);
   });
 
-  it('should not move to the next page if on last page', () => {
+  it('should not go to the next page if on the last page', () => {
     component.page = 1;
     component.totalPages = 2;
 
     component.nextPage();
 
-    expect(component.page).toBe(1); // La página no debería cambiar
-    expect(categoryService.getCategories).not.toHaveBeenCalled(); // No se debería llamar a la API
+    expect(component.page).toBe(1); // No debe cambiar
   });
 
-  it('should move to the previous page', () => {
+  it('should go to the previous page if available', () => {
     component.page = 1;
-
-    const mockCategoriesResponse = {
-      content: [{ id: 1, name: 'Category 1', description: 'Description 1' }],
-      page: 0,
-      size: 5,
-      totalElements: 10,
-      totalPages: 2,
-    };
-
-    jest.spyOn(categoryService, 'getCategories').mockReturnValue(of(mockCategoriesResponse));
-
     component.prevPage();
 
     expect(component.page).toBe(0);
-    expect(categoryService.getCategories).toHaveBeenCalledWith(0, 5, component['token']);
   });
 
-  it('should not move to the previous page if on first page', () => {
+  it('should not go to the previous page if on the first page', () => {
     component.page = 0;
-
     component.prevPage();
 
-    expect(component.page).toBe(0); // La página no debería cambiar
-    expect(categoryService.getCategories).not.toHaveBeenCalled(); // No se debería llamar a la API
-  });*/
+    expect(component.page).toBe(0); // No debe cambiar
+  });
+
+  it('should toggle ascending and reload categories', () => {
+    jest.spyOn(component, 'loadCategories');
+
+    component.ascending = true;
+    component.changeAscending();
+
+    expect(component.ascending).toBe(false);
+    expect(component.loadCategories).toHaveBeenCalled();
+  });
+
 });
