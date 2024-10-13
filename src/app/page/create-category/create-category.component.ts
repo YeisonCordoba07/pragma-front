@@ -19,6 +19,7 @@ export class CreateCategoryComponent implements OnInit {
 
   showToast: boolean = false;
   toastMessage: string = '';
+  typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
   showCustomToast(message: string) {
     this.toastMessage = message;
@@ -56,7 +57,7 @@ export class CreateCategoryComponent implements OnInit {
       if (value.length > 90) {
         this.descriptionError = "La descripción no puede tener más de 90 caracteres.";
       }else if(value.length === 0){
-        this.nameError = "La descripción no puede estar vacio.";
+        this.nameError = "La descripción no puede estar vacia.";
       }  else {
         this.descriptionError = "";
         this.categoryDescription = value;
@@ -81,11 +82,17 @@ export class CreateCategoryComponent implements OnInit {
 
         if (response.status === 201) {
           this.categoryStatus = "Categoria creada exitosamente";
+          this.typeToastMessage = "success";
+          this.showCustomToast("Categoría creada exitosamente");
+
         } else {
           this.categoryStatus = "... al crear categoria";
         }
       } catch (error) {
+
         this.categoryStatus = "Error al enviar la solicitud";
+        this.typeToastMessage = "error";
+        this.showCustomToast("Error al enviar la solicitud");
       }
     }
   }

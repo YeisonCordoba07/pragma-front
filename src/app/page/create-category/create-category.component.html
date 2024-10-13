@@ -1,8 +1,5 @@
 <section>
-  <app-toast
-    *ngIf="showToast"
-    toastType="success"
-    [message]="toastMessage"></app-toast>
+
 
   <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
 
@@ -39,5 +36,10 @@
     </div>
 
   </form>
+
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage"></app-toast>
 
 </section>
