@@ -22,7 +22,8 @@ import { GetCategoriesComponent } from './page/get-categories/get-categories.com
 import { IconLinkComponent } from './atoms/icon-link/icon-link.component';
 import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
 import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-sort-direction.component';
-import { ToastComponent } from './atoms/toast/toast.component'; // Importar FormsModule
+import { ToastComponent } from './atoms/toast/toast.component';
+import { SecondPageComponent } from './second-page/second-page.component'; // Importar FormsModule
 
 
 
@@ -42,7 +43,8 @@ import { ToastComponent } from './atoms/toast/toast.component'; // Importar Form
     IconLinkComponent,
     IconButtonComponent,
     TableSortDirectionComponent,
-    ToastComponent
+    ToastComponent,
+    SecondPageComponent
   ],
     imports: [
         BrowserModule,
