@@ -1,17 +1,32 @@
 <header class="header">
   <div class="header-container">
 
-    <button>
-      <img class="img-person-logo" src="assets/icons/person_logo.svg" alt="">
-    </button>
+    <app-icon-link
+      pageUrl="/"
+      imgWidth="24"
+      imgHeight="24"
+      imgSource="assets/icons/person_logo.svg"
+      imgAlt="person logo"
+    ></app-icon-link>
 
-    <button>
-      <img class="img-logo-pragma" src="assets/icons/logo_pragma_mobile.svg" alt="">
-    </button>
+    <app-icon-link
+      pageUrl="/"
+      imgWidth="87"
+      imgHeight="32"
+      imgSource="assets/icons/logo_pragma_mobile.svg"
+      imgAlt="pragma logo"
+    ></app-icon-link>
 
-    <button (click)="setActive()">
-      <img class="img-menu" src="assets/icons/logo_menu.svg" alt="">
-    </button>
+
+    <app-icon-button
+      imgSrc="assets/icons/logo_menu.svg"
+      imgAlt="menu logo"
+      imgWidth="32"
+      imgHeight="32"
+      (onClick)="setActive()">
+    </app-icon-button>
+
+
   </div>
 
   <app-navigation-bar

@@ -7,10 +7,15 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  @Output() closeNav: EventEmitter<any> = new EventEmitter();
+  @Output() closeNav: EventEmitter<void> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  handleCloseNav() {
+    this.closeNav.emit(); // Emitir el evento para cerrar la navegación
+  }
+
 
 }

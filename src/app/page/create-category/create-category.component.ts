@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from 'src/app/services/category.service';
+import {lastValueFrom} from "rxjs";
+
 
 @Component({
   selector: 'app-create-category',
@@ -7,30 +9,36 @@ import {CategoryService} from 'src/app/services/category.service';
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  private categoryName: string = "";
-  private categoryDescription: string = "";
-  private token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
+  public categoryName: string = "";
+  public categoryDescription: string = "";
+  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
 
   public nameError: string = "";
   public descriptionError: string = "";
   public categoryStatus: string = "";
 
+  showToast: boolean = false;
+  toastMessage: string = '';
+  typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
-  constructor(private dataService: CategoryService) {
+  showCustomToast(message: string) {
+    this.toastMessage = message;
+    this.showToast = true;
+
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000); // Duración del toast
+  }
+
+  constructor(private readonly categoryService: CategoryService) {
   }
 
 
   ngOnInit(): void {
-
-    // SOLICITUD GET
-    /*this.dataService.getPosts(this.token).subscribe(
-      (response) => {
-        console.log("DATA", response);
-      },
-      (error) => {
-        console.log("ERROR GET CATEGORY", error);
-      }
-    );*/
+    // No necessary
+    this.nameError = "Nombre no puede estar vacio";
+    this.descriptionError = "Descripcion no puede estar vacia";
+    this.showCustomToast("Se creó la aplicación con exito");
   }
 
 
@@ -38,6 +46,9 @@ export class CreateCategoryComponent implements OnInit {
     if (type === "name") {
       if (value.length > 50) {
         this.nameError = "El nombre no puede tener más de 50 caracteres.";
+      }
+      else if(value.length === 0){
+        this.nameError = "El nombre no puede estar vacio.";
       } else {
         this.nameError = "";
         this.categoryName = value;
@@ -45,7 +56,9 @@ export class CreateCategoryComponent implements OnInit {
     } else if (type === "description") {
       if (value.length > 90) {
         this.descriptionError = "La descripción no puede tener más de 90 caracteres.";
-      } else {
+      }else if(value.length === 0){
+        this.nameError = "La descripción no puede estar vacia.";
+      }  else {
         this.descriptionError = "";
         this.categoryDescription = value;
       }
@@ -53,31 +66,41 @@ export class CreateCategoryComponent implements OnInit {
   }
 
 
-  createCategory() {
+  async createCategory() {
     if (!this.nameError && !this.descriptionError) {
       const newCategory = {
         name: this.categoryName,
         description: this.categoryDescription
       };
-      console.log("NOMBRE: ", newCategory.name);
-      console.log("DESCRIPTION: ", newCategory.description);
+
 
       // POST REQUEST TO CREATE CATEGORY
-      this.dataService.createCategory(newCategory, this.token).subscribe(
-        response => {
-          if (response.status === 201) {
-            console.log("Categoría creada con éxito:", response);
-            this.categoryStatus = "Categoria creada exitosamente";
-          } else {
-            console.error("Error al crear la categoría: Código de estado inesperado", response.status);
-            this.categoryStatus = "... al crear categoria";
-          }
-        },
-        error => {
-          console.error("Error al crear la categoría:", error);
-          this.categoryStatus = "Error al enviar la solicitud";
+      try {
+        // POST REQUEST TO CREATE CATEGORY USING async/await
+        const response = await lastValueFrom(
+          this.categoryService.createCategory(newCategory, this.token));
+
+        if (response.status === 201) {
+          this.categoryStatus = "Categoria creada exitosamente";
+          this.typeToastMessage = "success";
+          this.showCustomToast("Categoría creada exitosamente");
+
+        } else {
+          this.categoryStatus = "... al crear categoria";
         }
-      );
+      } catch (error) {
+
+        this.categoryStatus = "Error al enviar la solicitud";
+        this.typeToastMessage = "error";
+        this.showCustomToast("Error al enviar la solicitud");
+      }
     }
   }
+
+
+
+
+
+
+
 }

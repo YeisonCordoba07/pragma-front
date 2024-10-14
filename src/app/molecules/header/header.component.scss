@@ -5,13 +5,14 @@
   width: 100vw;
   z-index: 9;
   position: relative;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 }
 
 .header-container{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 68px;
   padding: 20px;
@@ -19,34 +20,9 @@
   border-bottom: 2px solid $color-border;
 }
 
-.header-container > button{
-  border: none;
-  width: fit-content;
-  height: fit-content;
-  padding: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.img-person-logo {
-  width: 24px;
-  height: 24px;
-}
-.img-logo-pragma{
-  width: 87px;
-  height: 32px;
-}
-.img-menu{
-  width: 32px;
-  height: 32px;
-}
 
 .header-element{
-  //display: none;
-  display: flex;
+  display: none;
   position: absolute;
   right: 0;
   top: 0;
@@ -55,8 +31,7 @@
   width: 0;
 
   &__active{
-    //display: flex;
     width: 90vw;
-
+    display: flex;
   }
 }

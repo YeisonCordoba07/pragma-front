@@ -1,19 +1,36 @@
+
 <div class="nav-container">
+
+
   <div class="nav-header-container">
     <img src="assets/icons/purple_person_logo.svg" alt="">
 
-    <button (click)="closeNav.emit()">
-      <img src="assets/icons/close_line.svg" alt="">
-    </button>
+    <app-icon-button
+      imgSrc="assets/icons/close_line.svg"
+      imgAlt="Cerrar"
+      (onClick)="closeNav.emit()">
+    </app-icon-button>
+
   </div>
 
   <ul>
-    <app-navigation-bar-element elementText="Category" [isActived]="true"></app-navigation-bar-element>
-    <app-navigation-bar-element elementText="Brand"></app-navigation-bar-element>
+    <app-navigation-bar-element
+      elementText="Ver categorias"
+      [isActived]="true"
+      pageUrl="/ver-categorias"
+      (closeNav)="handleCloseNav()"></app-navigation-bar-element>
+
+    <app-navigation-bar-element
+      elementText="Crear categoria"
+      pageUrl="/crear-categoria"
+      elementIcon="assets/icons/purple_setting.svg"
+      (closeNav)="handleCloseNav()"></app-navigation-bar-element>
+
   </ul>
 
   <div class="nav-container__session">
     <img src="assets/icons/logout.svg" alt="">
     <p>Log out</p>
   </div>
+
 </div>
