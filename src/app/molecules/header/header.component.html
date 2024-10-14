@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="header-container">
+
+    <app-icon-link
+      pageUrl="/"
+      imgWidth="24"
+      imgHeight="24"
+      imgSource="assets/icons/person_logo.svg"
+      imgAlt="person logo"
+    ></app-icon-link>
+
+    <app-icon-link
+      pageUrl="/"
+      imgWidth="87"
+      imgHeight="32"
+      imgSource="assets/icons/logo_pragma_mobile.svg"
+      imgAlt="pragma logo"
+    ></app-icon-link>
+
+
+    <app-icon-button
+      imgSrc="assets/icons/logo_menu.svg"
+      imgAlt="menu logo"
+      imgWidth="32"
+      imgHeight="32"
+      (onClick)="setActive()">
+    </app-icon-button>
+
+
+  </div>
+
+  <app-navigation-bar
+    [ngClass]="{'header-element__active' : active}"
+    (closeNav)="setActive()"
+    class="header-element"></app-navigation-bar>
+</header>

@@ -1,0 +1,187 @@
+@import "src/styles/global-colors";
+@import "src/styles/fonts";
+
+
+
+
+// GENERAL -------------------------------------------------
+.shadow__extra-small{
+  box-shadow: 0 10px 15px 0 #D3C0D612;
+}
+
+.shadow__small{
+  box-shadow: 0 8px 16px 0 #3E134D12;
+}
+
+.shadow__medium{
+  box-shadow: 0 15px 30px 0 #3E134D17;
+}
+
+.shadow__large{
+  box-shadow: 0 10px 30px 0 #3E134D78;
+}
+
+
+
+
+// CORNER RADIUS -------------------------------------------
+.corner-radius__small{
+
+  border-radius: 2px;
+  position: relative;
+  background-color: $color-white;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 4px;
+  }
+}
+
+
+
+.corner-radius__medium{
+  position: relative;
+  background-color: $color-white;
+  border-radius: 6px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 8px;
+  }
+}
+
+
+
+
+.corner-radius__large{
+  border-radius: 10px;
+  position: relative;
+  background-color: $color-white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 12px;
+  }
+}
+
+
+
+
+.corner-radius__huge{
+  border-radius: 22px;
+  position: relative;
+  background-color: $color-white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background: linear-gradient(135deg, #9D3FE7 0.48%, #F5F5F7 42.49%, #F5F5F7 98.88%);
+    border-radius: 24px;
+  }
+}
+
+
+
+
+
+// PRIMARY BUTTON ------------------------------------------
+.primary-buttons{
+  border-radius: 4px;
+  border: 1px solid $color-purple;
+
+  color: white;
+  background-color:$color-purple;
+  transition-duration: 200ms;
+  @extend .main-text__body-m-regular;
+
+  &:hover {
+    background-color:$color-purple-hover;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    background-color:$color-purple-click;
+  }
+
+  &:disabled {
+    background-color:$color-disabled;
+    border-color: $color-disabled;
+  }
+
+}
+
+
+
+// SECONDARY BUTTON ---------------------------------------
+.secondary-buttons {
+  color: $color-purple;
+  border: 1px solid $color-purple;
+  background-color: inherit;
+  @extend .main-text__body-m-regular;
+
+  &:hover {
+    border-color: $color-purple-hover;
+    color: $color-purple-hover;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    border-color:$color-purple-click;
+    color:$color-purple-click;
+  }
+
+  &:disabled {
+    border-color:$color-disabled;
+    color:$color-disabled;
+  }
+}
+
+
+.main-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border-radius: 4px;
+  transition-duration: 200ms;
+
+  padding: 4px 12px;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 8px 28px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 12px 52px;
+  }
+}
+
+
+

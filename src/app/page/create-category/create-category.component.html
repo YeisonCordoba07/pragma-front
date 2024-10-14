@@ -1,0 +1,45 @@
+<section>
+
+
+  <form action="" (ngSubmit)="createCategory()" #categoryForm="ngForm">
+
+    <h2>Crear categoria</h2>
+
+    <div class="form-container">
+
+      <label for="name">Nombre: </label>
+      <app-input-text
+        idInput="name"
+        (valueChange)="updateCategoryValues('name', $event)">
+      </app-input-text>
+      <div *ngIf="nameError" class="error">{{ nameError }}</div>
+
+      <label for="description">Descripción: </label>
+      <app-input-text
+        idInput="description"
+        (valueChange)="updateCategoryValues('description', $event)">
+      </app-input-text>
+      <div *ngIf="descriptionError" class="error">{{ descriptionError }}</div>
+      <div *ngIf="categoryStatus" class="category-status">{{ categoryStatus }}</div>
+
+    </div>
+
+
+    <div class="buttons-container">
+      <app-main-button
+        type="submit"
+        typeButton="primary"
+        imgSource="assets/icons/white_save_icon.svg"
+        buttonText="Create"
+        [disabled]="nameError !== '' || descriptionError!== ''">
+      </app-main-button>
+    </div>
+
+  </form>
+
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage"></app-toast>
+
+</section>
