@@ -1,0 +1,24 @@
+@import "../../../styles/global-colors";
+@import "src/styles/fonts";
+
+input{
+  padding: 12px 8px;
+  border: 1px solid $color-border;
+  border-radius: 2px;
+  @extend .main-text__body-xs;
+  margin-bottom: 20px;
+  width: 100%;
+
+  &:focus{
+    outline-color: $color-purple;
+  }
+
+  &:disabled{
+    background-color: $color-disabled;
+    color: $color-border;
+  }
+
+}
+
+
+
