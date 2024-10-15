@@ -55,4 +55,16 @@ describe('NavigationBarElementComponent', () => {
     const imgElement: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement;
     expect(imgElement.src).toContain('favicon.ico'); // Verifica que la ruta de la imagen es correcta
   });
+
+
+
+  it('should change isActived when the url change', () => {
+    jest.spyOn(component.closeNav, 'emit'); // Espía el evento emitido
+    const aElement = fixture.debugElement.query(By.css('a')).nativeElement;
+
+    aElement.click();
+    console.log(aElement);
+    expect(component.closeNav.emit).toHaveBeenCalled();
+  });
+
 });
