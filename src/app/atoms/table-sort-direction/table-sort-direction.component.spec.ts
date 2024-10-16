@@ -23,7 +23,7 @@ describe('TableSortDirectionComponent', () => {
   });
 
   it('should call onChangeAscending when select changes', () => {
-    jest.spyOn(component, 'onChangeAscending'); // Espía el metodo onChangeAscending
+    jest.spyOn(component, 'onChangeAscending'); // Espia el metodo onChangeAscending
     const select = fixture.debugElement.query(By.css('select')).nativeElement;
 
     select.dispatchEvent(new Event('change')); // Simula un cambio en el select

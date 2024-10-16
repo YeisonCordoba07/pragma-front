@@ -17,9 +17,9 @@ export class NavigationBarElementComponent implements OnInit {
   constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe(() => {
+    /*this.router.events.subscribe(() => {
       this.isActived = this.router.url === this.pageUrl;
-    });
+    });*/
   }
 
   onClick() {

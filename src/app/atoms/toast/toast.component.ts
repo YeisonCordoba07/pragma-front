@@ -19,6 +19,7 @@ export class ToastComponent implements OnInit {
     this.showToast(); // Mostrar el toast al iniciar
   }
 
+
   showToast(): void {
 
     this.toastClass = 'toast-in';
@@ -40,8 +41,6 @@ export class ToastComponent implements OnInit {
       this.imgSource = "assets/icons/toast_warning.svg";
     }else if(this.toastType === "success"){
       this.imgSource = "assets/icons/toast_success.svg";
-    }else{
-      this.imgSource = "assets/icons/toast_neutral.svg";
     }
   }
 }
