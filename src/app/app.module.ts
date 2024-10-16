@@ -24,7 +24,8 @@ import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
 import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-sort-direction.component';
 import { ToastComponent } from './atoms/toast/toast.component';
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
-import {RouterLink} from "@angular/router"; // Importar FormsModule
+import {RouterLink} from "@angular/router";
+import { GetBrandsComponent } from './page/get-brands/get-brands.component'; // Importar FormsModule
 
 
 
@@ -45,7 +46,8 @@ import {RouterLink} from "@angular/router"; // Importar FormsModule
     IconButtonComponent,
     TableSortDirectionComponent,
     ToastComponent,
-    GetCategoriesComponent
+    GetCategoriesComponent,
+    GetBrandsComponent
   ],
     imports: [
         BrowserModule,
