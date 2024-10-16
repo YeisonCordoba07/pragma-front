@@ -9,7 +9,7 @@
   right: 20px;
   z-index: 1000;
   border-radius: 6px;
-  border: 1px solid $color-border;
+  border: 1px solid lightgray;
   @extend .shadow__medium;
   animation: toastIn 0.5s ease forwards; // Animación de entrada
 
