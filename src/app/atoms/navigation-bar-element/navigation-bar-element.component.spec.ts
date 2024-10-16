@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationBarElementComponent } from './navigation-bar-element.component';
 import {By} from "@angular/platform-browser";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('NavigationBarElementComponent', () => {
   let component: NavigationBarElementComponent;
@@ -9,7 +10,8 @@ describe('NavigationBarElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationBarElementComponent ]
+      declarations: [ NavigationBarElementComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
@@ -63,7 +65,6 @@ describe('NavigationBarElementComponent', () => {
     const aElement = fixture.debugElement.query(By.css('a')).nativeElement;
 
     aElement.click();
-    console.log(aElement);
     expect(component.closeNav.emit).toHaveBeenCalled();
   });
 

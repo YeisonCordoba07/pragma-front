@@ -49,7 +49,7 @@ export class GetBrandsComponent implements OnInit {
 
       }
     } catch (error) {
-      console.error('Error al obtener las categorías:', error);
+      console.error('Error al obtener brands:', error);
 
     }
   }

@@ -3,6 +3,7 @@ import { CategoryService } from '../../services/category/category.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GetCategoriesComponent } from './get-categories.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('SecondPageComponent', () => {
   let component: GetCategoriesComponent;
@@ -19,7 +20,8 @@ describe('SecondPageComponent', () => {
       imports: [HttpClientTestingModule],
       providers: [
         { provide: CategoryService, useValue: mockCategoryService }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 

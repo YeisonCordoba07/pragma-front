@@ -4,6 +4,7 @@ import { GetBrandsComponent } from './get-brands.component';
 import {of} from "rxjs";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {BrandService} from "../../services/brand/brand.service";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('GetBrandsComponent', () => {
   let component: GetBrandsComponent;
@@ -20,7 +21,8 @@ describe('GetBrandsComponent', () => {
       imports: [HttpClientTestingModule],
       providers: [
         { provide: BrandService, useValue: mockBrandService }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
@@ -29,12 +31,13 @@ describe('GetBrandsComponent', () => {
     fixture.detectChanges();
   });
 
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
 
-  it('should load categories on init', async () => {
+  it('should load brands on init', async () => {
     const mockResponse = {
       content: [
         { id: 1, name: 'Brand 1', description: 'Description 1' },
@@ -57,7 +60,7 @@ describe('GetBrandsComponent', () => {
     expect(component.totalPages).toBe(1);
   });
 
-  it('should call categoryService.getCategories with the correct parameters', async () => {
+  it('should call brandService.getBrands with the correct parameters', async () => {
     const mockResponse = {
       content: [],
       page: 0,

@@ -7,8 +7,8 @@ import {Observable} from "rxjs";
 })
 export class BrandService {
 
-  private readonly getBrandURL = "http://localhost:8080/category/getAll?page=0&size=3&sortBy=name&ascending=true";
-  private readonly createBrandURL = 'http://localhost:8080/category';
+  private readonly getBrandURL = "http://localhost:8080/brand/getAll?page=0&size=3&sortBy=name&ascending=true";
+  private readonly createBrandURL = 'http://localhost:8080/brand';
 
   constructor(private http: HttpClient) { }
 

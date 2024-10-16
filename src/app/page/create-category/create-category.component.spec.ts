@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CreateCategoryComponent } from './create-category.component';
 
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';  // Importa esto
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';  // Si u
 import { CategoryService } from 'src/app/services/category/category.service';
 import { of, throwError } from 'rxjs';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 class MockCategoryService {
   createCategory = jest.fn();
@@ -22,7 +23,8 @@ describe('CreateCategoryComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateCategoryComponent ],
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
-      providers: [{ provide: CategoryService, useClass: MockCategoryService }]
+      providers: [{ provide: CategoryService, useClass: MockCategoryService }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
