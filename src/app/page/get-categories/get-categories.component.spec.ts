@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '../../services/category/category.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GetCategoriesComponent } from './get-categories.component';

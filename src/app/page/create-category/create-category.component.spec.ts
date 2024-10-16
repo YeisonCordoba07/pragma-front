@@ -5,7 +5,7 @@ import { CreateCategoryComponent } from './create-category.component';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';  // Importa esto
 import { ReactiveFormsModule } from '@angular/forms';  // Si u
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { of, throwError } from 'rxjs';
 
 class MockCategoryService {

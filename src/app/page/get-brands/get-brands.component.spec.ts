@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GetBrandsComponent } from './get-brands.component';
 import {of} from "rxjs";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {BrandService} from "../../services/brand.service";
+import {BrandService} from "../../services/brand/brand.service";
 
 describe('GetBrandsComponent', () => {
   let component: GetBrandsComponent;

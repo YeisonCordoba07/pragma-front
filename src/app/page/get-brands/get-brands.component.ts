@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {firstValueFrom} from "rxjs";
-import {BrandService} from "../../services/brand.service";
+import {BrandService} from "../../services/brand/brand.service";
 
 @Component({
   selector: 'app-get-brands',

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CategoryService} from "../../services/category.service";
+import {CategoryService} from "../../services/category/category.service";
 import {firstValueFrom} from "rxjs";
 
 @Component({
