@@ -79,9 +79,9 @@ describe('CreateBrandComponent', () => {
 
 
 
-  it('should set descriptionError when description exceeds 90 characters', () => {
-    component.updateBrandValues('description', 'a'.repeat(91));
-    expect(component.descriptionError).toBe('La descripción no puede tener más de 90 caracteres.');
+  it('should set descriptionError when description exceeds 121 characters', () => {
+    component.updateBrandValues('description', 'a'.repeat(121));
+    expect(component.descriptionError).toBe('La descripción no puede tener más de 120 caracteres.');
   });
   it('should set descriptionError when name length is 0', () => {
     component.updateBrandValues('description', '');

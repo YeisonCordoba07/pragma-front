@@ -57,7 +57,7 @@ export class CreateCategoryComponent implements OnInit {
       if (value.length > 90) {
         this.descriptionError = "La descripción no puede tener más de 90 caracteres.";
       }else if(value.length === 0){
-        this.nameError = "La descripción no puede estar vacia.";
+        this.descriptionError = "La descripción no puede estar vacia.";
       }  else {
         this.descriptionError = "";
         this.categoryDescription = value;
