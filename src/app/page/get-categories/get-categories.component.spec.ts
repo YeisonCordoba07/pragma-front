@@ -50,7 +50,7 @@ describe('SecondPageComponent', () => {
 
     await component.ngOnInit();
 
-    expect(component.datos.length).toBe(2);
+    expect(component.categoryData.length).toBe(2);
     expect(component.page).toBe(0);
     expect(component.size).toBe(5);
     expect(component.totalElements).toBe(2);

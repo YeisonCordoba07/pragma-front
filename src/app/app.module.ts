@@ -25,7 +25,8 @@ import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-
 import { ToastComponent } from './atoms/toast/toast.component';
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
 import {RouterLink} from "@angular/router";
-import { GetBrandsComponent } from './page/get-brands/get-brands.component'; // Importar FormsModule
+import { GetBrandsComponent } from './page/get-brands/get-brands.component';
+import { DataTableComponent } from './molecules/data-table/data-table.component'; // Importar FormsModule
 
 
 
@@ -47,7 +48,8 @@ import { GetBrandsComponent } from './page/get-brands/get-brands.component'; // 
     TableSortDirectionComponent,
     ToastComponent,
     GetCategoriesComponent,
-    GetBrandsComponent
+    GetBrandsComponent,
+    DataTableComponent
   ],
     imports: [
         BrowserModule,

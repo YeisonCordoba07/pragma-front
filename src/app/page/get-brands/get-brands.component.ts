@@ -11,7 +11,7 @@ export class GetBrandsComponent implements OnInit {
 
   readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
 
-  datos: any[] = [];
+  brandData: any[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -38,7 +38,7 @@ export class GetBrandsComponent implements OnInit {
       );
 
       if (response) {
-        this.datos = response.content;
+        this.brandData = response.content;
         this.page = response.page;
         this.size = response.size;
         this.totalElements = response.totalElements;

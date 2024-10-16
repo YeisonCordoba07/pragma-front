@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryService} from "../../services/category.service";
 import {firstValueFrom} from "rxjs";
 
@@ -10,7 +10,7 @@ import {firstValueFrom} from "rxjs";
 export class GetCategoriesComponent implements OnInit {
   readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
 
-  datos: any[] = [];
+  categoryData: any[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -22,12 +22,9 @@ export class GetCategoriesComponent implements OnInit {
   constructor(private readonly categoryService: CategoryService) { }
 
 
-
   ngOnInit(): void {
     this.loadCategories();
   }
-
-
   // GET REQUEST
   async loadCategories(): Promise<void> {
     try {
@@ -37,7 +34,7 @@ export class GetCategoriesComponent implements OnInit {
       );
 
       if (response) {
-        this.datos = response.content;
+        this.categoryData = response.content;
         this.page = response.page;
         this.size = response.size;
         this.totalElements = response.totalElements;
@@ -61,12 +58,14 @@ export class GetCategoriesComponent implements OnInit {
     }
   }
 
+
   nextPage(): void {
     if (this.page < this.totalPages - 1) {
       this.page++;
       this.loadCategories();
     }
   }
+
 
   changeAscending(): void{
     this.ascending = !this.ascending;

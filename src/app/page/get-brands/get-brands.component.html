@@ -1,40 +1,15 @@
-<div class="data-container">
+<app-data-table
+  (leftClick)="prevPage()"
+  (rightClick)="nextPage()"
+  (changeSort)="changeAscending()"
+  [inputData]="brandData"
+  mainTitle="Todas las marcas"
 
-  <!-- Data form -->
-  <app-form-data
-    mainTitle="Todas las marcas"
-    [datos]="datos">
-  </app-form-data>
+  [page]="page"
+  [size]="size"
+  [totalElements]="totalElements"
+  [totalPages]="totalPages"
+  [ascending]="ascending">
+</app-data-table>
 
-  <!-- Sort by -->
-  <app-table-sort-direction
-    (ascendingChange)="changeAscending()">
-  </app-table-sort-direction>
-
-
-
-  <!-- Pagination + buttons -->
-  <div class="pagination-controls">
-
-    <app-icon-button
-      imgWidth="50"
-      imgHeight="50"
-      (onClick)="prevPage()"
-      imgSrc="assets/icons/left_arrow.svg">
-    </app-icon-button>
-
-    <div class="pagination">
-      {{ page + 1 }} de {{ totalPages }}
-      (Total de elementos: {{ totalElements }})
-    </div>
-
-    <app-icon-button
-      imgWidth="50"
-      imgHeight="50"
-      (onClick)="nextPage()"
-      imgSrc="assets/icons/right_arrow.svg">
-    </app-icon-button>
-
-  </div>
-</div>
 
