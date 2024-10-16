@@ -135,4 +135,32 @@ describe('SecondPageComponent', () => {
     expect(component.ascending).toBe(true);
     expect(mockCategoryService.getCategories).toHaveBeenCalledWith(0, 5, component.token, true);
   });
+
+
+
+  it('should log an error if no response is received from the API (response is null)', async () => {
+    mockCategoryService.getCategories.mockReturnValue(of(null));
+
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+    await component.loadCategories();
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith('No se recibieron datos de la API.');
+
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('should log an error if no response is received from the API (response is undefined)', async () => {
+    mockCategoryService.getCategories.mockReturnValue(of(undefined));
+
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+
+    await component.loadCategories();
+
+    // Verifica que se haya llamado a console.error
+    expect(consoleErrorSpy).toHaveBeenCalledWith('No se recibieron datos de la API.');
+
+    // Limpia el espia de console.error
+    consoleErrorSpy.mockRestore();
+  });
+
 });
