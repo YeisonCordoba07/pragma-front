@@ -19,6 +19,7 @@ export class ToastComponent implements OnInit {
     this.showToast(); // Mostrar el toast al iniciar
   }
 
+
   showToast(): void {
 
     this.toastClass = 'toast-in';
