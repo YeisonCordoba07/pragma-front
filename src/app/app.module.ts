@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { InputTextComponent } from './atoms/input-text/input-text.component';
-import { SaveIconComponent } from './atoms/save-icon/save-icon.component';
+
 
 
 import { CreateCategoryComponent } from './page/create-category/create-category.component';
@@ -24,7 +24,9 @@ import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
 import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-sort-direction.component';
 import { ToastComponent } from './atoms/toast/toast.component';
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
-import {RouterLink} from "@angular/router"; // Importar FormsModule
+import {RouterModule} from "@angular/router";
+import { GetBrandsComponent } from './page/get-brands/get-brands.component';
+import { DataTableComponent } from './molecules/data-table/data-table.component'; // Importar FormsModule
 
 
 
@@ -32,7 +34,6 @@ import {RouterLink} from "@angular/router"; // Importar FormsModule
   declarations: [
     AppComponent,
     InputTextComponent,
-    SaveIconComponent,
     CreateCategoryComponent,
     NavigationBarElementComponent,
     NavigationBarComponent,
@@ -45,7 +46,9 @@ import {RouterLink} from "@angular/router"; // Importar FormsModule
     IconButtonComponent,
     TableSortDirectionComponent,
     ToastComponent,
-    GetCategoriesComponent
+    GetCategoriesComponent,
+    GetBrandsComponent,
+    DataTableComponent,
   ],
     imports: [
         BrowserModule,
@@ -53,7 +56,8 @@ import {RouterLink} from "@angular/router"; // Importar FormsModule
         HttpClientModule,
         FormsModule,
         NgOptimizedImage,
-        RouterLink,
+        RouterModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

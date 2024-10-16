@@ -1,16 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CategoryService} from "../../services/category/category.service";
+import { Component, OnInit } from '@angular/core';
 import {firstValueFrom} from "rxjs";
+import {BrandService} from "../../services/brand/brand.service";
 
 @Component({
-  selector: 'app-get-categories',
-  templateUrl: './get-categories.component.html',
-  styleUrls: ['./get-categories.component.scss']
+  selector: 'app-get-brands',
+  templateUrl: './get-brands.component.html',
+  styleUrls: ['./get-brands.component.scss']
 })
-export class GetCategoriesComponent implements OnInit {
+export class GetBrandsComponent implements OnInit {
+
   readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3Mjg0MzU5NjUsImV4cCI6MTcyOTI5OTk2NX0.fgaWToNQjV4D6dOO529768D8g7MeZIa8PuIwmFdoPWE";
 
-  categoryData: any[] = [];
+  brandData: any[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -19,22 +20,25 @@ export class GetCategoriesComponent implements OnInit {
   ascending: boolean = true;
 
 
-  constructor(private readonly categoryService: CategoryService) { }
+  constructor(private readonly brandService: BrandService) { }
+
 
 
   ngOnInit(): void {
-    this.loadCategories();
+    this.loadBrands();
   }
+
+
   // GET REQUEST
-  async loadCategories(): Promise<void> {
+  async loadBrands(): Promise<void> {
     try {
       const response = await firstValueFrom(
-        this.categoryService.getCategories(
+        this.brandService.getBrand(
           this.page, this.size, this.token, this.ascending)
       );
 
       if (response) {
-        this.categoryData = response.content;
+        this.brandData = response.content;
         this.page = response.page;
         this.size = response.size;
         this.totalElements = response.totalElements;
@@ -45,7 +49,7 @@ export class GetCategoriesComponent implements OnInit {
 
       }
     } catch (error) {
-      console.error('Error al obtener las categorías:', error);
+      console.error('Error al obtener brands:', error);
 
     }
   }
@@ -54,22 +58,20 @@ export class GetCategoriesComponent implements OnInit {
   prevPage(): void {
     if (this.page > 0) {
       this.page--;
-      this.loadCategories();
+      this.loadBrands();
     }
   }
-
 
   nextPage(): void {
     if (this.page < this.totalPages - 1) {
       this.page++;
-      this.loadCategories();
+      this.loadBrands();
     }
   }
 
-
   changeAscending(): void{
     this.ascending = !this.ascending;
-    this.loadCategories();
+    this.loadBrands();
   }
 
 }

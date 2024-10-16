@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from 'src/app/services/category.service';
+import {CategoryService} from 'src/app/services/category/category.service';
 import {lastValueFrom} from "rxjs";
 
 

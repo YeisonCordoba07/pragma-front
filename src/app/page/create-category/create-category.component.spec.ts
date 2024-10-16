@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CreateCategoryComponent } from './create-category.component';
 
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';  // Importa esto
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';  // Si u
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { of, throwError } from 'rxjs';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 class MockCategoryService {
   createCategory = jest.fn();
@@ -22,7 +23,8 @@ describe('CreateCategoryComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateCategoryComponent ],
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
-      providers: [{ provide: CategoryService, useClass: MockCategoryService }]
+      providers: [{ provide: CategoryService, useClass: MockCategoryService }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
@@ -36,9 +38,36 @@ describe('CreateCategoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should display toast with the correct message and hide after 5 seconds', () => {
+    jest.useFakeTimers(); // Activa los temporizadores simulados de Jest
+
+    const testMessage = 'Test Toast Message';
+
+    // Llamamos al método
+    component.showCustomToast(testMessage);
+
+    // Verificamos que el mensaje de toast y el estado de visibilidad sean correctos inicialmente
+    expect(component.toastMessage).toBe(testMessage);
+    expect(component.showToast).toBe(true);
+
+    // Avanzamos los temporizadores 5 segundos (5000 ms)
+    jest.advanceTimersByTime(5000);
+
+    // Verificamos que el toast se haya ocultado después de 5 segundos
+    expect(component.showToast).toBe(false);
+
+    jest.useRealTimers(); // Restauramos los temporizadores reales
+  });
+
+
   it('should set nameError when name exceeds 50 characters', () => {
     component.updateCategoryValues('name', 'a'.repeat(51));
     expect(component.nameError).toBe('El nombre no puede tener más de 50 caracteres.');
+  });
+
+  it('should set nameError when name length is 0', () => {
+    component.updateCategoryValues('name', '');
+    expect(component.nameError).toBe('El nombre no puede estar vacio.');
   });
 
   it('should not set nameError when name is valid', () => {
@@ -52,6 +81,10 @@ describe('CreateCategoryComponent', () => {
   it('should set descriptionError when description exceeds 90 characters', () => {
     component.updateCategoryValues('description', 'a'.repeat(91));
     expect(component.descriptionError).toBe('La descripción no puede tener más de 90 caracteres.');
+  });
+  it('should set descriptionError when name length is 0', () => {
+    component.updateCategoryValues('description', '');
+    expect(component.nameError).toBe('La descripción no puede estar vacia.');
   });
 
   it('should not set descriptionError when description is valid', () => {
