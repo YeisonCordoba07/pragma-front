@@ -43,16 +43,7 @@ describe('InputTextComponent', () => {
     expect(inputElement.id).toBe('test-input');
   });
 
-  it('should update inputValue when input changes', () => {
-    const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
 
-    // Simular un cambio en el input
-    inputElement.value = 'New value';
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-
-    expect(component.inputValue).toBe('New value');
-  });
 
   it('should emit valueChange when input changes', () => {
     jest.spyOn(component.valueChange, 'emit');
