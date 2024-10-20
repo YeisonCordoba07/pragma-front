@@ -15,8 +15,8 @@ export class InputTextComponent implements OnInit {
   @Input() textLabel: string = "Campo de texto";
   @Input() control!: FormControl;
   @Input() maxInputLength: number = 50;
-  @Input() type: "text" | "email" | "password" = "text";
-  @Input() id!: string;
+  @Input() type: "text" | "email" | "password" | "number" = "text";
+  @Input() inputId!: string;
 
 
 
