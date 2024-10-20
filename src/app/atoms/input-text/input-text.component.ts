@@ -17,8 +17,6 @@ export class InputTextComponent implements OnInit {
   @Input() maxInputLength: number = 50;
   @Input() type: "text" | "email" | "password" = "text";
   @Input() id!: string;
-  public inputValue: string = "";
-
 
 
 
@@ -27,8 +25,5 @@ export class InputTextComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onInputChange(){
-    this.valueChange.emit(this.inputValue);
-  }
 
 }

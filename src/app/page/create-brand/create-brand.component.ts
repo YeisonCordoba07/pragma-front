@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {lastValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
 
@@ -9,28 +9,23 @@ import {BrandService} from "../../services/brand/brand.service";
 })
 export class CreateBrandComponent implements OnInit {
 
+  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
   public brandName: string = "";
   public brandDescription: string = "";
 
-  public nameError: string = "";
-  public descriptionError: string = "";
-  public brandStatus: string = "";
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
 
-
-
-  constructor(private readonly brandService: BrandService) { }
+  constructor(private readonly brandService: BrandService) {
+  }
 
   ngOnInit(): void {
-    this.nameError = "Nombre no puede estar vacio";
-    this.descriptionError = "Descripcion no puede estar vacia";
-    this.showCustomToast("Se creó la aplicación con exito");
+
   }
+
 
   showCustomToast(message: string) {
     this.toastMessage = message;
@@ -42,59 +37,32 @@ export class CreateBrandComponent implements OnInit {
   }
 
 
+  async createBrand(formData: any) {
 
-  updateBrandValues(type: "name" | "description", value: string) {
-    if (type === "name") {
-      if (value.length > 50) {
-        this.nameError = "El nombre no puede tener más de 50 caracteres.";
+    const newBrand = {
+      name: formData.name,
+      description: formData.description
+    };
+
+
+    // POST REQUEST TO CREATE BRAND
+    try {
+
+      const response = await lastValueFrom(
+        this.brandService.createBrand(newBrand, this.token));
+
+      if (response.status === 201) {
+
+        this.typeToastMessage = "success";
+        this.showCustomToast("Marca creada exitosamente");
+
       }
-      else if(value.length === 0){
-        this.nameError = "El nombre no puede estar vacio.";
-      } else {
-        this.nameError = "";
-        this.brandName = value;
-      }
-    } else if (type === "description") {
-      if (value.length > 120) {
-        this.descriptionError = "La descripción no puede tener más de 120 caracteres.";
-      }else if(value.length === 0){
-        this.descriptionError = "La descripción no puede estar vacia.";
-      }  else {
-        this.descriptionError = "";
-        this.brandDescription = value;
-      }
+    } catch (error) {
+
+      this.typeToastMessage = "error";
+      this.showCustomToast("Error al enviar la solicitud");
     }
-  }
 
-  async createBrand() {
-    if (!this.nameError && !this.descriptionError) {
-      const newBrand = {
-        name: this.brandName,
-        description: this.brandDescription
-      };
-
-
-      // POST REQUEST TO CREATE BRAND
-      try {
-        // POST REQUEST TO CREATE BRAND USING async/await
-        const response = await lastValueFrom(
-          this.brandService.createBrand(newBrand, this.token));
-
-        if (response.status === 201) {
-          this.brandStatus = "Marca creada exitosamente";
-          this.typeToastMessage = "success";
-          this.showCustomToast("Marca creada exitosamente");
-
-        } else {
-          this.brandStatus = "... al crear marca";
-        }
-      } catch (error) {
-
-        this.brandStatus = "Error al enviar la solicitud";
-        this.typeToastMessage = "error";
-        this.showCustomToast("Error al enviar la solicitud");
-      }
-    }
   }
 
 }

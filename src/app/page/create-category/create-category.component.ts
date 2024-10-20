@@ -35,14 +35,11 @@ export class CreateCategoryComponent implements OnInit {
   }
 
 
-  async createCategory(formFata: any) {
-
-
-    console.log("ENVIO: ", formFata);
+  async createCategory(formData: any) {
 
     const newCategory = {
-      name: formFata.name,
-      description: formFata.description
+      name: formData.name,
+      description: formData.description
     };
 
 
@@ -55,8 +52,6 @@ export class CreateCategoryComponent implements OnInit {
 
         this.typeToastMessage = "success";
         this.showCustomToast("Categoría creada exitosamente");
-
-      } else {
 
       }
     } catch (error) {
