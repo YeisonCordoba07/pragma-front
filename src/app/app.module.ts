@@ -28,7 +28,8 @@ import {RouterModule} from "@angular/router";
 import { GetBrandsComponent } from './page/get-brands/get-brands.component';
 import { DataTableComponent } from './molecules/data-table/data-table.component';
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
-import { CreateFormComponent } from './molecules/create-form/create-form.component'; // Importar FormsModule
+import { CreateFormComponent } from './molecules/create-form/create-form.component';
+import { CreateItemComponent } from './page/create-item/create-item.component'; // Importar FormsModule
 
 
 
@@ -52,7 +53,8 @@ import { CreateFormComponent } from './molecules/create-form/create-form.compone
     GetBrandsComponent,
     DataTableComponent,
     CreateBrandComponent,
-    CreateFormComponent
+    CreateFormComponent,
+    CreateItemComponent
   ],
     imports: [
         BrowserModule,
