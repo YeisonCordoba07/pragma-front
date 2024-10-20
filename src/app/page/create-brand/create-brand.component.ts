@@ -1,19 +1,30 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from 'src/app/services/category/category.service';
 import {lastValueFrom} from "rxjs";
-
+import {BrandService} from "../../services/brand/brand.service";
 
 @Component({
-  selector: 'app-create-category',
-  templateUrl: './create-category.component.html',
-  styleUrls: ['./create-category.component.scss']
+  selector: 'app-create-brand',
+  templateUrl: './create-brand.component.html',
+  styleUrls: ['./create-brand.component.scss']
 })
-export class CreateCategoryComponent implements OnInit {
+export class CreateBrandComponent implements OnInit {
+
   private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
+  public brandName: string = "";
+  public brandDescription: string = "";
+
 
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
+
+
+  constructor(private readonly brandService: BrandService) {
+  }
+
+  ngOnInit(): void {
+
+  }
 
 
   showCustomToast(message: string) {
@@ -26,32 +37,24 @@ export class CreateCategoryComponent implements OnInit {
   }
 
 
-  constructor(private readonly categoryService: CategoryService) {
-  }
+  async createBrand(formData: any) {
 
-
-  ngOnInit(): void {
-    // No necessary
-  }
-
-
-  async createCategory(formData: any) {
-
-    const newCategory = {
+    const newBrand = {
       name: formData.name,
       description: formData.description
     };
 
 
-    // POST REQUEST TO CREATE CATEGORY
+    // POST REQUEST TO CREATE BRAND
     try {
+
       const response = await lastValueFrom(
-        this.categoryService.createCategory(newCategory, this.token));
+        this.brandService.createBrand(newBrand, this.token));
 
       if (response.status === 201) {
 
         this.typeToastMessage = "success";
-        this.showCustomToast("Categoría creada exitosamente");
+        this.showCustomToast("Marca creada exitosamente");
 
       }
     } catch (error) {
@@ -61,6 +64,5 @@ export class CreateCategoryComponent implements OnInit {
     }
 
   }
-
 
 }
