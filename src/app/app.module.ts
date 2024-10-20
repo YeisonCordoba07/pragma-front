@@ -15,7 +15,7 @@ import { NavigationBarElementComponent } from './atoms/navigation-bar-element/na
 import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
 import { MainButtonComponent } from './atoms/main-button/main-button.component';
 import { FooterComponent } from './molecules/footer/footer.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { FormDataComponent } from './atoms/form-data/form-data.component';
@@ -27,7 +27,8 @@ import { GetCategoriesComponent } from './page/get-categories/get-categories.com
 import {RouterModule} from "@angular/router";
 import { GetBrandsComponent } from './page/get-brands/get-brands.component';
 import { DataTableComponent } from './molecules/data-table/data-table.component';
-import {CreateBrandComponent} from "./page/create-brand/create-brand.component"; // Importar FormsModule
+import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
+import { CreateFormComponent } from './molecules/create-form/create-form.component'; // Importar FormsModule
 
 
 
@@ -50,7 +51,8 @@ import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
     GetCategoriesComponent,
     GetBrandsComponent,
     DataTableComponent,
-    CreateBrandComponent
+    CreateBrandComponent,
+    CreateFormComponent
   ],
     imports: [
         BrowserModule,
@@ -59,6 +61,7 @@ import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
         FormsModule,
         NgOptimizedImage,
         RouterModule,
+        ReactiveFormsModule
 
     ],
   providers: [],

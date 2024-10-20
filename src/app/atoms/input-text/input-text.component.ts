@@ -12,6 +12,8 @@ export class InputTextComponent implements OnInit {
   public inputValue: string = "";
 
 
+
+
   constructor() { }
 
   ngOnInit(): void {

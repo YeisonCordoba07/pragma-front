@@ -1,0 +1,38 @@
+<form [formGroup]="formUser" (ngSubmit)="enviarFormulario()">
+
+
+  <label for="name">Nombre: </label>
+  <input type="text" formControlName="name" id="name">
+
+  <div [hidden]="name.valid || name.pristine" class="error">
+    <small *ngIf="name.errors?.['required']">El nombre no puede estar vacio</small>
+    <small *ngIf="name.errors?.['maxlength']">
+      El nombre no puede ser de mas de {{maxLengthName}} caracteres
+    </small>
+
+  </div>
+
+
+
+  <label for="description">Descripción: </label>
+  <input type="text" formControlName="description" id="description">
+
+  <div [hidden]="description.valid || description.pristine" class="error">
+    <small *ngIf="description.errors?.['required']">
+      La descripcion no debe estar vacia
+    </small>
+    <small *ngIf="description.errors?.['maxlength']">
+      La descripción no puede ser de mas de {{maxLengthDescription}} caracteres
+    </small>
+
+  </div>
+
+
+  <app-main-button
+  [disabled]="formUser.invalid"
+  buttonText="Guardar"
+  imgSource="assets/icons/white_save_icon.svg"
+  ></app-main-button>
+
+
+</form>
