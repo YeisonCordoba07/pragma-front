@@ -1,0 +1,42 @@
+@import "src/styles/global-colors";
+@import "src/styles/fonts";
+@import "src/styles/global";
+
+
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 30px;
+  margin: auto;
+  padding: 25px;
+  align-items: start;
+  @extend .shadow__medium;
+  @extend .corner-radius__large;
+
+  @media (min-width: 1024px) {
+    width:500px;
+  }
+}
+
+
+h2{
+  @extend .desktop__poppins-h1;
+}
+
+
+app-input-text{
+  width: 100%;
+}
+
+
+.buttons-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+select{
+  height: 400px;
+}

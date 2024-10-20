@@ -182,6 +182,10 @@
     padding: 12px 52px;
   }
 }
+.error{
+  color: $color-error;
+  @extend .main-text__body-s;
+}
 
 
 

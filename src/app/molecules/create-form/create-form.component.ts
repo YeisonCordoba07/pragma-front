@@ -15,7 +15,7 @@ export class CreateFormComponent implements OnInit {
   formUser: FormGroup;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
     this.formUser = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(this.maxLengthName)]],
       description: ['', [Validators.required, Validators.maxLength(this.maxLengthDescription)]],

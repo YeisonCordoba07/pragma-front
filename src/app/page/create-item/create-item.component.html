@@ -1,51 +1,19 @@
-<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
-
-  <h2>Crear articulo</h2>
-  <app-input-text
-    textLabel="Nombre"
-    inputId="name"
-    [maxInputLength]="maxLengthName"
-    type="text"
-    [control]="name"
-  >
-  </app-input-text>
-
-  <app-input-text
-    textLabel="Descripcion"
-    inputId="description"
-    [maxInputLength]="maxLengthDescription"
-    type="text"
-    [control]="description"
-  >
-  </app-input-text>
-
-  <app-input-text
-    textLabel="Cantidad"
-    inputId="quantity"
-    [maxInputLength]="maxLengthDescription"
-    type="number"
-    [control]="quantity"
-  >
-  </app-input-text>
-
-  <app-input-text
-    textLabel="Precio"
-    inputId="price"
-    [maxInputLength]="maxLengthDescription"
-    type="number"
-    [control]="price"
-  >
-  </app-input-text>
+<section>
+  <app-table-item
+    mainTitle="Crear Item"
+    (formSubmitted)="createItem($event)"
+    [maxLengthName]="50"
+    [maxLengthDescription]="120"
+    [categoryData]="categoryData"
+    [brandData]="brandData"
+  ></app-table-item>
 
 
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage">
+  </app-toast>
 
-  <div class="buttons-container">
+</section>
 
-    <app-main-button
-      [disabled]="formUser.invalid"
-      buttonText="Guardar"
-      imgSource="assets/icons/white_save_icon.svg"
-    ></app-main-button>
-  </div>
-
-</form>

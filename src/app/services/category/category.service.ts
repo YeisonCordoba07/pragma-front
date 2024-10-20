@@ -7,10 +7,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class CategoryService {
-  private readonly getCategoriesURL = "http://localhost:8080/category/getAll?page=0&size=3&sortBy=name&ascending=true";
+
   private readonly createCategoryURL = 'http://localhost:8080/category';
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
 
   getCategories(page: number, size: number, token: string, ascending: boolean): Observable<any> {
