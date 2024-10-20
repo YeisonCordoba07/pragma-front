@@ -1,9 +1,26 @@
-<input
-  type="text"
-  [placeholder]="placeholderText"
-  [id]="idInput"
-  [(ngModel)]="inputValue"
-  (input)="onInputChange()"
-  required
-/>
+<div class="element-container">
+  <label [for]="id">{{ textLabel }}</label>
+  <input [formControl]="control" [type]="type" [id]="id"/>
+
+
+  <!-- Mensajes de error -->
+  <div
+    [hidden]="control.valid || control.pristine"
+    class="error">
+    <small *ngIf="control.errors?.['required']">
+      {{ textLabel }} no puede estar vacio
+    </small>
+
+    <small *ngIf="control.errors?.['maxlength']">
+      {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
+    </small>
+
+    <div *ngIf="type === 'email'">
+
+      <small *ngIf="control.errors?.['maxlength']">
+        {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
+      </small>
+    </div>
+  </div>
+</div>
 

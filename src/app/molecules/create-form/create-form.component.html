@@ -1,38 +1,31 @@
-<form [formGroup]="formUser" (ngSubmit)="enviarFormulario()">
+<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
 
+  <h2>Crear categoria</h2>
+  <app-input-text
+    textLabel="Nombre"
+    id="name"
+    [maxInputLength]="maxLengthName"
+    type="text"
+    [control]="name"
+  >
+  </app-input-text>
 
-  <label for="name">Nombre: </label>
-  <input type="text" formControlName="name" id="name">
+  <app-input-text
+    textLabel="Descripcion"
+    id="description"
+    [maxInputLength]="maxLengthDescription"
+    type="text"
+    [control]="description"
+  >
+  </app-input-text>
 
-  <div [hidden]="name.valid || name.pristine" class="error">
-    <small *ngIf="name.errors?.['required']">El nombre no puede estar vacio</small>
-    <small *ngIf="name.errors?.['maxlength']">
-      El nombre no puede ser de mas de {{maxLengthName}} caracteres
-    </small>
-
-  </div>
-
-
-
-  <label for="description">Descripción: </label>
-  <input type="text" formControlName="description" id="description">
-
-  <div [hidden]="description.valid || description.pristine" class="error">
-    <small *ngIf="description.errors?.['required']">
-      La descripcion no debe estar vacia
-    </small>
-    <small *ngIf="description.errors?.['maxlength']">
-      La descripción no puede ser de mas de {{maxLengthDescription}} caracteres
-    </small>
-
-  </div>
-
+<div class="buttons-container">
 
   <app-main-button
-  [disabled]="formUser.invalid"
-  buttonText="Guardar"
-  imgSource="assets/icons/white_save_icon.svg"
+    [disabled]="formUser.invalid"
+    buttonText="Guardar"
+    imgSource="assets/icons/white_save_icon.svg"
   ></app-main-button>
-
+</div>
 
 </form>

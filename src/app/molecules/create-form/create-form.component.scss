@@ -3,23 +3,13 @@
 @import "src/styles/global";
 
 
-section{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  padding: 20px;
-  @media (min-width: 1024px) {
-    padding: 20px;
-  }
-}
 
 form{
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 8px;
+  gap: 30px;
+  margin: auto;
   padding: 25px;
   align-items: start;
   @extend .shadow__medium;
@@ -30,23 +20,19 @@ form{
   }
 }
 
+
 h2{
   @extend .desktop__poppins-h1;
 }
 
-label{
-  @extend  .main-text__body-l;
-}
 
-
-.form-container{
-  display: flex;
-  flex-direction: column;
+app-input-text{
   width: 100%;
 }
 
 
-.error{
-  color: $color-error;
-  @extend .main-text__body-s;
+.buttons-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

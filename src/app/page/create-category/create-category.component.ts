@@ -9,17 +9,12 @@ import {lastValueFrom} from "rxjs";
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  public categoryName: string = "";
-  public categoryDescription: string = "";
   private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
-
-  public nameError: string = "";
-  public descriptionError: string = "";
-  public categoryStatus: string = "";
 
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
+
 
   showCustomToast(message: string) {
     this.toastMessage = message;
@@ -30,77 +25,47 @@ export class CreateCategoryComponent implements OnInit {
     }, 5000); // Duración del toast
   }
 
+
   constructor(private readonly categoryService: CategoryService) {
   }
 
 
   ngOnInit(): void {
     // No necessary
-    this.nameError = "Nombre no puede estar vacio";
-    this.descriptionError = "Descripcion no puede estar vacia";
-    //this.showCustomToast("Se creó la aplicación con exito");
   }
 
 
-  updateCategoryValues(type: "name" | "description", value: string) {
-    if (type === "name") {
-      if (value.length > 50) {
-        this.nameError = "El nombre no puede tener más de 50 caracteres.";
-      }
-      else if(value.length === 0){
-        this.nameError = "El nombre no puede estar vacio.";
+  async createCategory(formFata: any) {
+
+
+    console.log("ENVIO: ", formFata);
+
+    const newCategory = {
+      name: formFata.name,
+      description: formFata.description
+    };
+
+
+    // POST REQUEST TO CREATE CATEGORY
+    try {
+      const response = await lastValueFrom(
+        this.categoryService.createCategory(newCategory, this.token));
+
+      if (response.status === 201) {
+
+        this.typeToastMessage = "success";
+        this.showCustomToast("Categoría creada exitosamente");
+
       } else {
-        this.nameError = "";
-        this.categoryName = value;
+
       }
-    } else if (type === "description") {
-      if (value.length > 90) {
-        this.descriptionError = "La descripción no puede tener más de 90 caracteres.";
-      }else if(value.length === 0){
-        this.descriptionError = "La descripción no puede estar vacia.";
-      }  else {
-        this.descriptionError = "";
-        this.categoryDescription = value;
-      }
+    } catch (error) {
+
+      this.typeToastMessage = "error";
+      this.showCustomToast("Error al enviar la solicitud");
     }
+
   }
-
-
-  async createCategory() {
-    if (!this.nameError && !this.descriptionError) {
-      const newCategory = {
-        name: this.categoryName,
-        description: this.categoryDescription
-      };
-
-
-      // POST REQUEST TO CREATE CATEGORY
-      try {
-        // POST REQUEST TO CREATE CATEGORY USING async/await
-        const response = await lastValueFrom(
-          this.categoryService.createCategory(newCategory, this.token));
-
-        if (response.status === 201) {
-          this.categoryStatus = "Categoria creada exitosamente";
-          this.typeToastMessage = "success";
-          this.showCustomToast("Categoría creada exitosamente");
-
-        } else {
-          this.categoryStatus = "... al crear categoria";
-        }
-      } catch (error) {
-
-        this.categoryStatus = "Error al enviar la solicitud";
-        this.typeToastMessage = "error";
-        this.showCustomToast("Error al enviar la solicitud");
-      }
-    }
-  }
-
-
-
-
-
 
 
 }
