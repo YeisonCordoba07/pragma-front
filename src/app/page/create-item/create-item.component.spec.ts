@@ -117,4 +117,118 @@ describe('CreateItemComponent', () => {
 
     jest.useRealTimers();
   });
+
+
+
+
+
+
+  describe('loadCategories', () => {
+    it('should load categories successfully', async () => {
+      const mockCategoriesResponse = { content: ['Category 1', 'Category 2'] };
+      mockCategoryService.getCategories.mockReturnValue(of(mockCategoriesResponse));
+
+      await component.loadCategories();
+
+      expect(component.categoryData).toEqual(mockCategoriesResponse.content);
+    });
+
+    it('should handle error when loading categories', async () => {
+      const error = 'Error loading categories';
+      mockCategoryService.getCategories.mockReturnValue(throwError(() => new Error(error)));
+
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      await component.loadCategories();
+
+      expect(consoleSpy).toHaveBeenCalledWith('Error al obtener brands:', new Error(error));
+      consoleSpy.mockRestore();
+    });
+  });
+
+  // Tests de carga de marcas
+  describe('loadBrands', () => {
+    it('should load brands successfully', async () => {
+      const mockBrandsResponse = { content: ['Brand 1', 'Brand 2'] };
+      mockBrandService.getBrand.mockReturnValue(of(mockBrandsResponse));
+
+      await component.loadBrands();
+
+      expect(component.brandData).toEqual(mockBrandsResponse.content);
+    });
+
+    it('should handle error when loading brands', async () => {
+      const error = 'Error loading brands';
+      mockBrandService.getBrand.mockReturnValue(throwError(() => new Error(error)));
+
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      await component.loadBrands();
+
+      expect(consoleSpy).toHaveBeenCalledWith('Error al obtener brands:', new Error(error));
+      consoleSpy.mockRestore();
+    });
+  });
+
+  // Test de creación de artículo
+  describe('createItem', () => {
+    it('should create an item successfully and show a success toast', async () => {
+      const mockFormData = {
+        name: 'Test Item',
+        description: 'Test Description',
+        quantity: 10,
+        price: 100,
+        categories: ['Electronics'],
+        brandName: 'Apple'
+      };
+
+      // Simula la respuesta exitosa
+      mockItemService.createItem.mockReturnValue(of({ status: 201 }));
+
+      const toastSpy = jest.spyOn(component, 'showCustomToast');
+
+      await component.createItem(mockFormData);
+
+      expect(component.typeToastMessage).toBe('success');
+      expect(toastSpy).toHaveBeenCalledWith('Articulo creado exitosamente');
+    });
+
+    it('should handle error when creating an item and show an error toast', async () => {
+      const mockFormData = {
+        name: 'Test Item',
+        description: 'Test Description',
+        quantity: 10,
+        price: 100,
+        categories: ['Electronics'],
+        brandName: 'Apple'
+      };
+
+      // Simula un error en la creación del item
+      mockItemService.createItem.mockReturnValue(throwError(() => new Error('Error creating item')));
+
+      const toastSpy = jest.spyOn(component, 'showCustomToast');
+
+      await component.createItem(mockFormData);
+
+      expect(component.typeToastMessage).toBe('error');
+      expect(toastSpy).toHaveBeenCalledWith('Error al enviar la solicitud');
+    });
+  });
+
+  // Test del metodo showCustomToast
+  describe('showCustomToast', () => {
+    it('should show and hide the toast after 5 seconds', () => {
+      jest.useFakeTimers();
+      component.showCustomToast('Test message');
+
+      expect(component.showToast).toBe(true);
+      expect(component.toastMessage).toBe('Test message');
+
+      // Avanza el tiempo 5 segundos
+      jest.advanceTimersByTime(5000);
+
+      expect(component.showToast).toBe(false);
+      jest.useRealTimers();
+    });
+  });
 });
