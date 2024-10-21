@@ -44,9 +44,6 @@ export class GetBrandsComponent implements OnInit {
         this.totalElements = response.totalElements;
         this.totalPages = response.totalPages;
 
-      } else {
-        console.error('No se recibieron datos de la API.');
-
       }
     } catch (error) {
       console.error('Error al obtener brands:', error);

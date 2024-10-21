@@ -97,9 +97,6 @@ export class CreateItemComponent implements OnInit {
       if (response) {
         this.categoryData = response.content;
 
-      } else {
-        console.error('No se recibieron datos de categorias de la API.');
-
       }
     } catch (error) {
       console.error('Error al obtener brands:', error);
@@ -116,9 +113,6 @@ export class CreateItemComponent implements OnInit {
 
       if (response) {
         this.brandData = response.content;
-
-      } else {
-        console.error('No se recibieron datos de marca de la API.');
 
       }
     } catch (error) {
