@@ -15,6 +15,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class MultiSelectTagComponent implements OnInit, ControlValueAccessor {
   @Input() inputData: any [] = [];
+  @Input() maxSelectedItems: number = 3;
   selectedItems: string[] = [];
   dropdownOpen: boolean = false;
 
@@ -33,7 +34,7 @@ export class MultiSelectTagComponent implements OnInit, ControlValueAccessor {
   toggleSelection(data: string) {
     const index = this.selectedItems.indexOf(data);
 
-    if (index === -1 && this.selectedItems.length < 3) {
+    if (index === -1 && this.selectedItems.length < this.maxSelectedItems) {
       this.selectedItems.push(data);
     } else if (index !== -1) {
       this.selectedItems.splice(index, 1);

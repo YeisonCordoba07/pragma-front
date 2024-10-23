@@ -28,6 +28,17 @@ describe('MultiSelectTagComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // Prueba por defecto del valor máximo
+  it('should have a default maxSelectedItems value of 3', () => {
+    expect(component.maxSelectedItems).toBe(3);
+  });
+
+  // Prueba al establecer un nuevo valor para maxSelectedItems
+  it('should update maxSelectedItems when a new value is set', () => {
+    component.maxSelectedItems = 5;
+    expect(component.maxSelectedItems).toBe(5);
+  });
+
   it('should toggle dropdown open state', () => {
     component.toggleDropdown();
     expect(component.dropdownOpen).toBe(true);
