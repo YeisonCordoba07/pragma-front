@@ -1,36 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { CreateCategoryComponent } from './create-category.component';
 
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ReactiveFormsModule } from '@angular/forms';  // Si u
 import { CategoryService } from 'src/app/services/category/category.service';
 import { of, throwError } from 'rxjs';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {By} from "@angular/platform-browser";
 
-class MockCategoryService {
-  createCategory = jest.fn();
-}
 
 
 describe('CreateCategoryComponent', () => {
   let component: CreateCategoryComponent;
   let fixture: ComponentFixture<CreateCategoryComponent>;
-  let categoryService: MockCategoryService;
+  let categoryServiceMock: any;
 
   beforeEach(async () => {
+
+    categoryServiceMock = {
+      createCategory: jest.fn(),
+    };
     await TestBed.configureTestingModule({
       declarations: [ CreateCategoryComponent ],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
-      providers: [{ provide: CategoryService, useClass: MockCategoryService }],
+      providers: [{ provide: CategoryService, useValue: categoryServiceMock  }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(CreateCategoryComponent);
     component = fixture.componentInstance;
-    categoryService = TestBed.inject(CategoryService) as unknown as MockCategoryService; // Hacemos un tipo de conversión aquí
     fixture.detectChanges();
   });
 
@@ -38,107 +35,74 @@ describe('CreateCategoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display toast with the correct message and hide after 5 seconds', () => {
-    jest.useFakeTimers(); // Activa los temporizadores simulados de Jest
+  // Verificar que el toast se muestra con el mensaje correcto y se oculta después de 5 segundos
+  it('should show and hide toast with correct message', () => {
+    jest.useFakeTimers(); // Simular temporizador
 
-    const testMessage = 'Test Toast Message';
+    // Llamar al metodo showCustomToast con un mensaje
+    component.showCustomToast('Categoría creada exitosamente');
 
-    // Llamamos al método
-    component.showCustomToast(testMessage);
-
-    // Verificamos que el mensaje de toast y el estado de visibilidad sean correctos inicialmente
-    expect(component.toastMessage).toBe(testMessage);
+    expect(component.toastMessage).toBe('Categoría creada exitosamente');
     expect(component.showToast).toBe(true);
 
-    // Avanzamos los temporizadores 5 segundos (5000 ms)
+    // Adelantar el temporizador
     jest.advanceTimersByTime(5000);
-
-    // Verificamos que el toast se haya ocultado después de 5 segundos
     expect(component.showToast).toBe(false);
 
-    jest.useRealTimers(); // Restauramos los temporizadores reales
+    jest.useRealTimers();
   });
 
+  // Verificar que createCategory se ejecute correctamente y muestre un toast de éxito
+  it('should create category and show success toast', async () => {
+    const formData = { name: 'Nueva Categoría', description: 'Descripción de la categoría' };
 
-  it('should set nameError when name exceeds 50 characters', () => {
-    component.updateCategoryValues('name', 'a'.repeat(51));
-    expect(component.nameError).toBe('El nombre no puede tener más de 50 caracteres.');
+    // Simular que la petición devuelve un estado 201
+    const mockResponse = { status: 201 };
+    categoryServiceMock.createCategory.mockReturnValue(of(mockResponse));
+
+    // Llamar al método createCategory
+    await component.createCategory(formData);
+
+    // Verificar que se llamó al método createCategory del servicio
+    expect(categoryServiceMock.createCategory).toHaveBeenCalledWith(formData, component['token']);
+
+    // Verificar que el tipo de mensaje del toast es "success" y se muestra
+    expect(component.typeToastMessage).toBe('success');
+    expect(component.toastMessage).toBe('Categoría creada exitosamente');
+    expect(component.showToast).toBe(true);
   });
 
-  it('should set nameError when name length is 0', () => {
-    component.updateCategoryValues('name', '');
-    expect(component.nameError).toBe('El nombre no puede estar vacio.');
+  // Verificar que createCategory maneja el error correctamente y muestra un toast de error
+  it('should handle error and show error toast', async () => {
+    const formData = { name: 'Nueva Categoría', description: 'Descripción de la categoría' };
+
+    // Simular un error en la petición
+    categoryServiceMock.createCategory.mockReturnValue(throwError(() => new Error('Error de red')));
+
+    // Llamar al metodo createCategory
+    await component.createCategory(formData);
+
+    // Verificar que se llamó al metodo createCategory del servicio
+    expect(categoryServiceMock.createCategory).toHaveBeenCalledWith(formData, component['token']);
+
+    // Verificar que el tipo de mensaje del toast es "error" y se muestra
+    expect(component.typeToastMessage).toBe('error');
+    expect(component.toastMessage).toBe('Error al enviar la solicitud');
+    expect(component.showToast).toBe(true);
   });
 
-  it('should not set nameError when name is valid', () => {
-    component.updateCategoryValues('name', 'Valid Name');
-    expect(component.nameError).toBe('');
-    expect(component.categoryName).toBe('Valid Name');
-  });
+  // Verificar que el componente interactúa con el app-create-form correctamente
+  it('should call createCategory when formSubmitted is triggered', () => {
+    const formData = { name: 'Nueva Categoría', description: 'Descripción de la categoría' };
 
+    // Espiar el metodo createCategory
+    jest.spyOn(component, 'createCategory');
 
+    // Simular la emisión del evento formSubmitted desde el app-create-form
+    const createFormElement = fixture.debugElement.query(By.css('app-create-form'));
+    createFormElement.triggerEventHandler('formSubmitted', formData);
 
-  it('should set descriptionError when description exceeds 90 characters', () => {
-    component.updateCategoryValues('description', 'a'.repeat(91));
-    expect(component.descriptionError).toBe('La descripción no puede tener más de 90 caracteres.');
-  });
-  it('should set descriptionError when name length is 0', () => {
-    component.updateCategoryValues('description', '');
-    expect(component.nameError).toBe('La descripción no puede estar vacia.');
-  });
-
-  it('should not set descriptionError when description is valid', () => {
-    component.updateCategoryValues('description', 'Valid Description');
-    expect(component.descriptionError).toBe('');
-    expect(component.categoryDescription).toBe('Valid Description');
-  });
-
-
-
-  it('should call createCategory service when form is valid', () => {
-    component.updateCategoryValues('name', 'Valid Name');
-    component.updateCategoryValues('description', 'Valid Description');
-
-    categoryService.createCategory.mockReturnValue(of({ status: 201 })); // Simular respuesta exitosa
-
-    component.createCategory();
-
-    expect(categoryService.createCategory).toHaveBeenCalledWith(
-      { name: 'Valid Name', description: 'Valid Description' },
-      component['token']
-    );
-  });
-
-  it('should set categoryStatus on successful creation', async () => {
-    component.updateCategoryValues('name', 'Valid Name');
-    component.updateCategoryValues('description', 'Valid Description');
-
-    categoryService.createCategory.mockReturnValue(of({ status: 201 })); // Simular respuesta exitosa
-
-    await component.createCategory();
-
-    expect(component.categoryStatus).toBe('Categoria creada exitosamente');
-  });
-
-  it('should set categoryStatus on unsuccessful creation', async () => {
-    component.updateCategoryValues('name', 'Valid Name');
-    component.updateCategoryValues('description', 'Valid Description');
-
-    categoryService.createCategory.mockReturnValue(of({ status: 400 })); // Simular respuesta de error
-
-    await component.createCategory();
-
-    expect(component.categoryStatus).toBe('... al crear categoria');
-  });
-
-  it('should set categoryStatus on error', async () => {
-    component.updateCategoryValues('name', 'Valid Name');
-    component.updateCategoryValues('description', 'Valid Description');
-
-    categoryService.createCategory.mockReturnValue(throwError(() => new Error('Error'))); // Simular error
-
-    await component.createCategory();
-
-    expect(component.categoryStatus).toBe('Error al enviar la solicitud');
+    // Verificar que se llamó al metodo createCategory con los datos correctos
+    expect(component.createCategory).toHaveBeenCalledWith(formData);
   });
 });

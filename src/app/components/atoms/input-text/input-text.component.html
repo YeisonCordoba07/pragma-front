@@ -1,0 +1,26 @@
+<div class="element-container">
+  <label [for]="inputId">{{ textLabel }}</label>
+  <input [formControl]="control" [type]="type" [id]="inputId"/>
+
+
+  <!-- Mensajes de error -->
+  <div
+    [hidden]="control.valid || control.pristine"
+    class="error">
+    <small *ngIf="control.errors?.['required']">
+      {{ textLabel }} no puede estar vacio
+    </small>
+
+    <small *ngIf="control.errors?.['maxlength']">
+      {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
+    </small>
+
+    <div *ngIf="type === 'email'">
+
+      <small *ngIf="control.errors?.['maxlength']">
+        {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
+      </small>
+    </div>
+  </div>
+</div>
+

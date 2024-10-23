@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category/category.service";
 import {firstValueFrom} from "rxjs";
 
@@ -25,6 +25,10 @@ export class GetCategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
   }
+
+
+
+
   // GET REQUEST
   async loadCategories(): Promise<void> {
     try {
@@ -39,9 +43,6 @@ export class GetCategoriesComponent implements OnInit {
         this.size = response.size;
         this.totalElements = response.totalElements;
         this.totalPages = response.totalPages;
-
-      } else {
-        console.error('No se recibieron datos de la API.');
 
       }
     } catch (error) {
