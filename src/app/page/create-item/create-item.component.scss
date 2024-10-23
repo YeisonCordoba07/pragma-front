@@ -1,0 +1,21 @@
+@import "src/styles/global-colors";
+@import "src/styles/fonts";
+@import "src/styles/global";
+
+
+section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100vw;
+  padding: 20px;
+  @media (min-width: 1024px) {
+    padding: 20px;
+  }
+}
+
+app-table-item{
+  width: 100%;
+}

@@ -1,0 +1,19 @@
+<section>
+  <app-table-item
+    mainTitle="Crear articulo"
+    (formSubmitted)="createItem($event)"
+    [maxLengthName]="50"
+    [maxLengthDescription]="120"
+    [categoryData]="categoryData"
+    [brandData]="brandData"
+  ></app-table-item>
+
+
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage">
+  </app-toast>
+
+</section>
+

@@ -6,29 +6,32 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {of, throwError} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
+import {By} from "@angular/platform-browser";
 
-
-class MockBrandService {
-  createBrand = jest.fn();
-}
 
 describe('CreateBrandComponent', () => {
   let component: CreateBrandComponent;
   let fixture: ComponentFixture<CreateBrandComponent>;
-  let brandService: MockBrandService;
+  let mockBrandService: any;
 
   beforeEach(async () => {
+    mockBrandService = {
+      createBrand: jest.fn()
+    };
+
+
     await TestBed.configureTestingModule({
       declarations: [ CreateBrandComponent ],
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
-      providers: [{ provide: BrandService, useClass: MockBrandService }],
+      providers: [
+        { provide: BrandService, useValue: mockBrandService }
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(CreateBrandComponent);
     component = fixture.componentInstance;
-    brandService = TestBed.inject(BrandService) as unknown as MockBrandService;
     fixture.detectChanges();
   });
 
@@ -39,107 +42,53 @@ describe('CreateBrandComponent', () => {
 
 
 
-  it('should display toast with the correct message and hide after 5 seconds', () => {
-    jest.useFakeTimers(); // Activa los temporizadores simulados de Jest
+  // Test para el método showCustomToast
+  it('should show and hide the toast message', () => {
+    jest.useFakeTimers(); // Para controlar el setTimeout
 
-    const testMessage = 'Test Toast Message';
-
-    // Llamamos al método
-    component.showCustomToast(testMessage);
-
-    // Verificamos que el mensaje de toast y el estado de visibilidad sean correctos inicialmente
-    expect(component.toastMessage).toBe(testMessage);
+    component.showCustomToast('Test message');
+    expect(component.toastMessage).toBe('Test message');
     expect(component.showToast).toBe(true);
 
-    // Avanzamos los temporizadores 5 segundos (5000 ms)
-    jest.advanceTimersByTime(5000);
-
-    // Verificamos que el toast se haya ocultado después de 5 segundos
+    jest.advanceTimersByTime(5000); // Avanza el tiempo para ocultar el toast
     expect(component.showToast).toBe(false);
 
-    jest.useRealTimers(); // Restauramos los temporizadores reales
+    jest.useRealTimers();
   });
 
+  // Verifica que se llame al servicio de crear marca y se maneje el éxito
+  it('should call createBrand and handle success response', async () => {
+    const formData = { name: 'Marca Test', description: 'Descripción de la marca' };
+    const mockResponse = { status: 201 };
+    mockBrandService.createBrand.mockReturnValue(of(mockResponse)); // Simula una respuesta exitosa
 
-  it('should set nameError when name exceeds 50 characters', () => {
-    component.updateBrandValues('name', 'a'.repeat(51));
-    expect(component.nameError).toBe('El nombre no puede tener más de 50 caracteres.');
+    await component.createBrand(formData);
+    expect(mockBrandService.createBrand).toHaveBeenCalledWith(formData, component.token);
+    expect(component.typeToastMessage).toBe('success');
+    expect(component.toastMessage).toBe('Marca creada exitosamente');
   });
 
-  it('should set nameError when name length is 0', () => {
-    component.updateBrandValues('name', '');
-    expect(component.nameError).toBe('El nombre no puede estar vacio.');
-  });
+  // Verifica que se llame al servicio de crear marca y se maneje el error
+  it('should call createBrand and handle error response', async () => {
+    const formData = { name: 'Marca Test', description: 'Descripción de la marca' };
+    mockBrandService.createBrand.mockReturnValue(throwError(() => new Error('Error de red'))); // Simula un error
 
-  it('should not set nameError when name is valid', () => {
-    component.updateBrandValues('name', 'Valid Name');
-    expect(component.nameError).toBe('');
-    expect(component.brandName).toBe('Valid Name');
-  });
-
-
-
-  it('should set descriptionError when description exceeds 121 characters', () => {
-    component.updateBrandValues('description', 'a'.repeat(121));
-    expect(component.descriptionError).toBe('La descripción no puede tener más de 120 caracteres.');
-  });
-  it('should set descriptionError when name length is 0', () => {
-    component.updateBrandValues('description', '');
-    expect(component.nameError).toBe('La descripción no puede estar vacia.');
-  });
-
-  it('should not set descriptionError when description is valid', () => {
-    component.updateBrandValues('description', 'Valid Description');
-    expect(component.descriptionError).toBe('');
-    expect(component.brandDescription).toBe('Valid Description');
+    await component.createBrand(formData);
+    expect(mockBrandService.createBrand).toHaveBeenCalledWith(formData, component.token);
+    expect(component.typeToastMessage).toBe('error');
+    expect(component.toastMessage).toBe('Error al enviar la solicitud');
   });
 
 
 
-  it('should call createCategory service when form is valid', () => {
-    component.updateBrandValues('name', 'Valid Name');
-    component.updateBrandValues('description', 'Valid Description');
 
-    brandService.createBrand.mockReturnValue(of({ status: 201 })); // Simular respuesta exitosa
+  // Verifica que el toast no se muestra cuando showToast es false
+  it('should not display the toast when showToast is false', () => {
+    component.showToast = false;
+    fixture.detectChanges(); // Actualiza la vista
 
-    component.createBrand();
-
-    expect(brandService.createBrand).toHaveBeenCalledWith(
-      { name: 'Valid Name', description: 'Valid Description' },
-      component['token']
-    );
+    const toastElement = fixture.debugElement.query(By.css('app-toast'));
+    expect(toastElement).toBeFalsy(); // Verifica que el componente app-toast no esté en el DOM
   });
 
-  it('should set categoryStatus on successful creation', async () => {
-    component.updateBrandValues('name', 'Valid Name');
-    component.updateBrandValues('description', 'Valid Description');
-
-    brandService.createBrand.mockReturnValue(of({ status: 201 })); // Simular respuesta exitosa
-
-    await component.createBrand();
-
-    expect(component.brandStatus).toBe('Marca creada exitosamente');
-  });
-
-  it('should set brandStatus on unsuccessful creation', async () => {
-    component.updateBrandValues('name', 'Valid Name');
-    component.updateBrandValues('description', 'Valid Description');
-
-    brandService.createBrand.mockReturnValue(of({ status: 400 })); // Simular respuesta de error
-
-    await component.createBrand();
-
-    expect(component.brandStatus).toBe('... al crear marca');
-  });
-
-  it('should set categoryStatus on error', async () => {
-    component.updateBrandValues('name', 'Valid Name');
-    component.updateBrandValues('description', 'Valid Description');
-
-    brandService.createBrand.mockReturnValue(throwError(() => new Error('Error'))); // Simular error
-
-    await component.createBrand();
-
-    expect(component.brandStatus).toBe('Error al enviar la solicitud');
-  });
 });
