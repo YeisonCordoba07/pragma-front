@@ -4,6 +4,7 @@ import { TableItemComponent } from './table-item.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {By} from "@angular/platform-browser";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {MultiSelectTagComponent} from "../multi-select-tag/multi-select-tag.component";
 
 describe('TableItemComponent', () => {
   let component: TableItemComponent;
@@ -23,8 +24,8 @@ describe('TableItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TableItemComponent],
-      imports: [ReactiveFormsModule], // Importamos ReactiveFormsModule
+      declarations: [TableItemComponent, MultiSelectTagComponent],
+      imports: [ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 

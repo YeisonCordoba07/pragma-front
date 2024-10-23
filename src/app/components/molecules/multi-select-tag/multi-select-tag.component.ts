@@ -1,5 +1,5 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, forwardRef, Input, OnInit, Optional, Self} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from "@angular/forms";
 
 @Component({
   selector: 'app-multi-select-tag',
@@ -13,17 +13,34 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     }
   ]
 })
-export class MultiSelectTagComponent implements OnInit, ControlValueAccessor {
+export class MultiSelectTagComponent implements ControlValueAccessor {
   @Input() inputData: any [] = [];
   @Input() maxSelectedItems: number = 3;
   selectedItems: string[] = [];
   dropdownOpen: boolean = false;
+
+  /*constructor(
+    @Self() @Optional() private ngControl: NgControl
+  ) {
+    // Si el componente se está usando como control de formulario
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
+    // En caso contrario se inicializan las funciones de CVA por defecto
+    else {
+      this.onChange = () => null;
+      this.onTouched = () => null;
+    }
+    // Se inicializa el control como habilitado
+    this.disabled = false;
+  }*/
 
   // Metodos de ControlValueAccessor
   onChange: (value: string[]) => void = () => {
   };
   onTouched: () => void = () => {
   };
+  disabled: boolean = false;
 
   // Abrir o cerrar el dropdown
   toggleDropdown() {
@@ -74,7 +91,5 @@ export class MultiSelectTagComponent implements OnInit, ControlValueAccessor {
   }
 
 
-  ngOnInit(): void {
-  }
 
 }
