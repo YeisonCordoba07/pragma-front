@@ -47,7 +47,7 @@ describe('MultiSelectTagComponent', () => {
   });
 
   it('should toggle dropdown when arrow is clicked', () => {
-    const dropdownToggle = fixture.nativeElement.querySelector('.arrow');
+    const dropdownToggle = fixture.nativeElement.querySelector('.multi-select-dropdown__arrow');
     dropdownToggle.click();
     fixture.detectChanges();
 
