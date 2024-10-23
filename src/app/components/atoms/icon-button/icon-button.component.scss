@@ -1,0 +1,19 @@
+@import "../../../../styles/global-colors";
+
+button{
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+  transition-duration: 0.3s;
+
+  &:hover{
+    background-color: $color-spacer_light;
+  }
+}

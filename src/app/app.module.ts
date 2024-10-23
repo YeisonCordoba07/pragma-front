@@ -6,32 +6,32 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { InputTextComponent } from './atoms/input-text/input-text.component';
+import { InputTextComponent } from './components/atoms/input-text/input-text.component';
 
 
 
 import { CreateCategoryComponent } from './page/create-category/create-category.component';
-import { NavigationBarElementComponent } from './atoms/navigation-bar-element/navigation-bar-element.component';
-import { NavigationBarComponent } from './molecules/navigation-bar/navigation-bar.component';
-import { MainButtonComponent } from './atoms/main-button/main-button.component';
-import { FooterComponent } from './molecules/footer/footer.component';
+import { NavigationBarElementComponent } from './components/atoms/navigation-bar-element/navigation-bar-element.component';
+import { NavigationBarComponent } from './components/molecules/navigation-bar/navigation-bar.component';
+import { MainButtonComponent } from './components/atoms/main-button/main-button.component';
+import { FooterComponent } from './components/molecules/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HeaderComponent } from './molecules/header/header.component';
+import { HeaderComponent } from './components/molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
-import { FormDataComponent } from './atoms/form-data/form-data.component';
-import { IconLinkComponent } from './atoms/icon-link/icon-link.component';
-import { IconButtonComponent } from './atoms/icon-button/icon-button.component';
-import { TableSortDirectionComponent } from './atoms/table-sort-direction/table-sort-direction.component';
-import { ToastComponent } from './atoms/toast/toast.component';
+import { FormDataComponent } from './components/atoms/form-data/form-data.component';
+import { IconLinkComponent } from './components/atoms/icon-link/icon-link.component';
+import { IconButtonComponent } from './components/atoms/icon-button/icon-button.component';
+import { TableSortDirectionComponent } from './components/atoms/table-sort-direction/table-sort-direction.component';
+import { ToastComponent } from './components/atoms/toast/toast.component';
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
 import {RouterModule} from "@angular/router";
 import { GetBrandsComponent } from './page/get-brands/get-brands.component';
-import { DataTableComponent } from './molecules/data-table/data-table.component';
+import { DataTableComponent } from './components/molecules/data-table/data-table.component';
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
-import { CreateFormComponent } from './molecules/create-form/create-form.component';
+import { CreateFormComponent } from './components/molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
-import { TableItemComponent } from './molecules/table-item/table-item.component';
-import { MultiSelectTagComponent } from './multi-select-tag/multi-select-tag.component'; // Importar FormsModule
+import { TableItemComponent } from './components/molecules/table-item/table-item.component';
+import { MultiSelectTagComponent } from './components/molecules/multi-select-tag/multi-select-tag.component'; // Importar FormsModule
 
 
 
