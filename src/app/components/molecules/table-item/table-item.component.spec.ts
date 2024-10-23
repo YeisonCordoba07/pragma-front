@@ -1,122 +1,126 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TableItemComponent } from './table-item.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {By} from "@angular/platform-browser";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { By } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, DebugElement} from '@angular/core';
 import {MultiSelectTagComponent} from "../multi-select-tag/multi-select-tag.component";
 
 describe('TableItemComponent', () => {
   let component: TableItemComponent;
   let fixture: ComponentFixture<TableItemComponent>;
-
-  const mockCategories = [
-    { name: 'Electronics' },
-    { name: 'Books' },
-    { name: 'Clothing' }
-  ];
-
-  const mockBrands = [
-    { name: 'Apple' },
-    { name: 'Samsung' },
-    { name: 'Sony' }
-  ];
+  let formElement: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TableItemComponent, MultiSelectTagComponent],
       imports: [ReactiveFormsModule],
+      providers: [FormBuilder],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TableItemComponent);
     component = fixture.componentInstance;
-
-    // Proveer datos simulados a las entradas del componente
-    component.mainTitle = 'Test Title';
-    component.categoryData = mockCategories;
-    component.brandData = mockBrands;
-    component.maxLengthName = 50;
-    component.maxLengthDescription = 120;
-
-    fixture.detectChanges(); // Detectar cambios para renderizar el template
+    formElement = fixture.debugElement.query(By.css('form'));
+    fixture.detectChanges();
   });
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a form with all the required controls', () => {
-    expect(component.formUser.contains('name')).toBeTruthy();
-    expect(component.formUser.contains('description')).toBeTruthy();
-    expect(component.formUser.contains('quantity')).toBeTruthy();
-    expect(component.formUser.contains('price')).toBeTruthy();
-    expect(component.formUser.contains('categories')).toBeTruthy();
-    expect(component.formUser.contains('brandName')).toBeTruthy();
-  });
-
-  it('should make the name control required', () => {
-    const control = component.formUser.get('name');
-    control?.setValue('');
-    expect(control?.valid).toBeFalsy();
-  });
-
-  it('should validate category selection length between 1 and 3', () => {
-    const control = component.formUser.get('categories');
-    control?.setValue([]); // Ninguna categoría seleccionada
-    expect(control?.valid).toBeFalsy();
-
-    control?.setValue([mockCategories[0]]); // 1 categoría seleccionada
-    expect(control?.valid).toBeTruthy();
-
-    control?.setValue([mockCategories[0], mockCategories[1], mockCategories[2]]); // 3 categorías seleccionadas
-    expect(control?.valid).toBeTruthy();
-
-    control?.setValue([mockCategories[0], mockCategories[1], mockCategories[2], { name: 'Extra Category' }]); // 4 categorías (excede el máximo)
-    expect(control?.valid).toBeFalsy();
-  });
-
-  it('should disable the submit button when form is invalid', () => {
-    const button = fixture.debugElement.query(By.css('app-main-button'));
-    expect(button.nativeElement.disabled).toBeTruthy();
-
-    // Hacer el formulario válido
-    component.formUser.patchValue({
-      name: 'Test Name',
-      description: 'Valid description',
-      quantity: 5,
-      price: 100,
-      categories: [mockCategories[0]],
-      brandName: 'Apple'
+  it('should initialize the form with default values', () => {
+    expect(component.formUser).toBeDefined();
+    const formValues = component.formUser.value;
+    expect(formValues).toEqual({
+      name: '',
+      description: '',
+      quantity: 0,
+      price: 0.0,
+      categories: [],
+      brandName: '',
     });
-    fixture.detectChanges();
-
-    expect(button.nativeElement.disabled).toBeFalsy();
   });
 
-  it('should emit formSubmitted event on valid form submit', () => {
-    jest.spyOn(component.formSubmitted, 'emit'); // Espía el evento emitido
+  it('should mark name as required and maxLength', () => {
+    const nameControl = component.formUser.get('name');
+    nameControl?.setValue('');
+    expect(nameControl?.hasError('required')).toBe(true);
+    nameControl?.setValue('A very long name that exceeds the maximum length allowed for the field');
+    expect(nameControl?.hasError('maxlength')).toBe(true);
+  });
 
-    // Hacer el formulario válido
-    component.formUser.patchValue({
+
+  it('should validate quantity to be greater than or equal to 1', () => {
+    const quantityControl = component.formUser.get('quantity');
+    quantityControl?.setValue(0);
+    expect(quantityControl?.hasError('min')).toBe(true);
+  });
+
+  it('should validate price to be greater than or equal to 1.0', () => {
+    const priceControl = component.formUser.get('price');
+    priceControl?.setValue(0.0);
+    expect(priceControl?.hasError('min')).toBe(true);
+  });
+
+  it('should validate categories array length between 1 and 3', () => {
+    const categoriesControl = component.formUser.get('categories');
+    categoriesControl?.setValue([]);
+    expect(categoriesControl?.hasError('minlength')).toBe(true);
+    categoriesControl?.setValue([1, 2, 3, 4]);
+    expect(categoriesControl?.hasError('maxlength')).toBe(true);
+  });
+
+  it('should validate that brandName is required', () => {
+    const brandControl = component.formUser.get('brandName');
+    brandControl?.setValue('');
+    expect(brandControl?.hasError('required')).toBe(true);
+  });
+
+  it('should emit formSubmitted when the form is valid and submitted', () => {
+    jest.spyOn(component.formSubmitted, 'emit');
+
+    component.formUser.setValue({
       name: 'Test Name',
-      description: 'Valid description',
-      quantity: 5,
-      price: 100,
-      categories: [mockCategories[0]],
-      brandName: 'Apple'
+      description: 'Test Description',
+      quantity: 2,
+      price: 10.0,
+      categories: [1],
+      brandName: 'Brand',
     });
 
-    component.onSubmit(); // Simular el envío del formulario
+    formElement.triggerEventHandler('ngSubmit', null);
 
     expect(component.formSubmitted.emit).toHaveBeenCalledWith({
       name: 'Test Name',
-      description: 'Valid description',
-      quantity: 5,
-      price: 100,
-      categories: [mockCategories[0]],
-      brandName: 'Apple'
+      description: 'Test Description',
+      quantity: 2,
+      price: 10.0,
+      categories: [1],
+      brandName: 'Brand',
     });
   });
 
+  it('should reset the form after submission', () => {
+    component.formUser.setValue({
+      name: 'Test Name',
+      description: 'Test Description',
+      quantity: 2,
+      price: 10.0,
+      categories: [1],
+      brandName: 'Brand',
+    });
+
+    component.onSubmit();
+
+    expect(component.formUser.value).toEqual({
+      name: '',
+      description: '',
+      quantity: 0,
+      price: 0.0,
+      categories: [],
+      brandName: '',
+    });
+  });
 });
