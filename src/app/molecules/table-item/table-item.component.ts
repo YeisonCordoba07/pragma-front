@@ -90,6 +90,14 @@ export class TableItemComponent implements OnInit {
       // Emitir los datos del formulario al componente padre
       console.log(this.formUser.value);
       this.formSubmitted.emit(this.formUser.value);
+      this.formUser.reset({
+        name: '',
+        description: '',
+        quantity: 0,
+        price: 0.0,
+        categories: [],
+        brandName: ''
+      });
     }
   }
 

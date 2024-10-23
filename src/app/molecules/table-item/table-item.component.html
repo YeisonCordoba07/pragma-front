@@ -39,18 +39,8 @@
 
 
   <!-- Selección de Categorías -->
-  <div>
 
-    <label for="categories" *ngIf="categoryData.length !== 0">Selecciona Categorías (min: 1, max: 3)</label>
-    <select *ngIf="categoryData.length !== 0" id="categories" formControlName="categories" multiple>
-      <option *ngFor="let category of categoryData" [value]="category.name">{{ category.name }}</option>
-    </select>
-    <div class="error" *ngIf="categories.errors?.['minlength'] || categories.errors?.['maxlength']">
-      Debes seleccionar entre 1 y 3 categorías.
-    </div>
-  </div>
-
-  <app-multi-select-tag
+  <app-multi-select-tag formControlName="categories"
   [inputData]="categoryData"></app-multi-select-tag>
 
 

@@ -1,28 +1,44 @@
-<div class="dropdown-container" [ngClass]="{'container-error':selectedItems.length ===3}">
+<label>
+  Seleccionar Marca
 
-  <!-- Mostrar las categorías seleccionadas como tags -->
-  <div class="selected-items" >
+  <div class="dropdown-container">
+    <!-- Mostrar las categorías seleccionadas como tags -->
+    <div class="selected-items"  [ngClass]="{'container-error':selectedItems.length ===3}">
     <span *ngFor="let item of selectedItems" class="selected-item">
       <span class="item-text">{{ item }}</span>
-      <span class="remove-item" (click)="removeItem(item)">X</span>
+      <img
+        src="assets/icons/close_tag_line.svg"
+        class="remove-item"
+        (click)="removeItem(item)"
+        (keydown.enter)="removeItem(item)"
+        alt="">
     </span>
 
-    <!-- Mostrar el texto "Seleccionar categorías" si no hay items seleccionados -->
-    <span *ngIf="selectedItems.length === 0" class="placeholder">Seleccionar categorías</span>
 
-    <!-- Flecha al final -->
-    <span class="arrow" (click)="toggleDropdown()" [ngClass]="{'rotate': dropdownOpen}">▼</span>
-  </div>
+      <!-- Mostrar el texto "Seleccionar categorías" si no hay items seleccionados -->
+      <span *ngIf="selectedItems.length === 0" class="placeholder">Seleccionar</span>
 
-  <!-- Lista desplegable de opciones -->
-  <div *ngIf="dropdownOpen" class="dropdown-options">
-    <div
-      *ngFor="let option of inputData"
-      class="dropdown-option"
-      [ngClass]="{'selected' : isSelected(option.name)}"
-      (click)="toggleSelection(option.name)">
-      {{ option.name }}
+
+      <!-- Flecha al final -->
+      <img
+        src="assets/icons/down_arrow.svg"
+        class="arrow" (click)="toggleDropdown()"
+        (keydown.enter)="toggleDropdown()"
+        [ngClass]="{'rotate': dropdownOpen}" alt="">
     </div>
-  </div>
 
-</div>
+
+    <!-- Lista desplegable de opciones -->
+    <div *ngIf="dropdownOpen" class="dropdown-options">
+      <div
+        *ngFor="let option of inputData"
+        class="dropdown-option"
+        [ngClass]="{'selected' : isSelected(option.name)}"
+        (click)="toggleSelection(option.name)"
+        (keydown.enter)="toggleSelection(option.name)">
+        {{ option.name }}
+      </div>
+    </div>
+
+  </div>
+</label>
