@@ -13,14 +13,16 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     }
   ]
 })
-export class MultiSelectTagComponent implements OnInit, ControlValueAccessor{
+export class MultiSelectTagComponent implements OnInit, ControlValueAccessor {
   @Input() inputData: any [] = [];
   selectedItems: string[] = [];
   dropdownOpen: boolean = false;
 
   // Metodos de ControlValueAccessor
-  onChange: (value: string[]) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: string[]) => void = () => {
+  };
+  onTouched: () => void = () => {
+  };
 
   // Abrir o cerrar el dropdown
   toggleDropdown() {
@@ -33,11 +35,10 @@ export class MultiSelectTagComponent implements OnInit, ControlValueAccessor{
 
     if (index === -1 && this.selectedItems.length < 3) {
       this.selectedItems.push(data);
-    } else if (index !== -1 && this.selectedItems.length === 3) {
-      this.selectedItems.splice(index, 1);
-    }else if(index !== -1){
+    } else if (index !== -1) {
       this.selectedItems.splice(index, 1);
     }
+
     this.onChange(this.selectedItems);
 
   }
@@ -55,7 +56,6 @@ export class MultiSelectTagComponent implements OnInit, ControlValueAccessor{
   }
 
 
-
   // Métodos de ControlValueAccessor
 
   writeValue(value: string[]): void {
@@ -70,10 +70,6 @@ export class MultiSelectTagComponent implements OnInit, ControlValueAccessor{
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    // Si quieres controlar el estado de deshabilitado, lo puedes gestionar aquí
   }
 
 
