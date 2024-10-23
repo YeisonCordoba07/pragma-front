@@ -1,0 +1,28 @@
+<div class="dropdown-container" [ngClass]="{'container-error':selectedItems.length ===3}">
+
+  <!-- Mostrar las categorías seleccionadas como tags -->
+  <div class="selected-items" >
+    <span *ngFor="let item of selectedItems" class="selected-item">
+      <span class="item-text">{{ item }}</span>
+      <span class="remove-item" (click)="removeItem(item)">X</span>
+    </span>
+
+    <!-- Mostrar el texto "Seleccionar categorías" si no hay items seleccionados -->
+    <span *ngIf="selectedItems.length === 0" class="placeholder">Seleccionar categorías</span>
+
+    <!-- Flecha al final -->
+    <span class="arrow" (click)="toggleDropdown()" [ngClass]="{'rotate': dropdownOpen}">▼</span>
+  </div>
+
+  <!-- Lista desplegable de opciones -->
+  <div *ngIf="dropdownOpen" class="dropdown-options">
+    <div
+      *ngFor="let option of inputData"
+      class="dropdown-option"
+      [ngClass]="{'selected' : isSelected(option.name)}"
+      (click)="toggleSelection(option.name)">
+      {{ option.name }}
+    </div>
+  </div>
+
+</div>

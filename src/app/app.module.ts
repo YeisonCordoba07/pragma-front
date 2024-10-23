@@ -30,7 +30,8 @@ import { DataTableComponent } from './molecules/data-table/data-table.component'
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import { CreateFormComponent } from './molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
-import { TableItemComponent } from './molecules/table-item/table-item.component'; // Importar FormsModule
+import { TableItemComponent } from './molecules/table-item/table-item.component';
+import { MultiSelectTagComponent } from './multi-select-tag/multi-select-tag.component'; // Importar FormsModule
 
 
 
@@ -56,7 +57,8 @@ import { TableItemComponent } from './molecules/table-item/table-item.component'
     CreateBrandComponent,
     CreateFormComponent,
     CreateItemComponent,
-    TableItemComponent
+    TableItemComponent,
+    MultiSelectTagComponent
   ],
     imports: [
         BrowserModule,
