@@ -69,7 +69,6 @@ export class GetItemsComponent implements OnInit {
 
   changeAscending2($event: any) {
     this.orderBy = $event;
-    console.log("EVNETO PADRE: "+$event);
     this.loadItems();
   }
 }
