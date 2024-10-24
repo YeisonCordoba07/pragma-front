@@ -44,8 +44,5 @@ export class ItemDataTableComponent implements OnInit {
 
     this.changeSort.emit();
   }
-  changeAscending2(value: string) {
-    this.orderBy = value;
-    this.changeTable.emit(this.orderBy);
-  }
+
 }

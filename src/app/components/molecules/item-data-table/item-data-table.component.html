@@ -2,21 +2,21 @@
 
   <!-- Data form -->
   <div *ngIf="inputData.length > 0" class="categories-container">
-    <h2 class="desktop__poppins-h1">Ver articulos</h2>
+    <h2 class="desktop__poppins-h1 categories-container__title">Ver articulos</h2>
 
     <div class="table-container">
 
       <table>
         <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Marca</th>
-          <th>Categorias</th>
-        </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Marca</th>
+            <th>Categorias</th>
+          </tr>
         </thead>
 
         <tbody>
@@ -28,6 +28,7 @@
           <td>{{ dataElement.price }}</td>
           <td>{{ dataElement.brand.name }}</td>
           <td id="row-categories">
+
             <table>
               <tbody>
               <tr *ngFor="let category of dataElement.categories">
@@ -46,45 +47,38 @@
   </div>
 
   <!-- Sort by -->
-  <app-table-sort-direction
-    (ascendingChange)="changeAscending()">
-  </app-table-sort-direction>
 
   <div class="sort-container">
 
-    <h3>Ordenar por: </h3>
-    <select (change)="changeTable.emit(orderSelect.value)" #orderSelect>
-      <option value="item">Item</option>
-      <option value="brand">Brand</option>
-      <option value="category">Category</option>
-    </select>
+    <app-table-sort-direction
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+    <div class="sort-container__table">
+
+      <h3>Ordenar por: </h3>
+      <select (change)="changeTable.emit(orderSelect.value)" #orderSelect>
+        <option value="item">Item</option>
+        <option value="brand">Brand</option>
+        <option value="category">Category</option>
+      </select>
+
+    </div>
+
 
   </div>
-
 
 
   <!-- Pagination + buttons -->
-  <div class="pagination-controls">
+  <app-pagination
+    [page]="page"
+    [size]="size"
+    [totalElements]="totalElements"
+    [totalPages]="totalPages"
+    (leftClick)="prevPage()"
+    (rightClick)="nextPage()"
+  >
+  </app-pagination>
 
-    <app-icon-button
-      imgWidth="50"
-      imgHeight="50"
-      (onClick)="prevPage()"
-      imgSrc="assets/icons/left_arrow.svg">
-    </app-icon-button>
-
-    <div class="pagination">
-      {{ page + 1 }} de {{ totalPages }}
-      (Total de elementos: {{ totalElements }})
-    </div>
-
-    <app-icon-button
-      imgWidth="50"
-      imgHeight="50"
-      (onClick)="nextPage()"
-      imgSrc="assets/icons/right_arrow.svg">
-    </app-icon-button>
-
-  </div>
 </div>
 
