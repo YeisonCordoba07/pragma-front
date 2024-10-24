@@ -31,7 +31,9 @@ import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import { CreateFormComponent } from './components/molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
 import { TableItemComponent } from './components/molecules/table-item/table-item.component';
-import { MultiSelectTagComponent } from './components/molecules/multi-select-tag/multi-select-tag.component'; // Importar FormsModule
+import { MultiSelectTagComponent } from './components/molecules/multi-select-tag/multi-select-tag.component';
+import { GetItemsComponent } from './page/get-items/get-items.component';
+import { ItemDataTableComponent } from './components/molecules/item-data-table/item-data-table.component'; // Importar FormsModule
 
 
 
@@ -58,7 +60,9 @@ import { MultiSelectTagComponent } from './components/molecules/multi-select-tag
     CreateFormComponent,
     CreateItemComponent,
     TableItemComponent,
-    MultiSelectTagComponent
+    MultiSelectTagComponent,
+    GetItemsComponent,
+    ItemDataTableComponent
   ],
     imports: [
         BrowserModule,

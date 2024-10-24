@@ -7,6 +7,7 @@ import {GetCategoriesComponent} from "./page/get-categories/get-categories.compo
 import {GetBrandsComponent} from "./page/get-brands/get-brands.component";
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import {CreateItemComponent} from "./page/create-item/create-item.component";
+import {GetItemsComponent} from "./page/get-items/get-items.component";
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: "ver-categorias", component: GetCategoriesComponent },
   { path: "ver-marcas", component: GetBrandsComponent },
   { path: "crear-marca", component: CreateBrandComponent },
-  { path: "crear-articulo", component: CreateItemComponent}
+  { path: "crear-articulo", component: CreateItemComponent},
+  { path: "ver-articulos", component: GetItemsComponent}
 ];
 
 @NgModule({
