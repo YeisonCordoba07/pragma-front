@@ -15,7 +15,7 @@ export class GetItemsComponent implements OnInit {
   totalElements: number = 0;
   totalPages: number = 0;
   ascending: boolean = true;
-  orderBy: string = "item";
+  orderBy: string = "itemEntity";
 
 
   constructor(private readonly itemService: ItemService) { }
@@ -64,6 +64,7 @@ export class GetItemsComponent implements OnInit {
 
   changeAscending(): void{
     this.ascending = !this.ascending;
+    console.log("cambio");
     this.loadItems();
   }
 

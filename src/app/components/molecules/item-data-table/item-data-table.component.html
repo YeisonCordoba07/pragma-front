@@ -2,7 +2,7 @@
 
   <!-- Data form -->
   <div *ngIf="inputData.length > 0" class="categories-container">
-    <h2 class="desktop__poppins-h1 categories-container__title">Ver articulos</h2>
+    <h2 class="desktop__poppins-h1 categories-container__title">{{ mainTitle }}</h2>
 
     <div class="table-container">
 
@@ -51,6 +51,14 @@
   <div class="sort-container">
 
     <app-table-sort-direction
+      [dataOption]="orderOptions"
+      inputTitle="Ordenar"
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+    <app-table-sort-direction
+      [dataOption]="dataOptions"
+      inputTitle="Ordenar por tabla"
       (ascendingChange)="changeAscending()">
     </app-table-sort-direction>
 
@@ -58,7 +66,7 @@
 
       <h3>Ordenar por: </h3>
       <select (change)="changeTable.emit(orderSelect.value)" #orderSelect>
-        <option value="item">Item</option>
+        <option value="itemEntity">Item</option>
         <option value="brand">Brand</option>
         <option value="category">Category</option>
       </select>

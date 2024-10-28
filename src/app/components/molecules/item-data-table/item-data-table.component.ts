@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ItemService} from "../../../services/item/item.service";
-import {firstValueFrom} from "rxjs";
+import {Option} from "../../../../types/Option";
+
 
 @Component({
   selector: 'app-item-data-table',
   templateUrl: './item-data-table.component.html',
   styleUrls: ['./item-data-table.component.scss']
 })
+
+
 export class ItemDataTableComponent implements OnInit {
 
   @Input() inputData: any[] = [];
@@ -17,18 +19,39 @@ export class ItemDataTableComponent implements OnInit {
   @Input() totalElements: number = 0;
   @Input() totalPages: number = 0;
   @Input() ascending: boolean = true;
-  @Input() orderBy: string = "item";
+  @Input() orderBy: string = "itemEntity";
 
   @Output() leftClick: EventEmitter<any> = new EventEmitter();
   @Output() rightClick: EventEmitter<any> = new EventEmitter();
   @Output() changeSort: EventEmitter<any> = new EventEmitter();
   @Output() changeTable: EventEmitter<any> = new EventEmitter<string>();
 
+  dataOptions: Option[] = [
+    { name: 'Item', value: 'itemEntity' },
+    { name: 'Brand', value: 'brand' },
+    { name: 'Category', value: 'category' }
+  ];
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
+
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.dataOptions = [
+      { name: 'Item', value: 'itemEntity' },
+      { name: 'Brand', value: 'brand' },
+      { name: 'Category', value: 'category' }
+    ];
+
+    this.orderOptions = [
+      { name: '↑ Ascendente', value: true },
+      { name: '↓ Descendente', value: false },
+    ];
   }
 
 

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Option} from "../../../../types/Option";
 
 @Component({
   selector: 'app-data-table',
@@ -20,6 +21,11 @@ export class DataTableComponent implements OnInit {
   @Output() leftClick: EventEmitter<any> = new EventEmitter();
   @Output() rightClick: EventEmitter<any> = new EventEmitter();
   @Output() changeSort: EventEmitter<any> = new EventEmitter();
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
 
   constructor() { }
