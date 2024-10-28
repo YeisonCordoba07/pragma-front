@@ -9,16 +9,17 @@ export class ItemService {
 
 
   private readonly createItemURL = 'http://localhost:8080/item';
+  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
   constructor(private readonly http: HttpClient) {
   }
 
 
-  getItem(page: number, size: number, token: string, ascending: boolean): Observable<any> {
-    const url = `http://localhost:8080/item/getAll?page=${page}&size=${size}&sortBy=name&ascending=${ascending}`;
+  getItem(page: number, size: number, table: string, ascending: boolean): Observable<any> {
+    const url = `http://localhost:8080/item/getAll?page=${page}&size=${size}&sortBy=name&table=${table}&ascending=${ascending}`;
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${this.token}`
     });
     return this.http.get<any>(url, {headers});
   }

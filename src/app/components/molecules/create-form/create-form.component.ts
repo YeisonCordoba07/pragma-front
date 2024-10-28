@@ -12,6 +12,8 @@ export class CreateFormComponent implements OnInit {
   @Input() maxLengthDescription: number = 120;
   @Output() formSubmitted = new EventEmitter<any>();
 
+  @Input() mainTitle: string = "Titulo creación"
+
   formUser: FormGroup;
 
 
