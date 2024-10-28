@@ -1,0 +1,120 @@
+@import "src/styles/global";
+@import "src/styles/global-colors";
+@import "src/styles/fonts";
+
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 300px;
+  gap: 35px;
+  margin: auto;
+  padding: 25px;
+  align-items: start;
+  @extend .shadow__medium;
+  @extend .corner-radius__large;
+
+  @media (min-width: 1024px) {
+    width:500px;
+  }
+}
+
+
+h2{
+  @extend .desktop__poppins-h1;
+}
+
+
+app-input-text{
+  width: 100%;
+}
+
+
+.buttons-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+
+
+/* Estilo para el select de categorías */
+#categories {
+  height: 300px;
+  width: 100%;
+  @extend .main-text__body-m;
+  border: 1px solid $color-border;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+#categories option {
+  height: 50px;
+  padding: 8px;
+  text-justify: auto;
+  border-bottom: 1px solid #ddd;
+  align-content: center;
+}
+
+#categories option:checked {
+  background-color: $color-purple;
+  color: white;
+}
+#categories option:hover {
+  background-color: $color-purple-hover;
+  color: white;
+}
+
+
+/* Estilo para el select de marcas */
+#brand {
+  height: 50px;
+  width: 100%;
+  @extend .main-text__body-m;
+  border: 1px solid $color-border;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+#brand option {
+  height: 50px;
+  padding: 8px;
+  border-bottom: 1px solid $color-border;
+}
+
+#brand option:checked {
+  background-color: $color-purple;
+  color: white;
+}
+#brand option:hover {
+  background-color: $color-purple-hover;
+  color: white;
+}
+
+
+
+/* Ajustes para los selectores en todos los navegadores */
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+label{
+  @extend .main-text__body-l;
+}
+
+div{
+  width: 100%;
+}
+
+
+app-multi-select-tag{
+  width: 100%;
+}
