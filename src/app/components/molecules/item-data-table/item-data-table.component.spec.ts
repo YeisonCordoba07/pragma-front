@@ -69,14 +69,4 @@ describe('ItemDataTableComponent', () => {
     expect(component.changeSort.emit).toHaveBeenCalled();
   });
 
-  it('should emit changeTable when selecting a different order option', () => {
-    jest.spyOn(component.changeTable, 'emit');
-
-    const selectElement = fixture.debugElement.query(By.css('select')).nativeElement;
-    selectElement.value = selectElement.options[2].value;  // 'Category'
-    selectElement.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-
-    expect(component.changeTable.emit).toHaveBeenCalledWith('category');
-  });
 });

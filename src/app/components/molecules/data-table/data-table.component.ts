@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Option} from "../../../../types/Option";
+import {Option} from "src/types/Option";
 
 @Component({
   selector: 'app-data-table',
