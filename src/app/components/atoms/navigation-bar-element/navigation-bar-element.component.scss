@@ -11,7 +11,8 @@ li{
 }
 .active{
   background-color: $color-hint_text;
-  display: block;
+  display: flex;
+  align-items: center;
 }
 a{
   display: flex;

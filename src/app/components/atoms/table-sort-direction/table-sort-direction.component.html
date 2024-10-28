@@ -1,9 +1,12 @@
 <div class="sort-container">
 
-  <h3>Ordenar: </h3>
-  <select (change)="onChangeAscending()">
-    <option [value]="true">Ascendente</option>
-    <option [value]="false">Descendente</option>
+  <h3 class="sort-container__text">{{inputTitle}}: </h3>
+  <select class="styled-select" (change)="onChangeAscending()">
+
+    <option *ngFor="let option of dataOption" [value]="option.value">
+      {{ option.name }}
+    </option>
+
   </select>
 
 </div>

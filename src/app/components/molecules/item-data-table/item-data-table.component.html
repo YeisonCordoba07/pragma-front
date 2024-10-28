@@ -1,0 +1,80 @@
+<div class="data-container">
+
+  <!-- Data form -->
+  <div *ngIf="inputData.length > 0" class="categories-container">
+    <h2 class="desktop__poppins-h1 categories-container__title">{{ mainTitle }}</h2>
+
+    <div class="table-container">
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Marca</th>
+            <th>Categorias</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let dataElement of inputData">
+          <td>{{ dataElement.id }}</td>
+          <td>{{ dataElement.name }}</td>
+          <td>{{ dataElement.description }}</td>
+          <td>{{ dataElement.quantity }}</td>
+          <td>{{ dataElement.price }}</td>
+          <td>{{ dataElement.brand.name }}</td>
+          <td id="row-categories">
+
+            <table>
+              <tbody>
+              <tr *ngFor="let category of dataElement.categories">
+                <td>{{ category.name }}</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- Sort by -->
+
+  <div class="sort-container">
+
+    <app-table-sort-direction
+      [dataOption]="orderOptions"
+      inputTitle="Ordenar"
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+    <app-table-sort-direction
+      [dataOption]="dataOptions"
+      inputTitle="Ordenar por tabla"
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+  </div>
+
+
+  <!-- Pagination + buttons -->
+  <app-pagination
+    [page]="page"
+    [size]="size"
+    [totalElements]="totalElements"
+    [totalPages]="totalPages"
+    (leftClick)="prevPage()"
+    (rightClick)="nextPage()"
+  >
+  </app-pagination>
+
+</div>
+
