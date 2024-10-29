@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import { By } from '@angular/platform-browser';
 
 
+
 describe('FormDataComponent', () => {
   let component: FormDataComponent;
   let fixture: ComponentFixture<FormDataComponent>;
@@ -30,49 +31,63 @@ describe('FormDataComponent', () => {
   });
 
 
-
-  it('should show the title successfully', () => {
-    component.datos = [{ id: 1, name: 'Categoría 1', description: 'Descripción 1' }];
-    component.mainTitle = 'Lista de categorias';
-
+  it('should display the main title', () => {
+    component.mainTitle = 'Test Title';
+    component.inputData = [{}];
     fixture.detectChanges();
-
-    const titleElement = fixture.debugElement.query(By.css('h2')).nativeElement;
-    expect(titleElement.textContent).toBe('Lista de categorias');
+    const titleElement = fixture.debugElement.query(By.css('.data-container__title')).nativeElement;
+    expect(titleElement.textContent).toBe('Test Title');
   });
 
-  it('should show the table when there is data', () => {
-    component.datos = [
-      { id: 1, name: 'Categoría 1', description: 'Descripción 1' }
-    ];
+  it('should not display the table if inputData is empty', () => {
+    component.inputData = [];
     fixture.detectChanges();
-
-    const tableElement = fixture.debugElement.query(By.css('table'));
-    expect(tableElement).toBeTruthy();
+    const dataContainer = fixture.debugElement.query(By.css('.data-container'));
+    expect(dataContainer).toBeFalsy();
   });
 
-  it('should do not show the table when there is not data' , () => {
-    component.datos = [];
+  it('should display the table headers', () => {
+    component.columnHeaders = ['ID', 'Name', 'Description'];
+    component.inputData = [{}]; // Add a dummy object to avoid empty table
     fixture.detectChanges();
-
-    const tableElement = fixture.debugElement.query(By.css('table'));
-    expect(tableElement).toBeFalsy();
+    const headers = fixture.debugElement.queryAll(By.css('.data-container__table-header'));
+    expect(headers.length).toBe(3);
+    expect(headers[0].nativeElement.textContent).toBe('ID');
+    expect(headers[1].nativeElement.textContent).toBe('Name');
+    expect(headers[2].nativeElement.textContent).toBe('Description');
   });
 
-  it('should render the data successfully in the rows', () => {
-    component.datos = [
-      { id: 1, name: 'Categoría 1', description: 'Descripción 1' },
-      { id: 2, name: 'Categoría 2', description: 'Descripción 2' }
-    ];
-    fixture.detectChanges();
-
-    const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
-    expect(rows.length).toBe(2);
-
-    const firstRow = rows[0].nativeElement;
-    expect(firstRow.textContent).toContain('1');
-    expect(firstRow.textContent).toContain('Categoría 1');
-    expect(firstRow.textContent).toContain('Descripción 1');
+  it('should emit changeSort when changeAscending is called', () => {
+    const changeSortSpy = jest.spyOn(component.changeSort, 'emit');
+    component.changeAscending();
+    expect(changeSortSpy).toHaveBeenCalled();
   });
+
+  it('should emit changeTable with correct value when onChangeTable is called', () => {
+    const changeTableSpy = jest.spyOn(component.changeTable, 'emit');
+    component.onChangeTable('category');
+    expect(changeTableSpy).toHaveBeenCalledWith('category');
+  });
+
+  it('should emit leftClick when prevPage is called', () => {
+    const leftClickSpy = jest.spyOn(component.leftClick, 'emit');
+    component.prevPage();
+    expect(leftClickSpy).toHaveBeenCalled();
+  });
+
+  it('should emit rightClick when nextPage is called', () => {
+    const rightClickSpy = jest.spyOn(component.rightClick, 'emit');
+    component.nextPage();
+    expect(rightClickSpy).toHaveBeenCalled();
+  });
+
+  it('should display sort direction components if orderOptions are provided', () => {
+    component.orderOptions = [{ name: 'Ascending', value: true }];
+    component.inputData = [{}];
+    fixture.detectChanges();
+    const sortDirection = fixture.debugElement.queryAll(By.css('app-table-sort-direction'));
+    expect(sortDirection.length).toBe(1); // Only one app-table-sort-direction should be shown
+  });
+
 
 });
