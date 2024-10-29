@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
+import {Option} from "../../../types/Option";
 
 @Component({
   selector: 'app-get-brands',
@@ -18,6 +19,11 @@ export class GetBrandsComponent implements OnInit {
   totalElements: number = 0;
   totalPages: number = 0;
   ascending: boolean = true;
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
 
   constructor(private readonly brandService: BrandService) { }

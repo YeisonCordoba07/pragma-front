@@ -26,7 +26,6 @@ import { ToastComponent } from './components/atoms/toast/toast.component';
 import { GetCategoriesComponent } from './page/get-categories/get-categories.component';
 import {RouterModule} from "@angular/router";
 import { GetBrandsComponent } from './page/get-brands/get-brands.component';
-import { DataTableComponent } from './components/molecules/data-table/data-table.component';
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import { CreateFormComponent } from './components/molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
@@ -57,7 +56,6 @@ import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.compon
     ToastComponent,
     GetCategoriesComponent,
     GetBrandsComponent,
-    DataTableComponent,
     CreateBrandComponent,
     CreateFormComponent,
     CreateItemComponent,

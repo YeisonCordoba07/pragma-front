@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category/category.service";
 import {firstValueFrom} from "rxjs";
+import {Option} from "../../../types/Option";
 
 @Component({
   selector: 'app-get-categories',
@@ -18,6 +19,10 @@ export class GetCategoriesComponent implements OnInit {
   totalPages: number = 0;
   ascending: boolean = true;
 
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
   constructor(private readonly categoryService: CategoryService) { }
 
