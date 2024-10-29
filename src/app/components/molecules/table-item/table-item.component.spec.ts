@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TableItemComponent } from './table-item.component';
 import { By } from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, DebugElement} from '@angular/core';
-import {MultiSelectTagComponent} from "../multi-select-tag/multi-select-tag.component";
+import {MultiSelectTagComponent} from "../../atoms/multi-select-tag/multi-select-tag.component";
 
 describe('TableItemComponent', () => {
   let component: TableItemComponent;

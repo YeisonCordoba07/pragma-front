@@ -3,11 +3,11 @@ import {Option} from "../../../../types/Option";
 
 
 @Component({
-  selector: 'app-form-data',
-  templateUrl: './form-data.component.html',
-  styleUrls: ['./form-data.component.scss']
+  selector: 'app-table-data',
+  templateUrl: './table-data.component.html',
+  styleUrls: ['./table-data.component.scss']
 })
-export class FormDataComponent implements OnInit {
+export class TableDataComponent implements OnInit {
 
   // Pagination
   @Input() page: number = 0;

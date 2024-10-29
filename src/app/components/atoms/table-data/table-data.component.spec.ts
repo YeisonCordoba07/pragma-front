@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormDataComponent } from './form-data.component';
+import { TableDataComponent } from './table-data.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import {FormsModule} from "@angular/forms";
@@ -8,20 +8,20 @@ import { By } from '@angular/platform-browser';
 
 
 
-describe('FormDataComponent', () => {
-  let component: FormDataComponent;
-  let fixture: ComponentFixture<FormDataComponent>;
+describe('TableDataComponent', () => {
+  let component: TableDataComponent;
+  let fixture: ComponentFixture<TableDataComponent>;
 
 
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, FormsModule],
-      declarations: [ FormDataComponent ],
+      declarations: [ TableDataComponent ],
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormDataComponent);
+    fixture = TestBed.createComponent(TableDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

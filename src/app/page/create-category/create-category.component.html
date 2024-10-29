@@ -2,8 +2,28 @@
   <app-create-form
     mainTitle="Crear categoría"
     (formSubmitted)="createCategory($event)"
+    [inputForm]="formCategory"
 
-  ></app-create-form>
+  >
+
+    <app-input-text
+      textLabel="Nombre"
+      inputId="name"
+      [maxInputLength]="50"
+      type="text"
+      [control]="name">
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Descripción"
+      inputId="description"
+      [maxInputLength]="120"
+      type="text"
+      [control]="description">
+    </app-input-text>
+
+
+  </app-create-form>
 
 
   <app-toast

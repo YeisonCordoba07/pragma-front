@@ -18,7 +18,7 @@ import { FooterComponent } from './components/molecules/footer/footer.component'
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './components/molecules/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
-import { FormDataComponent } from './components/atoms/form-data/form-data.component';
+import { TableDataComponent } from './components/atoms/table-data/table-data.component';
 import { IconLinkComponent } from './components/atoms/icon-link/icon-link.component';
 import { IconButtonComponent } from './components/atoms/icon-button/icon-button.component';
 import { TableSortDirectionComponent } from './components/atoms/table-sort-direction/table-sort-direction.component';
@@ -30,11 +30,12 @@ import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import { CreateFormComponent } from './components/molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
 import { TableItemComponent } from './components/molecules/table-item/table-item.component';
-import { MultiSelectTagComponent } from './components/molecules/multi-select-tag/multi-select-tag.component';
+import { MultiSelectTagComponent } from './components/atoms/multi-select-tag/multi-select-tag.component';
 import { GetItemsComponent } from './page/get-items/get-items.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
 import { CreateAuxComponent } from './page/create-aux/create-aux.component';
-import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.component'; // Importar FormsModule
+import { CreateAuxFormComponent } from './components/molecules/create-aux-form/create-aux-form.component';
+import { SelectElementComponent } from './components/atoms/select-element/select-element.component'; // Importar FormsModule
 
 
 
@@ -49,7 +50,7 @@ import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.compon
 
     FooterComponent,
     HeaderComponent,
-    FormDataComponent,
+    TableDataComponent,
     IconLinkComponent,
     IconButtonComponent,
     TableSortDirectionComponent,
@@ -64,7 +65,8 @@ import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.compon
     GetItemsComponent,
     PaginationComponent,
     CreateAuxComponent,
-    CreateAuxFormComponent
+    CreateAuxFormComponent,
+    SelectElementComponent
   ],
     imports: [
         BrowserModule,

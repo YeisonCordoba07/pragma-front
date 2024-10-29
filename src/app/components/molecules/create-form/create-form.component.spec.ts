@@ -28,13 +28,13 @@ describe('CreateFormComponent', () => {
 
 
   it('should initialize the form as invalid', () => {
-    expect(component.formUser.invalid).toBeTruthy();
+    expect(component.inputForm.invalid).toBeTruthy();
   });
 
   // Verificar que los campos del formulario se inicializan correctamente
   it('should initialize the form controls', () => {
-    const nameControl = component.formUser.get('name');
-    const descriptionControl = component.formUser.get('description');
+    const nameControl = component.inputForm.get('name');
+    const descriptionControl = component.inputForm.get('description');
 
     expect(nameControl).toBeTruthy();
     expect(descriptionControl).toBeTruthy();
@@ -48,15 +48,15 @@ describe('CreateFormComponent', () => {
 
   // Verificar que el formulario se vuelve válido cuando los campos se llenan correctamente
   it('should validate form when inputs are filled correctly', () => {
-    component.formUser.controls['name'].setValue('Nueva Categoría');
-    component.formUser.controls['description'].setValue('Descripción de la categoría');
-    expect(component.formUser.valid).toBeTruthy();
+    component.inputForm.controls['name'].setValue('Nueva Categoría');
+    component.inputForm.controls['description'].setValue('Descripción de la categoría');
+    expect(component.inputForm.valid).toBeTruthy();
   });
 
   // Verificar que el botón de "Guardar" esté habilitado cuando el formulario es válido
   it('should enable save button when form is valid', () => {
-    component.formUser.controls['name'].setValue('Nueva Categoría');
-    component.formUser.controls['description'].setValue('Descripción de la categoría');
+    component.inputForm.controls['name'].setValue('Nueva Categoría');
+    component.inputForm.controls['description'].setValue('Descripción de la categoría');
     fixture.detectChanges();
 
     const buttonElement = fixture.debugElement.query(By.css('app-main-button')).nativeElement;
@@ -71,8 +71,8 @@ describe('CreateFormComponent', () => {
     };
 
     // Llenar el formulario
-    component.formUser.controls['name'].setValue(formData.name);
-    component.formUser.controls['description'].setValue(formData.description);
+    component.inputForm.controls['name'].setValue(formData.name);
+    component.inputForm.controls['description'].setValue(formData.description);
 
     // Espiar el evento emitido
     jest.spyOn(component.formSubmitted, 'emit');

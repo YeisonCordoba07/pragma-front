@@ -1,12 +1,75 @@
 <section>
-  <app-table-item
+  <!--<app-table-item
     mainTitle="Crear articulo"
     (formSubmitted)="createItem($event)"
     [maxLengthName]="50"
     [maxLengthDescription]="120"
     [categoryData]="categoryData"
     [brandData]="brandData"
-  ></app-table-item>
+  >
+  </app-table-item>-->
+
+  <app-create-form
+    [mainTitle]="'Crear artículo'"
+    [inputForm]="formItem"
+    (formSubmitted)="createItem($event)"
+  >
+
+
+    <!-- Elements -->
+    <app-input-text
+      textLabel="Nombre"
+      inputId="name"
+      [maxInputLength]="50"
+      type="text"
+      [control]="name">
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Descripción"
+      inputId="description"
+      [maxInputLength]="120"
+      type="text"
+      [control]="description">
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Cantidad"
+      inputId="quantity"
+      [maxInputLength]="50"
+      type="number"
+      [control]="quantity">
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Precio"
+      inputId="price"
+      [maxInputLength]="50"
+      type="number"
+      [control]="price">
+    </app-input-text>
+
+
+    <!-- Select three categories -->
+    <app-multi-select-tag
+      [formControl]="categories"
+      [inputData]="categoryData">
+    </app-multi-select-tag>
+
+
+
+    <!-- Select brand -->
+    <app-select-element
+      [control]="brandName"
+      inputId="brandName2"
+      [inputData]="brandData"
+      inputLabel="Seleccionar marca 2"
+    >
+    </app-select-element>
+
+  </app-create-form>
+
+
 
 
   <app-toast

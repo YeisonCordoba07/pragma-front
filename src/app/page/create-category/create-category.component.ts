@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from 'src/app/services/category/category.service';
 import {lastValueFrom} from "rxjs";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -14,7 +15,9 @@ export class CreateCategoryComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
-
+  formCategory: FormGroup;
+  maxLengthName: number = 50;
+  maxLengthDescription: number = 120;
 
   showCustomToast(message: string) {
     this.toastMessage = message;
@@ -26,7 +29,11 @@ export class CreateCategoryComponent implements OnInit {
   }
 
 
-  constructor(private readonly categoryService: CategoryService) {
+  constructor(private readonly categoryService: CategoryService, private readonly fb: FormBuilder) {
+    this.formCategory = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(this.maxLengthName)]],
+      description: ['', [Validators.required, Validators.maxLength(this.maxLengthDescription)]],
+    })
   }
 
 
@@ -62,5 +69,16 @@ export class CreateCategoryComponent implements OnInit {
 
   }
 
+
+
+
+  // Getters
+  get name() {
+    return this.formCategory.get('name') as FormControl;
+  }
+
+  get description() {
+    return this.formCategory.get('description') as FormControl;
+  }
 
 }
