@@ -1,17 +1,27 @@
-<div class="element-container">
-  <label [for]="inputId">{{ textLabel }}</label>
-  <input [formControl]="control" [type]="type" [id]="inputId"/>
+<div class="input-element">
+  <label
+    class="input-element__label"
+    [for]="inputId">{{ textLabel }}</label>
+  <input
+    class="input-element__input"
+    [ngClass]="{'ng-touched ng-invalid': control.invalid && control.touched}"
+    [formControl]="control"
+    [type]="type"
+    [id]="inputId"
+    [placeholder]="placeholderText"/>
 
 
   <!-- Mensajes de error -->
   <div
-    [hidden]="control.valid || control.pristine"
-    class="error">
-    <small *ngIf="control.errors?.['required']">
+    *ngIf="control.invalid && control.touched"
+    class="error input-element__container-error">
+    <small
+      *ngIf="control.errors?.['required'] && type !== 'email'"
+    >
       {{ textLabel }} no puede estar vacio
     </small>
 
-    <small *ngIf="control.errors?.['maxlength']">
+    <small *ngIf="control.errors?.['maxlength']  && type !== 'email'">
       {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
     </small>
 
@@ -19,6 +29,10 @@
 
       <small *ngIf="control.errors?.['maxlength']">
         {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
+      </small>
+
+      <small *ngIf="control.errors?.['email']">
+        {{ textLabel }} debe se valido
       </small>
     </div>
   </div>

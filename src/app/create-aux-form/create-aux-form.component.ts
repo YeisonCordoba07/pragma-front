@@ -26,7 +26,8 @@ export class CreateAuxFormComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(this.maxLengthPhone)]],
       birthDate: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['']
+      password: [''],
+      role: ['AUX_ROLE', [Validators.required]],
     })
   }
 
@@ -56,6 +57,9 @@ export class CreateAuxFormComponent implements OnInit {
   get password() {
     return this.formAux.get('password') as FormControl;
   }
+  get role() {
+    return this.formAux.get('role') as FormControl;
+  }
 
 
   onSubmit() {
@@ -70,7 +74,8 @@ export class CreateAuxFormComponent implements OnInit {
         phone: '',
         birthDate: '',
         email: '',
-        password: ''
+        password: '',
+        role: ''
       });
     }
   }

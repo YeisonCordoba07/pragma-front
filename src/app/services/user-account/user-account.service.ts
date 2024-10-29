@@ -22,6 +22,7 @@ export class UserAccountService {
     birthDate: string;
     email: string,
     password: string,
+    role: string,
   }): Observable<any> {
 
     const headers = new HttpHeaders({

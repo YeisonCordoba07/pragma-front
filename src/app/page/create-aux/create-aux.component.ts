@@ -44,7 +44,8 @@ export class CreateAuxComponent implements OnInit {
       phone: formData.phone,
       birthDate: formData.birthDate,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
+      role: formData.role,
 
     };
 
