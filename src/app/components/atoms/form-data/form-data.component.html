@@ -1,26 +1,22 @@
-<div *ngIf="datos.length > 0" class="categories-container">
-  <h2 class="desktop__poppins-h1">{{ mainTitle }}</h2>
+<div *ngIf="inputData.length > 0" class="data-container">
+  <h2 class="data-container__title">{{ mainTitle }}</h2>
 
-  <div class="table-container">
+  <div class="data-container__table-container">
 
-    <table>
+    <table class="data-container__table">
       <thead>
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
+        <th *ngFor="let header of columnHeaders" class="data-container__table-header">{{ header }}</th>
       </tr>
       </thead>
 
+
       <tbody>
-      <tr *ngFor="let dataElement of datos">
-        <td>{{ dataElement.id }}</td>
-        <td>{{ dataElement.name }}</td>
-        <td>{{ dataElement.description }}</td>
-      </tr>
+      <!-- Aquí se utiliza ng-content para inyectar contenido personalizado -->
+      <ng-content></ng-content>
       </tbody>
     </table>
-
   </div>
 
 </div>
+

@@ -3,7 +3,17 @@
   <!-- Data form -->
   <app-form-data
     [mainTitle]="mainTitle"
-    [datos]="inputData">
+    [columnHeaders]="['ID', 'Nombre', 'Descripción']"
+    [inputData]="inputData">
+
+    <ng-container *ngFor="let dataElement of inputData">
+      <tr>
+        <td>{{ dataElement.id }}</td>
+        <td>{{ dataElement.name }}</td>
+        <td>{{ dataElement.description }}</td>
+      </tr>
+    </ng-container>
+
   </app-form-data>
 
   <!-- Sort by -->

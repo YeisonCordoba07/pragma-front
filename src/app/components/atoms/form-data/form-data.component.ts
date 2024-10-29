@@ -9,7 +9,9 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FormDataComponent implements OnInit {
 
   @Input() mainTitle: string = "Sin titulo";
-  @Input() datos: any[] = [];
+
+  @Input() inputData: any[] = [];
+  @Input() columnHeaders: string[] = [];
 
 
   constructor() { }
