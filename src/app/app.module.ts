@@ -33,7 +33,6 @@ import { CreateItemComponent } from './page/create-item/create-item.component';
 import { TableItemComponent } from './components/molecules/table-item/table-item.component';
 import { MultiSelectTagComponent } from './components/molecules/multi-select-tag/multi-select-tag.component';
 import { GetItemsComponent } from './page/get-items/get-items.component';
-import { ItemDataTableComponent } from './components/molecules/item-data-table/item-data-table.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
 import { CreateAuxComponent } from './page/create-aux/create-aux.component';
 import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.component'; // Importar FormsModule
@@ -65,7 +64,6 @@ import { CreateAuxFormComponent } from './create-aux-form/create-aux-form.compon
     TableItemComponent,
     MultiSelectTagComponent,
     GetItemsComponent,
-    ItemDataTableComponent,
     PaginationComponent,
     CreateAuxComponent,
     CreateAuxFormComponent

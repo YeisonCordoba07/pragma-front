@@ -1,7 +1,7 @@
 <div class="sort-container">
 
   <h3 class="sort-container__text">{{inputTitle}}: </h3>
-  <select class="styled-select" (change)="onChangeAscending()">
+  <select class="styled-select" (change)="onChangeAscending(SelectTable.value)" #SelectTable>
 
     <option *ngFor="let option of dataOption" [value]="option.value">
       {{ option.name }}

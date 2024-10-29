@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ItemService} from "../../services/item/item.service";
 import {firstValueFrom} from "rxjs";
+import {Option} from "../../../types/Option";
 
 @Component({
   selector: 'app-get-items',
@@ -16,6 +17,17 @@ export class GetItemsComponent implements OnInit {
   totalPages: number = 0;
   ascending: boolean = true;
   orderBy: string = "itemEntity";
+
+  dataOptions: Option[] = [
+    { name: 'Item', value: 'itemEntity' },
+    { name: 'Brand', value: 'brand' },
+    { name: 'Category', value: 'category' }
+  ];
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
 
   constructor(private readonly itemService: ItemService) { }

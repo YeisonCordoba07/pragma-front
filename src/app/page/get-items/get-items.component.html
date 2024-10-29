@@ -1,27 +1,24 @@
-<app-item-data-table
-
-  (leftClick)="prevPage()"
-  (rightClick)="nextPage()"
-  (changeSort)="changeAscending()"
-  [inputData]="itemData"
-  mainTitle="Todas los articulos"
-
-  [page]="page"
-  [size]="size"
-  [totalElements]="totalElements"
-  [totalPages]="totalPages"
-  [ascending]="ascending"
-  [orderBy]="orderBy"
-  (changeTable)="changeAscending2($event)"
-></app-item-data-table>
 
 <!-- Data form -->
 <app-form-data
   [inputData]="itemData"
   [columnHeaders]="['ID', 'Nombre', 'Descripción', 'Cantidad', 'Precio', 'Marca', 'Categorías']"
   mainTitle="Articulos"
+  [orderOptions]="orderOptions"
+  [dataOptions]="dataOptions"
+  (changeSort)="changeAscending()"
+  (changeTable)="changeAscending2($event)"
 
+  [page]="page"
+  [size]="size"
+  [totalElements]="totalElements"
+  [totalPages]="totalPages"
+  [ascending]="ascending"
+  (leftClick)="prevPage()"
+  (rightClick)="nextPage()"
 >
+
+
   <ng-container *ngFor="let dataElement of itemData">
     <tr class="data-container__table-row">
       <td class="data-container__table-cell">{{ dataElement.id }}</td>
@@ -41,6 +38,8 @@
       </td>
     </tr>
   </ng-container>
+
+
 
 </app-form-data>
 

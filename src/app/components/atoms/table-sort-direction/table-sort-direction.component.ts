@@ -9,6 +9,7 @@ import {Option} from "../../../../types/Option";
 export class TableSortDirectionComponent implements OnInit {
 
   @Output() ascendingChange = new EventEmitter<void>();
+  @Output() tableChange = new EventEmitter<String>();
   @Input() dataOption: Option[] = [];
   @Input() inputTitle: string = "Ordenar";
   constructor() { }
@@ -16,7 +17,12 @@ export class TableSortDirectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChangeAscending(): void{
+  onChangeAscending(value: String): void{
     this.ascendingChange.emit();
+    this.tableChange.emit(value);
   }
+  onChangeTable(value: String): void{
+    this.tableChange.emit(value);
+  }
+
 }
