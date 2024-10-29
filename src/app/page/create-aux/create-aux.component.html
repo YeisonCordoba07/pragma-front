@@ -11,4 +11,9 @@
 
   </app-create-aux-form>
 
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage"></app-toast>
+
 </section>

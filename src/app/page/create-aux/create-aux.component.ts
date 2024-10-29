@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {UserAccountService} from "../../services/user-account/user-account.service";
+import {lastValueFrom} from "rxjs";
 
 
 @Component({
@@ -12,16 +14,26 @@ export class CreateAuxComponent implements OnInit {
   @Input() maxLengthLastName: number = 120;
   @Input() maxLengthPhone: number = 13;
 
+  showToast: boolean = false;
+  toastMessage: string = '';
+  typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
 
-  constructor() {
+  constructor(private readonly userAccountService: UserAccountService) {
   }
 
   ngOnInit(): void {
 
   }
 
+  showCustomToast(message: string) {
+    this.toastMessage = message;
+    this.showToast = true;
 
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000); // Duración del toast
+  }
 
   async createAux(formData: any) {
 
@@ -37,21 +49,21 @@ export class CreateAuxComponent implements OnInit {
     };
 
     // POST REQUEST TO CREATE CATEGORY
-    /*try {
+    try {
       const response = await lastValueFrom(
-        this.itemService.createItem(newItem, this.token));
+        this.userAccountService.createUser(newAux));
 
       if (response.status === 201) {
 
         this.typeToastMessage = "success";
-        this.showCustomToast("Articulo creado exitosamente");
+        this.showCustomToast("Usuario creado exitosamente");
 
       }
     } catch (error) {
 
       this.typeToastMessage = "error";
       this.showCustomToast("Error al enviar la solicitud");
-    }*/
+    }
 
   }
 }
