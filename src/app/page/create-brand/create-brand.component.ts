@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {lastValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-brand',
@@ -10,16 +11,20 @@ import {BrandService} from "../../services/brand/brand.service";
 export class CreateBrandComponent implements OnInit {
 
   readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
-  public brandName: string = "";
-  public brandDescription: string = "";
-
-
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
+  formBrand: FormGroup;
+  maxLengthName: number = 50;
+  maxLengthDescription: number = 120;
 
-  constructor(private readonly brandService: BrandService) {
+
+  constructor(private readonly brandService: BrandService, private readonly fb: FormBuilder) {
+    this.formBrand = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(this.maxLengthName)]],
+      description: ['', [Validators.required, Validators.maxLength(this.maxLengthDescription)]],
+    })
   }
 
   ngOnInit(): void {
@@ -64,5 +69,16 @@ export class CreateBrandComponent implements OnInit {
     }
 
   }
+
+
+  // Getters
+  get name() {
+    return this.formBrand.get('name') as FormControl;
+  }
+
+  get description() {
+    return this.formBrand.get('description') as FormControl;
+  }
+
 
 }

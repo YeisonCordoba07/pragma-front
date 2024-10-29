@@ -15,6 +15,7 @@ export class CreateCategoryComponent implements OnInit {
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
+
   formCategory: FormGroup;
   maxLengthName: number = 50;
   maxLengthDescription: number = 120;

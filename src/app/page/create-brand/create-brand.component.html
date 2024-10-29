@@ -2,8 +2,28 @@
   <app-create-form
     mainTitle="Crear marca"
     (formSubmitted)="createBrand($event)"
+    [inputForm]="formBrand"
 
-  ></app-create-form>
+  >
+
+    <app-input-text
+      textLabel="Nombre"
+      inputId="name"
+      [maxInputLength]="maxLengthName"
+      type="text"
+      [control]="name">
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Descripción"
+      inputId="description"
+      [maxInputLength]="maxLengthDescription"
+      type="text"
+      [control]="description">
+    </app-input-text>
+
+
+  </app-create-form>
 
 
   <app-toast

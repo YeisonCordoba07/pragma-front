@@ -1,13 +1,5 @@
 <section>
-  <!--<app-table-item
-    mainTitle="Crear articulo"
-    (formSubmitted)="createItem($event)"
-    [maxLengthName]="50"
-    [maxLengthDescription]="120"
-    [categoryData]="categoryData"
-    [brandData]="brandData"
-  >
-  </app-table-item>-->
+
 
   <app-create-form
     [mainTitle]="'Crear artículo'"
@@ -67,6 +59,7 @@
     >
     </app-select-element>
 
+
   </app-create-form>
 
 
@@ -77,6 +70,18 @@
     [toastType]="typeToastMessage"
     [message]="toastMessage">
   </app-toast>
+
+
+
+  <!--<app-table-item
+  mainTitle="Crear articulo"
+  (formSubmitted)="createItem($event)"
+  [maxLengthName]="50"
+  [maxLengthDescription]="120"
+  [categoryData]="categoryData"
+  [brandData]="brandData"
+>
+</app-table-item>-->
 
 </section>
 

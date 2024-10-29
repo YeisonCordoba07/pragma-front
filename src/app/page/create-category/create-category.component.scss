@@ -16,61 +16,11 @@ section{
   }
 }
 
-form{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 8px;
-  padding: 25px;
-  align-items: start;
-  @extend .shadow__medium;
-  @extend .corner-radius__large;
 
-  @media (min-width: 1024px) {
-    width:500px;
-  }
-}
-
-h2{
-  @extend .desktop__poppins-h1;
-}
-
-label{
-  @extend  .main-text__body-l;
-}
-
-
-.form-container{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.buttons-container{
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  margin-top: 24px;
-  justify-content: center;
-  width: 100%;
-}
-
-app-create-form{
-  width: 100%;
-}
 // MESSAGES
 .error{
   color: $color-error;
   @extend .main-text__body-s;
-}
-
-.category-status{
-  color: $color-purple;
-  @extend .main-text__body-s;
-}
-
-app-input-text{
-  width: 100%;
 }
 
 
