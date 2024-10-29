@@ -4,19 +4,30 @@
   <app-form-data
     [mainTitle]="mainTitle"
     [columnHeaders]="['ID', 'Nombre', 'Descripción']"
-    [inputData]="inputData">
+    [inputData]="inputData"
+    [orderOptions]="orderOptions"
+    (changeSort)="changeAscending()"
+
+    [page]="page"
+    [size]="size"
+    [totalElements]="totalElements"
+    [totalPages]="totalPages"
+    [ascending]="ascending"
+    (leftClick)="prevPage()"
+    (rightClick)="nextPage()"
+  >
 
     <ng-container *ngFor="let dataElement of inputData">
-      <tr>
-        <td>{{ dataElement.id }}</td>
-        <td>{{ dataElement.name }}</td>
-        <td>{{ dataElement.description }}</td>
+      <tr class="data-container__table-row">
+        <td class="data-container__table-cell">{{ dataElement.id }}</td>
+        <td class="data-container__table-cell">{{ dataElement.name }}</td>
+        <td class="data-container__table-cell">{{ dataElement.description }}</td>
       </tr>
     </ng-container>
 
   </app-form-data>
 
-  <!-- Sort by -->
+  <!-- Sort by
   <app-table-sort-direction
     [dataOption]="orderOptions"
     (ascendingChange)="changeAscending()">
@@ -24,7 +35,7 @@
 
 
 
-  <!-- Pagination + buttons -->
+ Pagination + buttons
   <app-pagination
     [page]="page"
     [size]="size"
@@ -33,6 +44,6 @@
     (leftClick)="prevPage()"
     (rightClick)="nextPage()"
   >
-  </app-pagination>
+  </app-pagination>-->
 </div>
 

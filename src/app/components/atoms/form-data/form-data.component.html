@@ -19,16 +19,17 @@
 
 
   <!-- Sort by -->
-
-  <div class="sort-container">
+  <div class="data-container__sort-container">
 
     <app-table-sort-direction
+      *ngIf="orderOptions.length > 0"
       [dataOption]="orderOptions"
       inputTitle="Ordenar"
       (ascendingChange)="changeAscending()">
     </app-table-sort-direction>
 
     <app-table-sort-direction
+      *ngIf="dataOptions.length > 0"
       [dataOption]="dataOptions"
       inputTitle="Ordenar por tabla"
       (tableChange)="onChangeTable($event)">
