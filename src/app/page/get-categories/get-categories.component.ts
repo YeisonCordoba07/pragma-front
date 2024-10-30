@@ -9,7 +9,6 @@ import {Option} from "../../../types/Option";
   styleUrls: ['./get-categories.component.scss']
 })
 export class GetCategoriesComponent implements OnInit {
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
   categoryData: any[] = [];
 
@@ -39,7 +38,7 @@ export class GetCategoriesComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.categoryService.getCategories(
-          this.page, this.size, this.token, this.ascending)
+          this.page, this.size, this.ascending)
       );
 
       if (response) {

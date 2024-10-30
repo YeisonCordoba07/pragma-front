@@ -10,8 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateBrandComponent implements OnInit {
 
-  readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
-  showToast: boolean = false;
+ showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
 
@@ -54,7 +53,7 @@ export class CreateBrandComponent implements OnInit {
     try {
 
       const response = await lastValueFrom(
-        this.brandService.createBrand(newBrand, this.token));
+        this.brandService.createBrand(newBrand));
 
       if (response.status === 201) {
 

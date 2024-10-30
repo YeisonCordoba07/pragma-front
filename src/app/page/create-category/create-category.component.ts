@@ -10,7 +10,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
   showToast: boolean = false;
   toastMessage: string = '';
@@ -54,7 +53,7 @@ export class CreateCategoryComponent implements OnInit {
     // POST REQUEST TO CREATE CATEGORY
     try {
       const response = await lastValueFrom(
-        this.categoryService.createCategory(newCategory, this.token));
+        this.categoryService.createCategory(newCategory));
 
       if (response.status === 201) {
 

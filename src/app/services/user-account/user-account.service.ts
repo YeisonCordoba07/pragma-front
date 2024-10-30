@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {TOKEN, USER_CREATION_URL} from "../../constants/service.constants";
+import {UserAccountModel} from "../../../types/user-account.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAccountService {
-
-  private readonly createUserURL = 'http://localhost:8090/user/create';
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
 
   constructor(private readonly http: HttpClient) { }
@@ -23,15 +22,15 @@ export class UserAccountService {
     email: string,
     password: string,
     role: string,
-  }): Observable<any> {
+  }): Observable<HttpResponse<UserAccountModel>> {
 
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `Bearer ${TOKEN}`
       }
     );
 
-    return this.http.post<any>(this.createUserURL, newUser, {
+    return this.http.post<UserAccountModel>(USER_CREATION_URL, newUser, {
       headers,
       observe: "response"
     });

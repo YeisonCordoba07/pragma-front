@@ -58,7 +58,7 @@ describe('CategoryService', () => {
 
   it('should return the correct response for getCategories', () => {
     const mockResponse = {
-      content: [{ id: 1, name: 'Category 1', description: 'Description 1' }],
+      content: [{ id: 1, name: 'CategoryModels 1', description: 'Description 1' }],
       page: 0,
       size: 5,
       totalElements: 1,

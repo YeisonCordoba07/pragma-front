@@ -10,7 +10,6 @@ import {Option} from "../../../types/Option";
 })
 export class GetBrandsComponent implements OnInit {
 
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
   brandData: any[] = [];
 
@@ -40,7 +39,7 @@ export class GetBrandsComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.brandService.getBrand(
-          this.page, this.size, this.token, this.ascending)
+          this.page, this.size, this.ascending)
       );
 
       if (response) {

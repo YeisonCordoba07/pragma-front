@@ -125,7 +125,7 @@ describe('CreateItemComponent', () => {
 
   describe('loadCategories', () => {
     it('should load categories successfully', async () => {
-      const mockCategoriesResponse = { content: ['Category 1', 'Category 2'] };
+      const mockCategoriesResponse = { content: ['CategoryModels 1', 'CategoryModels 2'] };
       mockCategoryService.getCategories.mockReturnValue(of(mockCategoriesResponse));
 
       await component.loadCategories();

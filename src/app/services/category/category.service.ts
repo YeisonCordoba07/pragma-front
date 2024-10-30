@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {CATEGORY_CREATION_URL, TOKEN} from "../../constants/service.constants";
+import {CategoryModel, CategoryResponse} from "../../../types/category.model";
 
 
 @Injectable({
@@ -8,28 +10,25 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class CategoryService {
 
-  private readonly createCategoryURL = 'http://localhost:8080/category';
 
   constructor(private readonly http: HttpClient) { }
 
 
-  getCategories(page: number, size: number, token: string, ascending: boolean): Observable<any> {
+  getCategories(page: number, size: number, ascending: boolean): Observable<CategoryResponse> {
     const url = `http://localhost:8080/category/getAll?page=${page}&size=${size}&sortBy=name&ascending=${ascending}`;
-
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${TOKEN}`
     });
-    return this.http.get<any>(url, { headers });
+    return this.http.get<CategoryResponse>(url, { headers });
   }
 
-
-  createCategory(category: { name: string; description: string }, token:string): Observable<any> {
+  createCategory(category: { name: string; description: string }): Observable<HttpResponse<CategoryModel>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`}
-    );
+      'Authorization': `Bearer ${TOKEN}`
+    });
 
-    return this.http.post<any>(this.createCategoryURL, category, {
+    return this.http.post<CategoryModel>(CATEGORY_CREATION_URL, category, {
       headers,
       observe: "response"
     });

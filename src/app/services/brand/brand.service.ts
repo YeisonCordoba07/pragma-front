@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {BRAND_CREATION_URL, TOKEN} from "../../constants/service.constants";
+import {BrandModel, BrandResponse} from "../../../types/brand.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrandService {
 
-  private readonly getBrandURL = "http://localhost:8080/brand/getAll?page=0&size=3&sortBy=name&ascending=true";
-  private readonly createBrandURL = 'http://localhost:8080/brand';
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
 
-  getBrand(page: number, size: number, token: string, ascending: boolean): Observable<any> {
+  getBrand(page: number, size: number, ascending: boolean): Observable<BrandResponse> {
     const url = `http://localhost:8080/brand/getAll?page=${page}&size=${size}&sortBy=name&ascending=${ascending}`;
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${TOKEN}`
     });
-    return this.http.get<any>(url, { headers });
+    return this.http.get<BrandResponse>(url, { headers });
   }
 
 
-  createBrand(brand: { name: string; description: string }, token:string): Observable<any> {
+  createBrand(brand: { name: string; description: string }): Observable<HttpResponse<BrandModel>> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`}
+      'Authorization': `Bearer ${TOKEN}`}
     );
 
-    return this.http.post<any>(this.createBrandURL, brand, {
+    return this.http.post<BrandModel>(BRAND_CREATION_URL, brand, {
       headers,
       observe: "response"
     });

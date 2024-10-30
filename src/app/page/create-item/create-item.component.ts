@@ -13,8 +13,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateItemComponent implements OnInit {
 
-  readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
-
   showToast: boolean = false;
   toastMessage: string = '';
   typeToastMessage: "error" | "warning" | "success" | "neutral" = "neutral";
@@ -104,7 +102,7 @@ export class CreateItemComponent implements OnInit {
     // POST REQUEST TO CREATE CATEGORY
     try {
       const response = await lastValueFrom(
-        this.itemService.createItem(newItem, this.token));
+        this.itemService.createItem(newItem));
 
       if (response.status === 201) {
 
@@ -128,7 +126,7 @@ export class CreateItemComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.categoryService.getCategories(
-          0, 100, this.token, true)
+          0, 100, true)
       );
 
       if (response) {
@@ -145,7 +143,7 @@ export class CreateItemComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.brandService.getBrand(
-          0, 100, this.token, true)
+          0, 100, true)
       );
 
       if (response) {
