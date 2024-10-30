@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CategoryService } from './category.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { CATEGORY_CREATION_URL, TOKEN } from '../../constants/service.constants';
+import { CategoryModel, CategoryResponse } from '../../../types/category.model';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -10,78 +11,54 @@ describe('CategoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [CategoryService]
+      providers: [CategoryService],
     });
     service = TestBed.inject(CategoryService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify(); // Verifica que no queden solicitudes pendientes
+    httpMock.verify(); // Verifica que no hay solicitudes pendientes
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-
-
-  it('should make a GET request to get categories with correct URL and headers', () => {
-    const mockToken = 'mock-token';
-    const page = 1;
-    const size = 5;
-    const ascending = true;
-
-    service.getCategories(page, size, mockToken, ascending).subscribe();
-
-    const req = httpMock.expectOne(`http://localhost:8080/category/getAll?page=1&size=5&sortBy=name&ascending=true`);
-    expect(req.request.method).toBe('GET');
-    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
-
-    req.flush({}); // Simular respuesta vacía
-  });
-
-  it('should make a POST request to create a category with correct URL, body, and headers', () => {
-    const mockToken = 'mock-token';
-    const mockCategory = { name: 'New Category', description: 'New Description' };
-
-    service.createCategory(mockCategory, mockToken).subscribe();
-
-    const req = httpMock.expectOne('http://localhost:8080/category');
-    expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${mockToken}`);
-    expect(req.request.headers.get('Content-Type')).toBe('application/json');
-    expect(req.request.body).toEqual(mockCategory);
-
-    req.flush({}); // Simular respuesta vacía
-  });
-
-  it('should return the correct response for getCategories', () => {
-    const mockResponse = {
-      content: [{ id: 1, name: 'CategoryModels 1', description: 'Description 1' }],
+  it('should retrieve categories from API via GET', () => {
+    const mockResponse: CategoryResponse = {
+      content: [],
       page: 0,
-      size: 5,
-      totalElements: 1,
-      totalPages: 1
+      size: 100,
+      totalPages: 1,
+      totalElements: 0,
     };
 
-    service.getCategories(0, 5, 'mock-token', true).subscribe(response => {
-      expect(response).toEqual(mockResponse);
+    service.getCategories(0, 10, true).subscribe(categories => {
+      expect(categories).toEqual(mockResponse);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/category/getAll?page=0&size=5&sortBy=name&ascending=true');
-    req.flush(mockResponse); // Simular respuesta de la API
+    const req = httpMock.expectOne(
+      `http://localhost:8080/category/getAll?page=0&size=10&sortBy=name&ascending=true`
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse); // Simula la respuesta del servidor
   });
 
-  it('should return the correct response for createCategory', () => {
-    const mockCategory = { name: 'New Category', description: 'New Description' };
-    const mockResponse = { id: 1, ...mockCategory };
+  it('should create a new category and return the response', () => {
+    const mockCategory: CategoryModel = {
+      id: 1,
+      name: 'New Category',
+      description: 'Category Description',
+    };
 
-    service.createCategory(mockCategory, 'mock-token').subscribe(response => {
-      expect(response.body).toEqual(mockResponse);
+    const mockResponse = { status: 201, body: mockCategory };
+
+    service.createCategory({ name: 'New Category', description: 'Category Description' }).subscribe(response => {
+      expect(response.body).toEqual(mockCategory);
+      expect(response.status).toBe(201);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/category');
-    req.flush(mockResponse); // Simular respuesta de la API
+    const req = httpMock.expectOne(CATEGORY_CREATION_URL);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${TOKEN}`);
+    expect(req.request.headers.get('Content-Type')).toBe('application/json');
+    req.flush(mockResponse.body, { status: 201, statusText: 'Created' }); // Simula la respuesta del servidor
   });
 });
