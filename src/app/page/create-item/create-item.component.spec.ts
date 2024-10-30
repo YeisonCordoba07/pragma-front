@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { CreateItemComponent } from './create-item.component';
 import { CategoryService } from '../../services/category/category.service';
 import { BrandService } from '../../services/brand/brand.service';
@@ -199,6 +199,16 @@ describe('CreateItemComponent', () => {
     expect(component.typeToastMessage).toBe('error');
     expect(component.showToast).toBe(true);
   });
+
+  it('should set showToast to false after 5 seconds', fakeAsync(() => {
+    component.showCustomToast('Test message'); // Llama al metodo para mostrar el toast
+    expect(component.showToast).toBe(true); // Verifica que showToast sea verdadero inicialmente
+
+    tick(5000); // Simula el paso de 5 segundos
+
+    expect(component.showToast).toBe(false); // Verifica que showToast se haya vuelto falso
+  }));
+
 
 
 });
