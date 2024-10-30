@@ -4,7 +4,7 @@ import { CategoryService } from '../../services/category/category.service';
 import { BrandService } from '../../services/brand/brand.service';
 import { ItemService } from '../../services/item/item.service'; // Asegúrate de importar tu ItemService
 import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importa el módulo de pruebas para HttpClient
-import { of } from 'rxjs';
+import {of, throwError} from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
@@ -103,4 +103,102 @@ describe('CreateItemComponent', () => {
     expect(component.brandData).toEqual(mockBrands.content);
     expect(brandService.getBrand).toHaveBeenCalledWith(0, 100, true);
   });
+
+
+
+
+
+
+
+
+
+
+  it('should return the form control for name', () => {
+    const control = component.name;
+    expect(control).toBe(component.formItem.get('name'));
+  });
+
+  it('should return the form control for description', () => {
+    const control = component.description;
+    expect(control).toBe(component.formItem.get('description'));
+  });
+
+  it('should return the form control for quantity', () => {
+    const control = component.quantity;
+    expect(control).toBe(component.formItem.get('quantity'));
+  });
+
+  it('should return the form control for price', () => {
+    const control = component.price;
+    expect(control).toBe(component.formItem.get('price'));
+  });
+
+  it('should return the form control for categories', () => {
+    const control = component.categories;
+    expect(control).toBe(component.formItem.get('categories'));
+  });
+
+  it('should return the form control for brandName', () => {
+    const control = component.brandName;
+    expect(control).toBe(component.formItem.get('brandName'));
+  });
+
+
+
+
+
+  it('should call loadCategories and loadBrands on init', () => {
+    const loadCategoriesSpy = jest.spyOn(component, 'loadCategories');
+    const loadBrandsSpy = jest.spyOn(component, 'loadBrands');
+
+    component.ngOnInit();
+
+    expect(loadCategoriesSpy).toHaveBeenCalled();
+    expect(loadBrandsSpy).toHaveBeenCalled();
+  });
+
+
+
+
+
+  it('should create an item and show success toast', async () => {
+    const newItem = {
+      name: 'Item Test',
+      description: 'Test Description',
+      quantity: 10,
+      price: 100,
+      categories: ['Category1'],
+      brandName: 'BrandTest',
+    };
+
+    component.formItem.setValue(newItem);
+    itemService.createItem = jest.fn().mockReturnValue(of({ status: 201 }));
+
+    await component.createItem(newItem);
+
+    expect(itemService.createItem).toHaveBeenCalledWith(newItem);
+    expect(component.typeToastMessage).toBe('success');
+    expect(component.showToast).toBe(true);
+  });
+
+  it('should show error toast on createItem failure', async () => {
+    const newItem = {
+      name: 'Item Test',
+      description: 'Test Description',
+      quantity: 10,
+      price: 100,
+      categories: ['Category1'],
+      brandName: 'BrandTest',
+    };
+    component.formItem.setValue(newItem);
+    itemService.createItem = jest.fn().mockReturnValue(throwError(() => new Error('Error')));
+
+    await component.createItem(newItem);
+
+    expect(itemService.createItem).toHaveBeenCalledWith(newItem);
+    expect(component.typeToastMessage).toBe('error');
+    expect(component.showToast).toBe(true);
+  });
+
+
 });

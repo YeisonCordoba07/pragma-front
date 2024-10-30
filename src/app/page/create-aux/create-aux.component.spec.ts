@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import { CreateAuxComponent } from './create-aux.component';
 import { UserAccountService } from '../../services/user-account/user-account.service';
 import { of, throwError } from 'rxjs';
@@ -94,4 +94,85 @@ describe('CreateAuxComponent', () => {
     expect(nameControl.valid).toBe(true);
     expect(lastNameControl.valid).toBe(true);
   });
+
+
+
+
+
+
+
+  it('should return the form control for name', () => {
+    const control = component.name;
+    expect(control).toBe(component.formAux.get('name'));
+  });
+
+  it('should return the form control for lastName', () => {
+    const control = component.lastName;
+    expect(control).toBe(component.formAux.get('lastName'));
+  });
+
+  it('should return the form control for identityDocument', () => {
+    const control = component.identityDocument;
+    expect(control).toBe(component.formAux.get('identityDocument'));
+  });
+
+  it('should return the form control for phone', () => {
+    const control = component.phone;
+    expect(control).toBe(component.formAux.get('phone'));
+  });
+
+  it('should return the form control for birthDate', () => {
+    const control = component.birthDate;
+    expect(control).toBe(component.formAux.get('birthDate'));
+  });
+
+  it('should return the form control for email', () => {
+    const control = component.email;
+    expect(control).toBe(component.formAux.get('email'));
+  });
+
+  it('should return the form control for password', () => {
+    const control = component.password;
+    expect(control).toBe(component.formAux.get('password'));
+  });
+
+  it('should return the form control for role', () => {
+    const control = component.role;
+    expect(control).toBe(component.formAux.get('role'));
+  });
+
+
+
+  it('should show toast message and set showToast to true', () => {
+    component.showCustomToast('Test Message');
+
+    expect(component.toastMessage).toBe('Test Message'); // Verifica que se haya establecido el mensaje
+    expect(component.showToast).toBe(true); // Verifica que showToast sea verdadero
+  });
+
+
+
+
+
+
+  it('should return null if age is greater than 18', () => {
+    const control = new FormControl('2000-01-01'); // Fecha de nacimiento (23 años)
+    const result = component.adultValidator(control);
+    expect(result).toBeNull(); // Es mayor de edad
+  });
+
+  it('should return null if age is exactly 18 and monthDiff > 0', () => {
+    const control = new FormControl(new Date(new Date().getFullYear() - 18, 1, 1).toISOString().split('T')[0]); // Cumpleaños en enero, hoy es marzo
+    const result = component.adultValidator(control);
+    expect(result).toBeNull(); // Es mayor de edad
+  });
+
+  it('should return null if age is exactly 18 and monthDiff === 0 and dayDiff >= 0', () => {
+    const today = new Date();
+    const control = new FormControl(new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()).toISOString().split('T')[0]); // Cumpleaños hoy
+    const result = component.adultValidator(control);
+    expect(result).toBeNull(); // Es mayor de edad
+  });
+
+
 });
