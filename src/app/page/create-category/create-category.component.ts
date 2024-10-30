@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryService} from 'src/app/services/category/category.service';
 import {lastValueFrom} from "rxjs";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {
+  CATEGORY_SUCCESSFULLY_CREATED, FIELD_DESCRIPTION,
+  FIELD_NAME, ID_FIELD_DESCRIPTION,
+  ID_FIELD_NAME,
+  TITLE_CREATE_CATEGORY
+} from "../../constants/category.constants";
+import {SEND_ERROR} from "../../constants/global.constants";
 
 
 @Component({
@@ -58,13 +65,13 @@ export class CreateCategoryComponent implements OnInit {
       if (response.status === 201) {
 
         this.typeToastMessage = "success";
-        this.showCustomToast("Categoría creada exitosamente");
+        this.showCustomToast(CATEGORY_SUCCESSFULLY_CREATED);
 
       }
     } catch (error) {
 
       this.typeToastMessage = "error";
-      this.showCustomToast("Error al enviar la solicitud");
+      this.showCustomToast(SEND_ERROR);
     }
 
   }
@@ -81,4 +88,9 @@ export class CreateCategoryComponent implements OnInit {
     return this.formCategory.get('description') as FormControl;
   }
 
+  protected readonly TITLE_CREATE_CATEGORY = TITLE_CREATE_CATEGORY;
+  protected readonly FIELD_NAME = FIELD_NAME;
+  protected readonly ID_FIELD_NAME = ID_FIELD_NAME;
+  protected readonly FIELD_DESCRIPTION = FIELD_DESCRIPTION;
+  protected readonly ID_FIELD_DESCRIPTION = ID_FIELD_DESCRIPTION;
 }

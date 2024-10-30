@@ -34,7 +34,6 @@ import { MultiSelectTagComponent } from './components/atoms/multi-select-tag/mul
 import { GetItemsComponent } from './page/get-items/get-items.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
 import { CreateAuxComponent } from './page/create-aux/create-aux.component';
-import { CreateAuxFormComponent } from './components/molecules/create-aux-form/create-aux-form.component';
 import { SelectElementComponent } from './components/atoms/select-element/select-element.component'; // Importar FormsModule
 
 
@@ -65,7 +64,6 @@ import { SelectElementComponent } from './components/atoms/select-element/select
     GetItemsComponent,
     PaginationComponent,
     CreateAuxComponent,
-    CreateAuxFormComponent,
     SelectElementComponent
   ],
     imports: [

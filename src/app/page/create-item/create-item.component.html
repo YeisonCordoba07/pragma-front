@@ -2,7 +2,7 @@
 
 
   <app-create-form
-    [mainTitle]="'Crear artículo'"
+    [mainTitle]="TITLE_CREATE_ITEM"
     [inputForm]="formItem"
     (formSubmitted)="createItem($event)"
   >
@@ -10,32 +10,32 @@
 
     <!-- Elements -->
     <app-input-text
-      textLabel="Nombre"
-      inputId="name"
+      [textLabel]="FIELD_NAME"
+      [inputId]="ID_FIELD_NAME"
       [maxInputLength]="50"
       type="text"
       [control]="name">
     </app-input-text>
 
     <app-input-text
-      textLabel="Descripción"
-      inputId="description"
+      [textLabel]="FIELD_DESCRIPTION"
+      [inputId]="ID_FIELD_DESCRIPTION"
       [maxInputLength]="120"
       type="text"
       [control]="description">
     </app-input-text>
 
     <app-input-text
-      textLabel="Cantidad"
-      inputId="quantity"
+      [textLabel]="FIELD_QUANTITY"
+      [inputId]="ID_FIELD_QUANTITY"
       [maxInputLength]="50"
       type="number"
       [control]="quantity">
     </app-input-text>
 
     <app-input-text
-      textLabel="Precio"
-      inputId="price"
+      [textLabel]="FIELD_PRICE"
+      [inputId]="ID_FIELD_PRICE"
       [maxInputLength]="50"
       type="number"
       [control]="price">
@@ -49,28 +49,24 @@
     </app-multi-select-tag>
 
 
-
     <!-- Select brand -->
     <app-select-element
       [control]="brandName"
-      inputId="brandName2"
+      [inputId]="ID_FIELD_SELECT_BRAND"
       [inputData]="brandData"
-      inputLabel="Seleccionar marca 2"
-    >
+      [inputLabel]="FIELD_SELECT_BRAND">
     </app-select-element>
 
 
   </app-create-form>
 
 
-
-
+  <!-- Toast -->
   <app-toast
     *ngIf="showToast"
     [toastType]="typeToastMessage"
     [message]="toastMessage">
   </app-toast>
-
 
 
   <!--<app-table-item

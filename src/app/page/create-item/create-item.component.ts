@@ -4,6 +4,14 @@ import {ItemService} from "../../services/item/item.service";
 import {CategoryService} from "../../services/category/category.service";
 import {BrandService} from "../../services/brand/brand.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {SEND_ERROR} from "../../constants/global.constants";
+import {
+  FIELD_DESCRIPTION,
+  FIELD_NAME, FIELD_PRICE, FIELD_QUANTITY, FIELD_SELECT_BRAND,
+  ID_FIELD_DESCRIPTION,
+  ID_FIELD_NAME, ID_FIELD_PRICE, ID_FIELD_QUANTITY, ID_FIELD_SELECT_BRAND,
+  ITEM_SUCCESSFULLY_CREATED, TITLE_CREATE_ITEM
+} from "../../constants/item.constants";
 
 
 @Component({
@@ -107,13 +115,13 @@ export class CreateItemComponent implements OnInit {
       if (response.status === 201) {
 
         this.typeToastMessage = "success";
-        this.showCustomToast("Articulo creado exitosamente");
+        this.showCustomToast(ITEM_SUCCESSFULLY_CREATED);
 
       }
     } catch (error) {
 
       this.typeToastMessage = "error";
-      this.showCustomToast("Error al enviar la solicitud");
+      this.showCustomToast(SEND_ERROR);
     }
 
   }
@@ -185,4 +193,15 @@ export class CreateItemComponent implements OnInit {
   }
 
 
+  protected readonly FIELD_NAME = FIELD_NAME;
+  protected readonly ID_FIELD_NAME = ID_FIELD_NAME;
+  protected readonly FIELD_DESCRIPTION = FIELD_DESCRIPTION;
+  protected readonly ID_FIELD_DESCRIPTION = ID_FIELD_DESCRIPTION;
+  protected readonly TITLE_CREATE_ITEM = TITLE_CREATE_ITEM;
+  protected readonly FIELD_QUANTITY = FIELD_QUANTITY;
+  protected readonly ID_FIELD_QUANTITY = ID_FIELD_QUANTITY;
+  protected readonly FIELD_PRICE = FIELD_PRICE;
+  protected readonly ID_FIELD_PRICE = ID_FIELD_PRICE;
+  protected readonly ID_FIELD_SELECT_BRAND = ID_FIELD_SELECT_BRAND;
+  protected readonly FIELD_SELECT_BRAND = FIELD_SELECT_BRAND;
 }

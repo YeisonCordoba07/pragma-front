@@ -3,6 +3,25 @@ import {UserAccountService} from "../../services/user-account/user-account.servi
 import {lastValueFrom} from "rxjs";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Option} from "../../../types/Option";
+import {
+  FIELD_NAME,
+  ID_FIELD_NAME,
+  FIELD_BIRTH_DATE,
+  FIELD_EMAIL,
+  FIELD_IDENTITY_DOCUMENT,
+  FIELD_LAST_NAME,
+  FIELD_PASSWORD,
+  FIELD_PHONE,
+  FIELD_ROLE,
+  ID_FIELD_BIRTH_DATE,
+  ID_FIELD_EMAIL,
+  ID_FIELD_IDENTITY_DOCUMENT,
+  ID_FIELD_LAST_NAME,
+  ID_FIELD_PASSWORD,
+  ID_FIELD_PHONE, ID_FIELD_ROLE,
+  TITLE_CREATE_AUX
+} from "../../constants/user-account.constants";
+import {SEND_ERROR} from "../../constants/global.constants";
 
 
 @Component({
@@ -93,7 +112,7 @@ export class CreateAuxComponent implements OnInit {
     } catch (error) {
 
       this.typeToastMessage = "error";
-      this.showCustomToast("Error al enviar la solicitud");
+      this.showCustomToast(SEND_ERROR);
     }
 
   }
@@ -126,4 +145,22 @@ export class CreateAuxComponent implements OnInit {
   get role() {
     return this.formAux.get('role') as FormControl;
   }
+
+  protected readonly TITLE_CREATE_AUX = TITLE_CREATE_AUX;
+  protected readonly FIELD_NAME = FIELD_NAME;
+  protected readonly ID_FIELD_NAME = ID_FIELD_NAME;
+  protected readonly FIELD_LAST_NAME = FIELD_LAST_NAME;
+  protected readonly ID_FIELD_LAST_NAME = ID_FIELD_LAST_NAME;
+  protected readonly FIELD_IDENTITY_DOCUMENT = FIELD_IDENTITY_DOCUMENT;
+  protected readonly ID_FIELD_IDENTITY_DOCUMENT = ID_FIELD_IDENTITY_DOCUMENT;
+  protected readonly FIELD_PHONE = FIELD_PHONE;
+  protected readonly ID_FIELD_PHONE = ID_FIELD_PHONE;
+  protected readonly FIELD_EMAIL = FIELD_EMAIL;
+  protected readonly ID_FIELD_EMAIL = ID_FIELD_EMAIL;
+  protected readonly FIELD_PASSWORD = FIELD_PASSWORD;
+  protected readonly ID_FIELD_PASSWORD = ID_FIELD_PASSWORD;
+  protected readonly FIELD_BIRTH_DATE = FIELD_BIRTH_DATE;
+  protected readonly ID_FIELD_BIRTH_DATE = ID_FIELD_BIRTH_DATE;
+  protected readonly FIELD_ROLE = FIELD_ROLE;
+  protected readonly ID_FIELD_ROLE = ID_FIELD_ROLE;
 }

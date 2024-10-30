@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {lastValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {
+  BRAND_SUCCESSFULLY_CREATED, FIELD_DESCRIPTION,
+  FIELD_NAME, ID_FIELD_DESCRIPTION,
+  ID_FIELD_NAME,
+  TITLE_CREATE_BRAND
+} from "../../constants/brand.constants";
+import {SEND_ERROR} from "../../constants/global.constants";
 
 @Component({
   selector: 'app-create-brand',
@@ -58,13 +65,13 @@ export class CreateBrandComponent implements OnInit {
       if (response.status === 201) {
 
         this.typeToastMessage = "success";
-        this.showCustomToast("Marca creada exitosamente");
+        this.showCustomToast(BRAND_SUCCESSFULLY_CREATED);
 
       }
     } catch (error) {
 
       this.typeToastMessage = "error";
-      this.showCustomToast("Error al enviar la solicitud");
+      this.showCustomToast(SEND_ERROR);
     }
 
   }
@@ -80,4 +87,9 @@ export class CreateBrandComponent implements OnInit {
   }
 
 
+  protected readonly TITLE_CREATE_BRAND = TITLE_CREATE_BRAND;
+  protected readonly FIELD_NAME = FIELD_NAME;
+  protected readonly ID_FIELD_NAME = ID_FIELD_NAME;
+  protected readonly FIELD_DESCRIPTION = FIELD_DESCRIPTION;
+  protected readonly ID_FIELD_DESCRIPTION = ID_FIELD_DESCRIPTION;
 }

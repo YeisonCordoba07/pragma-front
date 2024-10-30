@@ -1,28 +1,13 @@
 <section>
-
-  <!--<app-create-aux-form
-    mainTitle="Crear auxiliar de bodega"
-    (formSubmitted)="createAux($event)"
-
-    [maxLengthName]="maxLengthName"
-    [maxLengthLastName]="maxLengthLastName"
-    [maxLengthPhone]="maxLengthPhone"
-  >
-
-  </app-create-aux-form>-->
-
-
-
   <app-create-form
-    [mainTitle]="'Crear auxiliar'"
+    [mainTitle]="TITLE_CREATE_AUX"
     [inputForm]="formAux"
     (formSubmitted)="createAux($event)"
   >
 
-
     <app-input-text
-      textLabel="Nombre"
-      inputId="name"
+      [textLabel]="FIELD_NAME"
+      [inputId]="ID_FIELD_NAME"
       [maxInputLength]="maxLengthName"
       type="text"
       [control]="name"
@@ -30,8 +15,8 @@
     </app-input-text>
 
     <app-input-text
-      textLabel="Apellido"
-      inputId="lastName"
+      [textLabel]="FIELD_LAST_NAME"
+      [inputId]="ID_FIELD_LAST_NAME"
       [maxInputLength]="maxLengthLastName"
       type="text"
       [control]="lastName"
@@ -39,16 +24,16 @@
     </app-input-text>
 
     <app-input-text
-      textLabel="Documento de Identidad"
-      inputId="identityDocument"
+      [textLabel]="FIELD_IDENTITY_DOCUMENT"
+      [inputId]="ID_FIELD_IDENTITY_DOCUMENT"
       type="number"
       [control]="identityDocument"
     >
     </app-input-text>
 
     <app-input-text
-      textLabel="Celular"
-      inputId="phone"
+      [textLabel]="FIELD_PHONE"
+      [inputId]="ID_FIELD_PHONE"
       [maxInputLength]="maxLengthPhone"
       type="text"
       [control]="phone"
@@ -56,57 +41,42 @@
     </app-input-text>
 
     <app-input-text
-      textLabel="Correo"
-      inputId="email"
+      [textLabel]="FIELD_EMAIL"
+      [inputId]="ID_FIELD_EMAIL"
       type="email"
       [control]="email"
     >
     </app-input-text>
 
     <app-input-text
-      textLabel="Contraseña"
-      inputId="password"
+      [textLabel]="FIELD_PASSWORD"
+      [inputId]="ID_FIELD_PASSWORD"
       type="password"
       [control]="password"
     >
     </app-input-text>
 
     <app-input-text
-      textLabel="Fecha de nacimiento"
-      inputId="birthDate"
+      [textLabel]="FIELD_BIRTH_DATE"
+      [inputId]="ID_FIELD_BIRTH_DATE"
       type="date"
       [control]="birthDate"
     >
     </app-input-text>
 
-
-   <!-- <div class="select-container">
-
-      <label for="role">Rol:</label>
-
-      <select name="role" id="role" [formControl]="role">
-        <option value="AUX_BODEGA">Auxiliar de bodega</option>
-      </select>
-
-    </div>-->
-
     <app-select-element
-      inputLabel="Seleccionar un rol"
+      [inputLabel]="FIELD_ROLE"
       [inputData]="roleOptions"
       [control]="role"
-      inputId="role"
+      [inputId]="ID_FIELD_ROLE"
     ></app-select-element>
 
-
-
   </app-create-form>
-
-
 
   <app-toast
     *ngIf="showToast"
     [toastType]="typeToastMessage"
-    [message]="toastMessage"></app-toast>
-
-
+    [message]="toastMessage">
+  </app-toast>
 </section>
+
