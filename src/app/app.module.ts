@@ -29,7 +29,6 @@ import { GetBrandsComponent } from './page/get-brands/get-brands.component';
 import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import { CreateFormComponent } from './components/molecules/create-form/create-form.component';
 import { CreateItemComponent } from './page/create-item/create-item.component';
-import { TableItemComponent } from './components/molecules/table-item/table-item.component';
 import { MultiSelectTagComponent } from './components/atoms/multi-select-tag/multi-select-tag.component';
 import { GetItemsComponent } from './page/get-items/get-items.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
@@ -59,7 +58,6 @@ import { SelectElementComponent } from './components/atoms/select-element/select
     CreateBrandComponent,
     CreateFormComponent,
     CreateItemComponent,
-    TableItemComponent,
     MultiSelectTagComponent,
     GetItemsComponent,
     PaginationComponent,
