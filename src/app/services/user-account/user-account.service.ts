@@ -17,7 +17,7 @@ export class UserAccountService {
   createUser(newUser: {
     name: string;
     lastName: string,
-    documentId: number,
+    identityDocument: number,
     phone: string,
     birthDate: string;
     email: string,

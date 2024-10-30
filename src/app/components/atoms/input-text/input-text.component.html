@@ -1,40 +1,46 @@
 <div class="input-element">
-  <label
-    class="input-element__label"
-    [for]="inputId">{{ textLabel }}</label>
+  <label class="input-element__label" [for]="inputId">{{ textLabel }}</label>
+
   <input
     class="input-element__input"
-    [ngClass]="{'ng-touched ng-invalid': control.invalid && control.touched}"
+    [ngClass]="{'ng-touched ng-invalid': control.invalid && (control.dirty || control.touched)}"
     [formControl]="control"
     [type]="type"
     [id]="inputId"
-    [placeholder]="placeholderText"/>
-
+    [placeholder]="placeholderText"
+  />
 
   <!-- Mensajes de error -->
-  <div
-    *ngIf="control.invalid && control.touched"
-    class="error input-element__container-error">
-    <small
-      *ngIf="control.errors?.['required'] && type !== 'email'"
-    >
-      {{ textLabel }} no puede estar vacio
-    </small>
+  <div *ngIf="control.invalid && (control.dirty || control.touched)" class="error input-element__container-error">
 
-    <small *ngIf="control.errors?.['maxlength']  && type !== 'email'">
-      {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
-    </small>
-
-    <div *ngIf="type === 'email'">
-
-      <small *ngIf="control.errors?.['maxlength']">
-        {{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres
-      </small>
-
-      <small *ngIf="control.errors?.['email']">
-        {{ textLabel }} debe se valido
-      </small>
+    <!-- Errores para texto y nombre (tipo text) -->
+    <div *ngIf="type === 'text'">
+      <small *ngIf="control.errors?.['required']">{{ textLabel }} es obligatorio.</small>
+      <small *ngIf="control.errors?.['maxlength']">{{ textLabel }} debe tener menos de {{ maxInputLength }} caracteres.</small>
     </div>
+
+    <!-- Errores para email -->
+    <div *ngIf="type === 'email'">
+      <small *ngIf="control.errors?.['required']">El correo electrónico es obligatorio.</small>
+      <small *ngIf="control.errors?.['email']">Ingresa un correo electrónico válido.</small>
+      <small *ngIf="control.errors?.['maxlength']">El correo debe tener menos de {{ maxInputLength }} caracteres.</small>
+    </div>
+
+    <!-- Errores para contraseña -->
+    <div *ngIf="type === 'password'">
+      <small *ngIf="control.errors?.['required']">La contraseña es obligatoria.</small>
+    </div>
+
+    <!-- Errores para número -->
+    <div *ngIf="type === 'number'">
+      <small *ngIf="control.errors?.['required']">{{ textLabel }} es obligatorio.</small>
+    </div>
+
+    <!-- Errores para fecha de nacimiento -->
+    <div *ngIf="type === 'date'">
+      <small *ngIf="control.errors?.['required']">La fecha de nacimiento es obligatoria.</small>
+      <small *ngIf="control.errors?.['notAdult']">Debes ser mayor de 18 años.</small>
+    </div>
+
   </div>
 </div>
-

@@ -1,6 +1,6 @@
 <section>
 
-  <app-create-aux-form
+  <!--<app-create-aux-form
     mainTitle="Crear auxiliar de bodega"
     (formSubmitted)="createAux($event)"
 
@@ -9,11 +9,104 @@
     [maxLengthPhone]="maxLengthPhone"
   >
 
-  </app-create-aux-form>
+  </app-create-aux-form>-->
+
+
+
+  <app-create-form
+    [mainTitle]="'Crear auxiliar'"
+    [inputForm]="formAux"
+    (formSubmitted)="createAux($event)"
+  >
+
+
+    <app-input-text
+      textLabel="Nombre"
+      inputId="name"
+      [maxInputLength]="maxLengthName"
+      type="text"
+      [control]="name"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Apellido"
+      inputId="lastName"
+      [maxInputLength]="maxLengthLastName"
+      type="text"
+      [control]="lastName"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Documento de Identidad"
+      inputId="identityDocument"
+      type="number"
+      [control]="identityDocument"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Celular"
+      inputId="phone"
+      [maxInputLength]="maxLengthPhone"
+      type="text"
+      [control]="phone"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Correo"
+      inputId="email"
+      type="email"
+      [control]="email"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Contraseña"
+      inputId="password"
+      type="password"
+      [control]="password"
+    >
+    </app-input-text>
+
+    <app-input-text
+      textLabel="Fecha de nacimiento"
+      inputId="birthDate"
+      type="date"
+      [control]="birthDate"
+    >
+    </app-input-text>
+
+
+   <!-- <div class="select-container">
+
+      <label for="role">Rol:</label>
+
+      <select name="role" id="role" [formControl]="role">
+        <option value="AUX_BODEGA">Auxiliar de bodega</option>
+      </select>
+
+    </div>-->
+
+    <app-select-element
+      inputLabel="Seleccionar un rol"
+      [inputData]="roleOptions"
+      [control]="role"
+      inputId="role"
+    ></app-select-element>
+
+
+
+  </app-create-form>
+
+
 
   <app-toast
     *ngIf="showToast"
     [toastType]="typeToastMessage"
     [message]="toastMessage"></app-toast>
+
 
 </section>

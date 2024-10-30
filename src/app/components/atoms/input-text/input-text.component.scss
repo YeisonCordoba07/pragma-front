@@ -9,25 +9,25 @@
   flex-direction: column;
 }
 
-.input-element__input{
+.input-element__input {
   padding: 12px 8px;
   border: 1px solid $color-spacer_light;
   border-radius: 3px;
-  @extend .main-text__body-xs;
   width: 100%;
 
-  &:focus{
+  &:focus {
     outline-color: $color-purple;
   }
 
-  &:disabled{
+  &:disabled {
     background-color: $color-disabled;
     color: $color-border;
   }
-  &.ng-touched.ng-invalid {
+
+  &.ng-touched.ng-invalid,
+  &.ng-dirty.ng-invalid {
     outline: 2px solid $color-error;
   }
-
 }
 
 .error{
