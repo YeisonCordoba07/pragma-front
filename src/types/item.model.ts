@@ -1,10 +1,15 @@
+import {CategoryModel} from "./category.model";
+import {BrandModel} from "./brand.model";
+
 export interface ItemModel {
   id: number;
   name: string;
   description: string;
-  brand: string;
-  category: string;
+  price: number;
   quantity: number;
+  brand: BrandModel;
+  categories: CategoryModel[];
+
 }
 
 export interface ItemResponse {

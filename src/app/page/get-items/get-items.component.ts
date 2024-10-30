@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ItemService} from "../../services/item/item.service";
 import {firstValueFrom} from "rxjs";
 import {Option} from "../../../types/Option";
+import {ItemModel} from "../../../types/item.model";
 
 @Component({
   selector: 'app-get-items',
@@ -9,7 +10,7 @@ import {Option} from "../../../types/Option";
   styleUrls: ['./get-items.component.scss']
 })
 export class GetItemsComponent implements OnInit {
-  itemData: any[] = [];
+  itemData: ItemModel[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -80,8 +81,8 @@ export class GetItemsComponent implements OnInit {
     this.loadItems();
   }
 
-  changeAscending2($event: any) {
-    this.orderBy = $event;
+  changeAscending2(orderBy: string) {
+    this.orderBy = orderBy;
     this.loadItems();
   }
 }

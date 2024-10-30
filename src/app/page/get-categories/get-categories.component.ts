@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category/category.service";
 import {firstValueFrom} from "rxjs";
 import {Option} from "../../../types/Option";
+import {CategoryModel} from "../../../types/category.model";
 
 @Component({
   selector: 'app-get-categories',
@@ -10,7 +11,7 @@ import {Option} from "../../../types/Option";
 })
 export class GetCategoriesComponent implements OnInit {
 
-  categoryData: any[] = [];
+  categoryData: CategoryModel[] = [];
 
   page: number = 0;
   size: number = 5;

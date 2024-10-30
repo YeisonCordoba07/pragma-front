@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
 import {Option} from "../../../types/Option";
+import {BrandModel} from "../../../types/brand.model";
 
 @Component({
   selector: 'app-get-brands',
@@ -11,7 +12,7 @@ import {Option} from "../../../types/Option";
 export class GetBrandsComponent implements OnInit {
 
 
-  brandData: any[] = [];
+  brandData: BrandModel[] = [];
 
   page: number = 0;
   size: number = 5;
