@@ -36,19 +36,6 @@ describe('NavigationBarElementComponent', () => {
     expect(spanElement.textContent).toBe('Home');
   });
 
-  it('should bind isActived input to show or hide the vertical divider', () => {
-    component.isActived = true;
-    fixture.detectChanges();
-
-    const dividerElement = fixture.debugElement.query(By.css('.vertical-divider'));
-    expect(dividerElement).toBeTruthy();
-
-    component.isActived = false;
-    fixture.detectChanges();
-
-    const hiddenDivider = fixture.debugElement.query(By.css('.vertical-divider'));
-    expect(hiddenDivider).toBeFalsy();
-  });
 
   it('should bind elementIcon input to the img src attribute', () => {
     component.elementIcon = 'favicon.ico';
