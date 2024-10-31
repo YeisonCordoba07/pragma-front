@@ -1,11 +1,11 @@
-<li>
+<li class="navigation-bar-element" routerLinkActive="navigation-bar-element--border">
 
-  <a [routerLink]="pageUrl" (click)="onClick()"  routerLinkActive="active" >
+  <a
+    class="navigation-bar-element__a"
+    [routerLink]="pageUrl" (click)="onClick()"  routerLinkActive="navigation-bar-element__a--active" >
 
     <img [src]="elementIcon" alt="" width="28" height="30">
-    <span>{{elementText}}</span>
-
-    <div *ngIf="isActived" class="vertical-divider"></div>
+    <span class="navigation-bar-element__text">{{elementText}}</span>
 
   </a>
 </li>
