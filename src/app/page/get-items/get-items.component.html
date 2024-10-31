@@ -1,17 +1,46 @@
-<app-item-data-table
 
-  (leftClick)="prevPage()"
-  (rightClick)="nextPage()"
-  (changeSort)="changeAscending()"
+<!-- Data form -->
+<app-table-data
   [inputData]="itemData"
-  mainTitle="Todas los articulos"
+  [columnHeaders]="['ID', 'Nombre', 'Descripción', 'Cantidad', 'Precio', 'Marca', 'Categorías']"
+  mainTitle="Articulos"
+  [orderOptions]="orderOptions"
+  [dataOptions]="dataOptions"
+  (changeSort)="changeAscending()"
+  (changeTable)="changeAscending2($event)"
 
   [page]="page"
   [size]="size"
   [totalElements]="totalElements"
   [totalPages]="totalPages"
   [ascending]="ascending"
-  [orderBy]="orderBy"
-  (changeTable)="changeAscending2($event)"
-></app-item-data-table>
+  (leftClick)="prevPage()"
+  (rightClick)="nextPage()"
+>
+
+
+  <ng-container *ngFor="let dataElement of itemData">
+    <tr class="data-container__table-row">
+      <td class="data-container__table-cell">{{ dataElement.id }}</td>
+      <td class="data-container__table-cell">{{ dataElement.name }}</td>
+      <td class="data-container__table-cell">{{ dataElement.description }}</td>
+      <td class="data-container__table-cell">{{ dataElement.quantity }}</td>
+      <td class="data-container__table-cell">{{ dataElement.price }}</td>
+      <td class="data-container__table-cell">{{ dataElement.brand.name }}</td>
+      <td class="data-container__table-cell data-container__table-cell--padding">
+        <table class="data-container__table data-container__table--nested">
+          <tbody>
+          <tr *ngFor="let category of dataElement.categories" class="data-container__table-row">
+            <td class="data-container__table-cell data-container__table-cell--border">{{ category.name }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </ng-container>
+
+
+
+</app-table-data>
+
 

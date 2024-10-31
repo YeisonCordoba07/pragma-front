@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../services/category/category.service";
 import {firstValueFrom} from "rxjs";
+import {Option} from "../../../types/Option";
+import {CategoryModel} from "../../../types/category.model";
 
 @Component({
   selector: 'app-get-categories',
@@ -8,9 +10,8 @@ import {firstValueFrom} from "rxjs";
   styleUrls: ['./get-categories.component.scss']
 })
 export class GetCategoriesComponent implements OnInit {
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
-  categoryData: any[] = [];
+  categoryData: CategoryModel[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -18,6 +19,10 @@ export class GetCategoriesComponent implements OnInit {
   totalPages: number = 0;
   ascending: boolean = true;
 
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
   constructor(private readonly categoryService: CategoryService) { }
 
@@ -34,7 +39,7 @@ export class GetCategoriesComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.categoryService.getCategories(
-          this.page, this.size, this.token, this.ascending)
+          this.page, this.size, this.ascending)
       );
 
       if (response) {

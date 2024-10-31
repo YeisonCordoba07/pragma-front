@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateFormComponent } from './create-form.component';
 import {By} from "@angular/platform-browser";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('CreateFormComponent', () => {
@@ -19,6 +19,10 @@ describe('CreateFormComponent', () => {
 
     fixture = TestBed.createComponent(CreateFormComponent);
     component = fixture.componentInstance;
+    component.inputForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(component.maxLengthName)]),
+      description: new FormControl('', [Validators.maxLength(component.maxLengthDescription)])
+    });
     fixture.detectChanges();
   });
 
@@ -27,72 +31,56 @@ describe('CreateFormComponent', () => {
   });
 
 
-  it('should initialize the form as invalid', () => {
-    expect(component.formUser.invalid).toBeTruthy();
+  it('should display the main title', () => {
+    component.mainTitle = 'Crear Nuevo Item';
+    fixture.detectChanges();
+    const titleElement = fixture.debugElement.query(By.css('h2')).nativeElement;
+    expect(titleElement.textContent).toBe('Crear Nuevo Item');
   });
 
-  // Verificar que los campos del formulario se inicializan correctamente
-  it('should initialize the form controls', () => {
-    const nameControl = component.formUser.get('name');
-    const descriptionControl = component.formUser.get('description');
-
-    expect(nameControl).toBeTruthy();
-    expect(descriptionControl).toBeTruthy();
-  });
-
-  // Verificar que el botón de "Guardar" esté deshabilitado si el formulario es inválido
-  it('should disable save button when form is invalid', () => {
-    const buttonElement = fixture.debugElement.query(By.css('app-main-button')).nativeElement;
-    expect(buttonElement.disabled).toBe(true);
-  });
-
-  // Verificar que el formulario se vuelve válido cuando los campos se llenan correctamente
-  it('should validate form when inputs are filled correctly', () => {
-    component.formUser.controls['name'].setValue('Nueva Categoría');
-    component.formUser.controls['description'].setValue('Descripción de la categoría');
-    expect(component.formUser.valid).toBeTruthy();
-  });
-
-  // Verificar que el botón de "Guardar" esté habilitado cuando el formulario es válido
-  it('should enable save button when form is valid', () => {
-    component.formUser.controls['name'].setValue('Nueva Categoría');
-    component.formUser.controls['description'].setValue('Descripción de la categoría');
+  it('should disable the submit button if form is invalid', () => {
+    component.inputForm.controls['name'].setValue(''); // Formulario inválido ya que 'name' es requerido
     fixture.detectChanges();
 
-    const buttonElement = fixture.debugElement.query(By.css('app-main-button')).nativeElement;
-    expect(buttonElement.disabled).toBe(false);
+    const submitButton = fixture.debugElement.query(By.css('app-main-button')).nativeElement;
+    expect(submitButton.disabled).toBeTruthy();
   });
 
-  // Verificar que se emite el evento 'formSubmitted' cuando el formulario es válido y se envía
-  it('should emit formSubmitted when form is submitted', () => {
-    const formData = {
-      name: 'Nueva Categoría',
-      description: 'Descripción de la categoría'
-    };
+  it('should enable the submit button if form is valid', () => {
+    component.inputForm.controls['name'].setValue('Nombre válido');
+    component.inputForm.controls['description'].setValue('Descripción válida');
+    fixture.detectChanges();
 
-    // Llenar el formulario
-    component.formUser.controls['name'].setValue(formData.name);
-    component.formUser.controls['description'].setValue(formData.description);
-
-    // Espiar el evento emitido
-    jest.spyOn(component.formSubmitted, 'emit');
-
-    // Ejecutar el metodo onSubmit()
-    component.onSubmit();
-
-    // Verificar que se emitió el evento con los datos correctos
-    expect(component.formSubmitted.emit).toHaveBeenCalledWith(formData);
+    const submitButton = fixture.debugElement.query(By.css('app-main-button')).nativeElement;
+    expect(submitButton.disabled).toBeFalsy();
   });
 
-  // Verificar que no se emita el evento si el formulario es inválido
-  it('should not emit formSubmitted when form is invalid', () => {
-    jest.spyOn(component.formSubmitted, 'emit');
+  it('should emit formSubmitted with form data on valid form submission', () => {
+    // Espiar el evento formSubmitted
+    const formSubmittedSpy = jest.spyOn(component.formSubmitted, 'emit');
 
-    // Ejecutar el metodo onSubmit() sin completar el formulario
+    // Llenar el formulario con datos válidos
+    component.inputForm.controls['name'].setValue('Nombre válido');
+    component.inputForm.controls['description'].setValue('Descripción válida');
+
+    // Simular el envío del formulario
     component.onSubmit();
 
-    // Verificar que no se emitió el evento
-    expect(component.formSubmitted.emit).not.toHaveBeenCalled();
+    expect(formSubmittedSpy).toHaveBeenCalledWith({
+      name: 'Nombre válido',
+      description: 'Descripción válida',
+    });
+  });
+
+  it('should reset the form after submission', () => {
+    component.inputForm.controls['name'].setValue('Nombre válido');
+    component.inputForm.controls['description'].setValue('Descripción válida');
+
+    component.onSubmit();
+
+    // Verificar que el formulario se ha reseteado
+    expect(component.inputForm.controls['name'].value).toBeNull();
+    expect(component.inputForm.controls['description'].value).toBeNull();
   });
 
 

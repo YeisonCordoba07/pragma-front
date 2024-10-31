@@ -1,0 +1,40 @@
+@import "../../../../styles/global-colors";
+@import "../../../../styles/fonts";
+@import "../../../../styles/global";
+
+
+/* Estilo para el select de marcas */
+.custom-select{
+  width: 100%;
+}
+.custom-select__label{
+  @extend .main-text__body-m;
+}
+.custom-select__select{
+  height: 50px;
+  width: 100%;
+  @extend .main-text__body-m;
+  border: 1px solid $color-spacer_light;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+  &:focus{
+    border: 2px solid $color-purple;
+    outline-color: $color-purple;
+  }
+}
+
+.custom-select__option{
+  height: 50px;
+  padding: 8px;
+  border-bottom: 1px solid $color-border;
+}
+
+.custom-select__option:checked {
+  background-color: $color-purple;
+  color: white;
+}
+.custom-select__option:hover {
+  background-color: $color-purple-hover;
+  color: white;
+}

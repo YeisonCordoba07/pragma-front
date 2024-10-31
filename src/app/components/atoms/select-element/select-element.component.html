@@ -1,0 +1,27 @@
+<div class="custom-select">
+
+  <label
+    class="custom-select__label"
+    [for]="inputId">{{ inputLabel }}
+  </label>
+
+  <select
+    class="custom-select__select"
+    [id]="inputId"
+    [formControl]="control"
+  >
+    <option
+      class="custom-select__option"
+      *ngFor="let data of inputData"
+      [value]="data.name">
+      {{ data.name }}
+    </option>
+
+  </select>
+
+
+  <!-- Error messages -->
+  <div *ngIf="control.errors?.['required']" class="error custom-select__error-container">
+    Debe seleccionar una opción.
+  </div>
+</div>

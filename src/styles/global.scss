@@ -192,3 +192,92 @@
 }
 
 
+
+//TABLE STYLES -----------------------------------------
+.data-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 20px;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+    @extend .desktop__poppins-h1;
+  }
+
+  &__table-container {
+    width: 90vw;
+    max-width: 90vw;
+    height: 400px;
+    max-height: 80vw;
+    overflow: auto;
+
+    @media (min-width: 1024px) {
+      width: 800px;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    color: $color-black;
+
+    &-header,
+    &-cell {
+      padding: 8px 12px;
+      text-align: center;
+      max-height: 48px;
+      width: 136px;
+      height: 48px;
+      white-space: nowrap;
+      border: 3px solid $color-spacer_light;
+    }
+
+    &-header {
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      background-color: $color-white;
+      z-index: 1;
+      border-bottom: 5px solid $color-spacer_light;
+      @extend .main-text__body-s-regular;
+    }
+
+    &-cell {
+      @extend .main-text__body-s;
+      &--padding{
+        padding: 0;
+      }
+
+    }
+
+    &-row:nth-child(even) {
+      background-color: rgba(245, 243, 247);
+    }
+
+    &--nested {
+      width: 100%;
+      border: none;
+
+      & .data-container__table-cell {
+        padding: 4px 8px;
+        border: 1px solid $color-spacer_light;
+      }
+      & .data-container__table-cell--border {
+        border-left: none;
+        border-right: none;
+        border-top:none;
+      }
+
+    }
+  }
+
+
+}
+
+// Componentes --------------------------------------
+app-create-form, app-input-text, app-select-element{
+  width: 100%;
+}

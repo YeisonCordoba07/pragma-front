@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ITEM_CREATION_URL, TOKEN} from "../../constants/service.constants";
+import {ItemResponse} from "../../../types/item.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +11,17 @@ import {Observable} from "rxjs";
 export class ItemService {
 
 
-  private readonly createItemURL = 'http://localhost:8080/item';
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
-
   constructor(private readonly http: HttpClient) {
   }
 
 
-  getItem(page: number, size: number, table: string, ascending: boolean): Observable<any> {
+  getItem(page: number, size: number, table: string, ascending: boolean): Observable<ItemResponse> {
     const url = `http://localhost:8080/item/getAll?page=${page}&size=${size}&sortBy=name&table=${table}&ascending=${ascending}`;
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
+      'Authorization': `Bearer ${TOKEN}`
     });
-    return this.http.get<any>(url, {headers});
+    return this.http.get<ItemResponse>(url, {headers});
   }
 
 
@@ -34,15 +34,15 @@ export class ItemService {
     price: number,
     categories: string[];
     brandName: string
-  }, token: string): Observable<any> {
+  }): Observable<HttpResponse<ItemResponse>> {
 
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${TOKEN}`
       }
     );
 
-    return this.http.post<any>(this.createItemURL, item, {
+    return this.http.post<ItemResponse>(ITEM_CREATION_URL, item, {
       headers,
       observe: "response"
     });

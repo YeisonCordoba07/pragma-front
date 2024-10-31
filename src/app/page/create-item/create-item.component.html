@@ -1,19 +1,83 @@
 <section>
-  <app-table-item
-    mainTitle="Crear articulo"
+
+
+  <app-create-form
+    [mainTitle]="TITLE_CREATE_ITEM"
+    [inputForm]="formItem"
     (formSubmitted)="createItem($event)"
-    [maxLengthName]="50"
-    [maxLengthDescription]="120"
-    [categoryData]="categoryData"
-    [brandData]="brandData"
-  ></app-table-item>
+  >
 
 
+    <!-- Elements -->
+    <app-input-text
+      [textLabel]="FIELD_NAME"
+      [inputId]="ID_FIELD_NAME"
+      [maxInputLength]="50"
+      type="text"
+      [control]="name">
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_DESCRIPTION"
+      [inputId]="ID_FIELD_DESCRIPTION"
+      [maxInputLength]="120"
+      type="text"
+      [control]="description">
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_QUANTITY"
+      [inputId]="ID_FIELD_QUANTITY"
+      [maxInputLength]="50"
+      type="number"
+      [control]="quantity">
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_PRICE"
+      [inputId]="ID_FIELD_PRICE"
+      [maxInputLength]="50"
+      type="number"
+      [control]="price">
+    </app-input-text>
+
+
+    <!-- Select three categories -->
+    <app-multi-select-tag
+      [formControl]="categories"
+      [inputData]="categoryData">
+    </app-multi-select-tag>
+
+
+    <!-- Select brand -->
+    <app-select-element
+      [control]="brandName"
+      [inputId]="ID_FIELD_SELECT_BRAND"
+      [inputData]="brandData"
+      [inputLabel]="FIELD_SELECT_BRAND">
+    </app-select-element>
+
+
+  </app-create-form>
+
+
+  <!-- Toast -->
   <app-toast
     *ngIf="showToast"
     [toastType]="typeToastMessage"
     [message]="toastMessage">
   </app-toast>
+
+
+  <!--<app-table-item
+  mainTitle="Crear articulo"
+  (formSubmitted)="createItem($event)"
+  [maxLengthName]="50"
+  [maxLengthDescription]="120"
+  [categoryData]="categoryData"
+  [brandData]="brandData"
+>
+</app-table-item>-->
 
 </section>
 

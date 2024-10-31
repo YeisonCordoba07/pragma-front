@@ -5,9 +5,11 @@
 .sort-container {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+
   width: 100%;
+  height: fit-content;
   @extend .desktop__poppins-h4;
+  margin: 0;
 }
 
 

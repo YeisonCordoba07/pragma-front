@@ -58,6 +58,7 @@ export class MultiSelectTagComponent implements ControlValueAccessor {
     }
 
     this.onChange(this.selectedItems);
+    console.log("MULTI SELECTION:", this.selectedItems);
 
   }
 
@@ -71,6 +72,7 @@ export class MultiSelectTagComponent implements ControlValueAccessor {
       this.selectedItems.splice(index, 1);
     }
     this.onChange(this.selectedItems);
+    console.log("MULTI REMOVE:", this.selectedItems);
   }
 
 

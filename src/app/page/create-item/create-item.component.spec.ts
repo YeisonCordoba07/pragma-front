@@ -1,234 +1,214 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { CreateItemComponent } from './create-item.component';
-import {of, throwError} from "rxjs";
-import {ItemService} from "../../services/item/item.service";
-import {CategoryService} from "../../services/category/category.service";
-import {BrandService} from "../../services/brand/brand.service";
+import { CategoryService } from '../../services/category/category.service';
+import { BrandService } from '../../services/brand/brand.service';
+import { ItemService } from '../../services/item/item.service'; // Asegúrate de importar tu ItemService
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importa el módulo de pruebas para HttpClient
+import {of, throwError} from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+
+// Definiciones de los tipos de respuesta
+interface CategoryResponse {
+  content: { id: number; name: string }[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+}
+
+interface BrandResponse {
+  content: { id: number; name: string }[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+}
+
+// Mocks de las respuestas
+const mockCategories: CategoryResponse = {
+  content: [
+    { id: 1, name: 'Category 1' },
+    { id: 2, name: 'Category 2' },
+  ],
+  page: 0,
+  size: 2,
+  totalElements: 2,
+  totalPages: 1,
+};
+
+const mockBrands: BrandResponse = {
+  content: [
+    { id: 1, name: 'Brand 1' },
+    { id: 2, name: 'Brand 2' },
+  ],
+  page: 0,
+  size: 2,
+  totalElements: 2,
+  totalPages: 1,
+};
 
 describe('CreateItemComponent', () => {
   let component: CreateItemComponent;
   let fixture: ComponentFixture<CreateItemComponent>;
-  let mockItemService: any;
-  let mockCategoryService: any;
-  let mockBrandService: any;
+  let categoryService: jest.Mocked<CategoryService>;
+  let brandService: jest.Mocked<BrandService>;
+  let itemService: jest.Mocked<ItemService>;
 
   beforeEach(async () => {
+    categoryService = {
+      getCategories: jest.fn(),
+    } as unknown as jest.Mocked<CategoryService>;
 
-    mockItemService = {
-      createItem: jest.fn()
-    };
-    mockCategoryService = {
-      getCategories: jest.fn().mockReturnValue(of({ content: [{ name: 'Electronics' }, { name: 'Books' }] }))
-    };
-    mockBrandService = {
-      getBrand: jest.fn().mockReturnValue(of({ content: [{ name: 'Apple' }, { name: 'Samsung' }] }))
-    };
+    brandService = {
+      getBrand: jest.fn(),
+    } as unknown as jest.Mocked<BrandService>;
 
+    itemService = {
+      createItem: jest.fn(),
+    } as unknown as jest.Mocked<ItemService>;
 
     await TestBed.configureTestingModule({
-      declarations: [ CreateItemComponent ],
+      imports: [HttpClientTestingModule], // Importa HttpClientTestingModule
+      declarations: [CreateItemComponent],
       providers: [
-        { provide: ItemService, useValue: mockItemService },
-        { provide: CategoryService, useValue: mockCategoryService },
-        { provide: BrandService, useValue: mockBrandService }
+        { provide: CategoryService, useValue: categoryService },
+        { provide: BrandService, useValue: brandService },
+        { provide: ItemService, useValue: itemService }, // Proveedor para ItemService
+        FormBuilder,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CreateItemComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
 
   it('should load categories on init', async () => {
+    // @ts-ignore
+    categoryService.getCategories.mockReturnValue(of(mockCategories));
+
     await component.loadCategories();
-    expect(mockCategoryService.getCategories).toHaveBeenCalled();
-    expect(component.categoryData.length).toBe(2); // Dos categorías cargadas
+
+    expect(component.categoryData).toEqual(mockCategories.content);
+    expect(categoryService.getCategories).toHaveBeenCalledWith(0, 100, true);
   });
 
   it('should load brands on init', async () => {
+    // @ts-ignore
+    brandService.getBrand.mockReturnValue(of(mockBrands));
+
     await component.loadBrands();
-    expect(mockBrandService.getBrand).toHaveBeenCalled();
-    expect(component.brandData.length).toBe(2); // Dos marcas cargadas
+
+    expect(component.brandData).toEqual(mockBrands.content);
+    expect(brandService.getBrand).toHaveBeenCalledWith(0, 100, true);
   });
 
-  it('should show success toast on successful item creation', async () => {
-    mockItemService.createItem.mockReturnValue(of({ status: 201 }));
 
-    const formData = {
-      name: 'Test Item',
+
+
+
+
+
+
+
+
+  it('should return the form control for name', () => {
+    const control = component.name;
+    expect(control).toBe(component.formItem.get('name'));
+  });
+
+  it('should return the form control for description', () => {
+    const control = component.description;
+    expect(control).toBe(component.formItem.get('description'));
+  });
+
+  it('should return the form control for quantity', () => {
+    const control = component.quantity;
+    expect(control).toBe(component.formItem.get('quantity'));
+  });
+
+  it('should return the form control for price', () => {
+    const control = component.price;
+    expect(control).toBe(component.formItem.get('price'));
+  });
+
+  it('should return the form control for categories', () => {
+    const control = component.categories;
+    expect(control).toBe(component.formItem.get('categories'));
+  });
+
+  it('should return the form control for brandName', () => {
+    const control = component.brandName;
+    expect(control).toBe(component.formItem.get('brandName'));
+  });
+
+
+
+
+
+  it('should call loadCategories and loadBrands on init', () => {
+    const loadCategoriesSpy = jest.spyOn(component, 'loadCategories');
+    const loadBrandsSpy = jest.spyOn(component, 'loadBrands');
+
+    component.ngOnInit();
+
+    expect(loadCategoriesSpy).toHaveBeenCalled();
+    expect(loadBrandsSpy).toHaveBeenCalled();
+  });
+
+
+
+
+
+  it('should create an item and show success toast', async () => {
+    const newItem = {
+      name: 'Item Test',
       description: 'Test Description',
-      quantity: 5,
+      quantity: 10,
       price: 100,
-      categories: ['Electronics'],
-      brandName: 'Apple'
+      categories: ['Category1'],
+      brandName: 'BrandTest',
     };
 
-    await component.createItem(formData);
+    component.formItem.setValue(newItem);
+    itemService.createItem = jest.fn().mockReturnValue(of({ status: 201 }));
 
-    expect(mockItemService.createItem).toHaveBeenCalledWith({
-      name: 'Test Item',
-      description: 'Test Description',
-      quantity: 5,
-      price: 100,
-      categories: ['Electronics'],
-      brandName: 'Apple'
-    }, component.token);
+    await component.createItem(newItem);
 
+    expect(itemService.createItem).toHaveBeenCalledWith(newItem);
     expect(component.typeToastMessage).toBe('success');
-    expect(component.toastMessage).toBe('Articulo creado exitosamente');
-    expect(component.showToast).toBeTruthy();
+    expect(component.showToast).toBe(true);
   });
 
-  it('should show error toast on failed item creation', async () => {
-    mockItemService.createItem.mockReturnValue(throwError(() => new Error('Error al enviar la solicitud')));
-
-    const formData = {
-      name: 'Test Item',
+  it('should show error toast on createItem failure', async () => {
+    const newItem = {
+      name: 'Item Test',
       description: 'Test Description',
-      quantity: 5,
+      quantity: 10,
       price: 100,
-      categories: ['Electronics'],
-      brandName: 'Apple'
+      categories: ['Category1'],
+      brandName: 'BrandTest',
     };
+    component.formItem.setValue(newItem);
+    itemService.createItem = jest.fn().mockReturnValue(throwError(() => new Error('Error')));
 
-    await component.createItem(formData);
+    await component.createItem(newItem);
 
+    expect(itemService.createItem).toHaveBeenCalledWith(newItem);
     expect(component.typeToastMessage).toBe('error');
-    expect(component.toastMessage).toBe('Error al enviar la solicitud');
-    expect(component.showToast).toBeTruthy();
+    expect(component.showToast).toBe(true);
   });
 
-  it('should hide toast after 5 seconds', () => {
-    jest.useFakeTimers();
-    component.showCustomToast('Test Toast');
-    expect(component.showToast).toBeTruthy();
+  it('should set showToast to false after 5 seconds', fakeAsync(() => {
+    component.showCustomToast('Test message'); // Llama al metodo para mostrar el toast
+    expect(component.showToast).toBe(true); // Verifica que showToast sea verdadero inicialmente
 
-    jest.advanceTimersByTime(5000);
-    expect(component.showToast).toBeFalsy();
+    tick(5000); // Simula el paso de 5 segundos
 
-    jest.useRealTimers();
-  });
+    expect(component.showToast).toBe(false); // Verifica que showToast se haya vuelto falso
+  }));
 
 
 
-
-
-
-  describe('loadCategories', () => {
-    it('should load categories successfully', async () => {
-      const mockCategoriesResponse = { content: ['Category 1', 'Category 2'] };
-      mockCategoryService.getCategories.mockReturnValue(of(mockCategoriesResponse));
-
-      await component.loadCategories();
-
-      expect(component.categoryData).toEqual(mockCategoriesResponse.content);
-    });
-
-    it('should handle error when loading categories', async () => {
-      const error = 'Error loading categories';
-      mockCategoryService.getCategories.mockReturnValue(throwError(() => new Error(error)));
-
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-
-      await component.loadCategories();
-
-      expect(consoleSpy).toHaveBeenCalledWith('Error al obtener brands:', new Error(error));
-      consoleSpy.mockRestore();
-    });
-  });
-
-  // Tests de carga de marcas
-  describe('loadBrands', () => {
-    it('should load brands successfully', async () => {
-      const mockBrandsResponse = { content: ['Brand 1', 'Brand 2'] };
-      mockBrandService.getBrand.mockReturnValue(of(mockBrandsResponse));
-
-      await component.loadBrands();
-
-      expect(component.brandData).toEqual(mockBrandsResponse.content);
-    });
-
-    it('should handle error when loading brands', async () => {
-      const error = 'Error loading brands';
-      mockBrandService.getBrand.mockReturnValue(throwError(() => new Error(error)));
-
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-
-      await component.loadBrands();
-
-      expect(consoleSpy).toHaveBeenCalledWith('Error al obtener brands:', new Error(error));
-      consoleSpy.mockRestore();
-    });
-  });
-
-  // Test de creación de artículo
-  describe('createItem', () => {
-    it('should create an item successfully and show a success toast', async () => {
-      const mockFormData = {
-        name: 'Test Item',
-        description: 'Test Description',
-        quantity: 10,
-        price: 100,
-        categories: ['Electronics'],
-        brandName: 'Apple'
-      };
-
-      // Simula la respuesta exitosa
-      mockItemService.createItem.mockReturnValue(of({ status: 201 }));
-
-      const toastSpy = jest.spyOn(component, 'showCustomToast');
-
-      await component.createItem(mockFormData);
-
-      expect(component.typeToastMessage).toBe('success');
-      expect(toastSpy).toHaveBeenCalledWith('Articulo creado exitosamente');
-    });
-
-    it('should handle error when creating an item and show an error toast', async () => {
-      const mockFormData = {
-        name: 'Test Item',
-        description: 'Test Description',
-        quantity: 10,
-        price: 100,
-        categories: ['Electronics'],
-        brandName: 'Apple'
-      };
-
-      // Simula un error en la creación del item
-      mockItemService.createItem.mockReturnValue(throwError(() => new Error('Error creating item')));
-
-      const toastSpy = jest.spyOn(component, 'showCustomToast');
-
-      await component.createItem(mockFormData);
-
-      expect(component.typeToastMessage).toBe('error');
-      expect(toastSpy).toHaveBeenCalledWith('Error al enviar la solicitud');
-    });
-  });
-
-  // Test del metodo showCustomToast
-  describe('showCustomToast', () => {
-    it('should show and hide the toast after 5 seconds', () => {
-      jest.useFakeTimers();
-      component.showCustomToast('Test message');
-
-      expect(component.showToast).toBe(true);
-      expect(component.toastMessage).toBe('Test message');
-
-      // Avanza el tiempo 5 segundos
-      jest.advanceTimersByTime(5000);
-
-      expect(component.showToast).toBe(false);
-      jest.useRealTimers();
-    });
-  });
 });

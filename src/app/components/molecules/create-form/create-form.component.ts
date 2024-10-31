@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-create-form',
@@ -8,30 +8,17 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateFormComponent implements OnInit {
 
+  @Input() mainTitle: string = "Titulo creación"
   @Input() maxLengthName: number = 50;
   @Input() maxLengthDescription: number = 120;
   @Output() formSubmitted = new EventEmitter<any>();
 
-  @Input() mainTitle: string = "Titulo creación"
 
-  formUser: FormGroup;
-
-
-  constructor(private readonly fb: FormBuilder) {
-    this.formUser = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(this.maxLengthName)]],
-      description: ['', [Validators.required, Validators.maxLength(this.maxLengthDescription)]],
-    })
-  }
+  @Input() inputForm!: FormGroup;
 
 
-  // Getters
-  get name() {
-    return this.formUser.get('name') as FormControl;
-  }
+  constructor() {
 
-  get description() {
-    return this.formUser.get('description') as FormControl;
   }
 
 
@@ -39,9 +26,10 @@ export class CreateFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formUser.valid) {
+    if (this.inputForm.valid) {
       // Emitir los datos del formulario al componente padre
-      this.formSubmitted.emit(this.formUser.value);
+      this.formSubmitted.emit(this.inputForm.value);
+      this.inputForm.reset();
     }
   }
 
