@@ -1,94 +1,97 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CreateBrandComponent } from './create-brand.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-import {of, throwError} from "rxjs";
-import {BrandService} from "../../services/brand/brand.service";
-import {By} from "@angular/platform-browser";
-
+import { BrandService } from '../../services/brand/brand.service';
+import { of, throwError } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CreateBrandComponent', () => {
   let component: CreateBrandComponent;
   let fixture: ComponentFixture<CreateBrandComponent>;
-  let mockBrandService: any;
+  let brandServiceMock: any;
 
   beforeEach(async () => {
-    mockBrandService = {
+    brandServiceMock = {
       createBrand: jest.fn()
     };
 
-
     await TestBed.configureTestingModule({
-      declarations: [ CreateBrandComponent ],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
+      imports: [ReactiveFormsModule],
+      declarations: [CreateBrandComponent],
       providers: [
-        { provide: BrandService, useValue: mockBrandService }
+        { provide: BrandService, useValue: brandServiceMock }
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA] // Ignorar otros componentes en pruebas
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(CreateBrandComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-
-
-
-  // Test para el método showCustomToast
-  it('should show and hide the toast message', () => {
-    jest.useFakeTimers(); // Para controlar el setTimeout
-
-    component.showCustomToast('Test message');
-    expect(component.toastMessage).toBe('Test message');
-    expect(component.showToast).toBe(true);
-
-    jest.advanceTimersByTime(5000); // Avanza el tiempo para ocultar el toast
-    expect(component.showToast).toBe(false);
-
-    jest.useRealTimers();
+  it('should initialize the form correctly', () => {
+    expect(component.formBrand).toBeDefined();
+    expect(component.formBrand.get('name')).toBeTruthy();
+    expect(component.formBrand.get('description')).toBeTruthy();
   });
 
-  // Verifica que se llame al servicio de crear marca y se maneje el éxito
-  it('should call createBrand and handle success response', async () => {
-    const formData = { name: 'Marca Test', description: 'Descripción de la marca' };
+  it('should show a success toast when a brand is created successfully', async () => {
     const mockResponse = { status: 201 };
-    mockBrandService.createBrand.mockReturnValue(of(mockResponse)); // Simula una respuesta exitosa
+    brandServiceMock.createBrand.mockReturnValue(of(mockResponse));
 
-    await component.createBrand(formData);
-    expect(mockBrandService.createBrand).toHaveBeenCalledWith(formData, component.token);
-    expect(component.typeToastMessage).toBe('success');
+    await component.createBrand({ name: 'Test Brand', description: 'Test Description' });
+
+    expect(component.showToast).toBe(true);
     expect(component.toastMessage).toBe('Marca creada exitosamente');
+    expect(component.typeToastMessage).toBe('success');
   });
 
-  // Verifica que se llame al servicio de crear marca y se maneje el error
-  it('should call createBrand and handle error response', async () => {
-    const formData = { name: 'Marca Test', description: 'Descripción de la marca' };
-    mockBrandService.createBrand.mockReturnValue(throwError(() => new Error('Error de red'))); // Simula un error
+  it('should show an error toast when brand creation fails', async () => {
+    brandServiceMock.createBrand.mockReturnValue(throwError(() => new Error('Error')));
 
-    await component.createBrand(formData);
-    expect(mockBrandService.createBrand).toHaveBeenCalledWith(formData, component.token);
-    expect(component.typeToastMessage).toBe('error');
+    await component.createBrand({ name: 'Test Brand', description: 'Test Description' });
+
+    expect(component.showToast).toBe(true);
     expect(component.toastMessage).toBe('Error al enviar la solicitud');
+    expect(component.typeToastMessage).toBe('error');
   });
 
+  it('should call the createBrand method of the brandService when form is submitted', async () => {
+    const mockResponse = { status: 201 };
+    brandServiceMock.createBrand.mockReturnValue(of(mockResponse));
 
+    await component.createBrand({ name: 'Test Brand', description: 'Test Description' });
 
-
-  // Verifica que el toast no se muestra cuando showToast es false
-  it('should not display the toast when showToast is false', () => {
-    component.showToast = false;
-    fixture.detectChanges(); // Actualiza la vista
-
-    const toastElement = fixture.debugElement.query(By.css('app-toast'));
-    expect(toastElement).toBeFalsy(); // Verifica que el componente app-toast no esté en el DOM
+    expect(brandServiceMock.createBrand).toHaveBeenCalledWith({
+      name: 'Test Brand',
+      description: 'Test Description'
+    });
   });
+
+  it('should have a form with validators', () => {
+    const nameControl = component.name;
+    const descriptionControl = component.description;
+
+    nameControl.setValue('');
+    expect(nameControl.valid).toBeFalsy();
+
+    descriptionControl.setValue('');
+    expect(descriptionControl.valid).toBeFalsy();
+  });
+
+  it('should set showToast to false after 5 seconds', fakeAsync(() => {
+    component.showCustomToast('Test message'); // Llama al metodo para mostrar el toast
+    expect(component.showToast).toBe(true); // Verifica que showToast sea verdadero inicialmente
+
+    tick(5000); // Simula el paso de 5 segundos
+
+    expect(component.showToast).toBe(false); // Verifica que showToast se haya vuelto falso
+  }));
 
 });

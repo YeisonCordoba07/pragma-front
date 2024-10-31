@@ -1,6 +1,6 @@
-@import "src/styles/global";
-@import "src/styles/global-colors";
-@import "src/styles/fonts";
+@import "../../../../styles/global";
+@import "../../../../styles/global-colors";
+@import "../../../../styles/fonts";
 
 .multi-select-dropdown {
   position: relative;
@@ -18,6 +18,11 @@
   border-radius: 5px;
   min-height: 44px;
   height: 100%;
+
+  &:focus{
+    outline-color: $color-purple;
+    border: 1px solid $color-purple;
+  }
 
 }
 

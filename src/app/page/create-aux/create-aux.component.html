@@ -1,0 +1,82 @@
+<section>
+  <app-create-form
+    [mainTitle]="TITLE_CREATE_AUX"
+    [inputForm]="formAux"
+    (formSubmitted)="createAux($event)"
+  >
+
+    <app-input-text
+      [textLabel]="FIELD_NAME"
+      [inputId]="ID_FIELD_NAME"
+      [maxInputLength]="maxLengthName"
+      type="text"
+      [control]="name"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_LAST_NAME"
+      [inputId]="ID_FIELD_LAST_NAME"
+      [maxInputLength]="maxLengthLastName"
+      type="text"
+      [control]="lastName"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_IDENTITY_DOCUMENT"
+      [inputId]="ID_FIELD_IDENTITY_DOCUMENT"
+      type="number"
+      [control]="identityDocument"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_PHONE"
+      [inputId]="ID_FIELD_PHONE"
+      [maxInputLength]="maxLengthPhone"
+      type="text"
+      [control]="phone"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_EMAIL"
+      [inputId]="ID_FIELD_EMAIL"
+      type="email"
+      [control]="email"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_PASSWORD"
+      [inputId]="ID_FIELD_PASSWORD"
+      type="password"
+      [control]="password"
+    >
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_BIRTH_DATE"
+      [inputId]="ID_FIELD_BIRTH_DATE"
+      type="date"
+      [control]="birthDate"
+    >
+    </app-input-text>
+
+    <app-select-element
+      [inputLabel]="FIELD_ROLE"
+      [inputData]="roleOptions"
+      [control]="role"
+      [inputId]="ID_FIELD_ROLE"
+    ></app-select-element>
+
+  </app-create-form>
+
+  <app-toast
+    *ngIf="showToast"
+    [toastType]="typeToastMessage"
+    [message]="toastMessage">
+  </app-toast>
+</section>
+

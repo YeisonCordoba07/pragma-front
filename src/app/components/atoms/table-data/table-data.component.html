@@ -1,0 +1,57 @@
+<div *ngIf="inputData.length > 0" class="data-container">
+  <h2 class="data-container__title">{{ mainTitle }}</h2>
+
+  <div class="data-container__table-container">
+
+    <table class="data-container__table">
+      <thead>
+      <tr>
+        <th *ngFor="let header of columnHeaders" class="data-container__table-header">{{ header }}</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+
+
+        <ng-content></ng-content>
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Sort by -->
+  <div class="data-container__sort-container">
+
+    <app-table-sort-direction
+      *ngIf="orderOptions.length > 0"
+      [dataOption]="orderOptions"
+      inputTitle="Ordenar"
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+    <app-table-sort-direction
+      *ngIf="dataOptions.length > 0"
+      [dataOption]="dataOptions"
+      inputTitle="Ordenar por tabla"
+      (tableChange)="onChangeTable($event)">
+    </app-table-sort-direction>
+
+  </div>
+
+
+  <!-- Pagination + buttons -->
+  <app-pagination
+    [page]="page"
+    [size]="size"
+    [totalElements]="totalElements"
+    [totalPages]="totalPages"
+    (leftClick)="prevPage()"
+    (rightClick)="nextPage()"
+  >
+  </app-pagination>
+
+</div>
+

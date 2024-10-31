@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ItemService} from "../../services/item/item.service";
 import {firstValueFrom} from "rxjs";
+import {Option} from "../../../types/Option";
+import {ItemModel} from "../../../types/item.model";
 
 @Component({
   selector: 'app-get-items',
@@ -8,7 +10,7 @@ import {firstValueFrom} from "rxjs";
   styleUrls: ['./get-items.component.scss']
 })
 export class GetItemsComponent implements OnInit {
-  itemData: any[] = [];
+  itemData: ItemModel[] = [];
 
   page: number = 0;
   size: number = 5;
@@ -16,6 +18,17 @@ export class GetItemsComponent implements OnInit {
   totalPages: number = 0;
   ascending: boolean = true;
   orderBy: string = "itemEntity";
+
+  dataOptions: Option[] = [
+    { name: 'Item', value: 'itemEntity' },
+    { name: 'Brand', value: 'brand' },
+    { name: 'Category', value: 'category' }
+  ];
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
 
   constructor(private readonly itemService: ItemService) { }
@@ -68,8 +81,8 @@ export class GetItemsComponent implements OnInit {
     this.loadItems();
   }
 
-  changeAscending2($event: any) {
-    this.orderBy = $event;
+  changeAscending2(orderBy: string) {
+    this.orderBy = orderBy;
     this.loadItems();
   }
 }

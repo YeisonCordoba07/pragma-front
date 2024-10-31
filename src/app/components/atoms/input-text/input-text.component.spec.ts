@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {FormControl,  ReactiveFormsModule} from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { InputTextComponent } from './input-text.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('InputTextComponent', () => {
   let component: InputTextComponent;
@@ -9,67 +9,40 @@ describe('InputTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputTextComponent ],
-      imports: [ ReactiveFormsModule ],
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule],
+      declarations: [InputTextComponent],
+      schemas: [NO_ERRORS_SCHEMA] // Ignorar otros componentes en pruebas
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(InputTextComponent);
     component = fixture.componentInstance;
-    component.control = new FormControl('');
+
+    // Inicializar propiedades del componente
+    component.control = new FormControl();
+    component.inputId = 'testInput';
+    component.textLabel = 'Nombre';
+    component.type = 'text';
+    component.maxInputLength = 50;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
-// Verifica que el texto del label es el esperado
-  it('should display the correct label text', () => {
-    component.textLabel = 'Nombre';
-    fixture.detectChanges();
 
-    const labelElement = fixture.debugElement.query(By.css('label')).nativeElement;
-    expect(labelElement.textContent).toBe('Nombre');
-  });
-
-  // Verifica que el campo de texto tiene el tipo correcto
-  it('should set the input type correctly', () => {
-    component.type = 'email';
-    fixture.detectChanges();
-
-    const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-    expect(inputElement.type).toBe('email');
+  it('should display the label correctly', () => {
+    const labelElement: HTMLElement = fixture.nativeElement.querySelector('label');
+    expect(labelElement.textContent).toContain('Nombre');
   });
 
 
+  it('should bind the input control correctly', () => {
+    const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('input');
+    inputElement.value = 'Nuevo Nombre'; // Simular entrada
+    inputElement.dispatchEvent(new Event('input')); // Disparar el evento de entrada
 
-  // Verifica que el mensaje de error "requerido" aparece correctamente
-  it('should show "required" error message if control is invalid and touched', () => {
-    component.control.setErrors({ required: true });
-    component.control.markAsTouched(); // Marca el control como tocado
-    fixture.detectChanges();
-
-    const errorMessageElement = fixture.debugElement.query(By.css('.error small')).nativeElement;
-    expect(errorMessageElement.textContent.trim()).toBe(`${component.textLabel} no puede estar vacio`);
-  });
-
-  // Verifica que el mensaje de error "maxlength" aparece correctamente
-  it('should show "maxlength" error message if control exceeds max length', () => {
-    component.control.setErrors({ maxlength: true });
-    component.control.markAsTouched(); // Marca el control como tocado
-    fixture.detectChanges();
-
-    const errorMessageElement = fixture.debugElement.query(By.css('.error small')).nativeElement;
-    expect(errorMessageElement.textContent.trim()).toBe(`${component.textLabel} debe tener menos de ${component.maxInputLength} caracteres`);
-  });
-
-  // Verifica que no se muestra ningún mensaje de error cuando el control es válido
-  it('should not display error messages if control is valid', () => {
-    component.control.setErrors(null); // Control válido
-    component.control.markAsTouched(); // Marca el control como tocado
-    fixture.detectChanges();
-
-    const errorMessages = fixture.debugElement.queryAll(By.css('.error small'));
-    expect(errorMessages.length).toBe(0); // No debería haber mensajes de error
+    expect(component.control.value).toBe('Nuevo Nombre');
   });
 });

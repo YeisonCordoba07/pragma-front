@@ -1,9 +1,29 @@
 <section>
   <app-create-form
-    mainTitle="Crear marca"
+    [mainTitle]="TITLE_CREATE_BRAND"
     (formSubmitted)="createBrand($event)"
+    [inputForm]="formBrand"
 
-  ></app-create-form>
+  >
+
+    <app-input-text
+      [textLabel]="FIELD_NAME"
+      [inputId]="ID_FIELD_NAME"
+      [maxInputLength]="maxLengthName"
+      type="text"
+      [control]="name">
+    </app-input-text>
+
+    <app-input-text
+      [textLabel]="FIELD_DESCRIPTION"
+      [inputId]="ID_FIELD_DESCRIPTION"
+      [maxInputLength]="maxLengthDescription"
+      type="text"
+      [control]="description">
+    </app-input-text>
+
+
+  </app-create-form>
 
 
   <app-toast

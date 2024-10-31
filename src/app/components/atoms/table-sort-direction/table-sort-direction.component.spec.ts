@@ -21,24 +21,61 @@ describe('TableSortDirectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should call onChangeAscending when select changes', () => {
-    jest.spyOn(component, 'onChangeAscending'); // Espia el metodo onChangeAscending
-    const select = fixture.debugElement.query(By.css('select')).nativeElement;
-
-    select.dispatchEvent(new Event('change')); // Simula un cambio en el select
+  it('should display the input title', () => {
+    component.inputTitle = 'Sort By';
     fixture.detectChanges();
-
-    expect(component.onChangeAscending).toHaveBeenCalled(); // Verifica si se llamó
+    const titleElement = fixture.debugElement.query(By.css('.sort-container__text')).nativeElement;
+    expect(titleElement.textContent.trim()).toBe('Sort By:');
   });
 
-  it('should emit ascendingChange event when onChangeAscending is called', () => {
-    jest.spyOn(component.ascendingChange, 'emit'); // Espía el metodo emit del EventEmitter
+  it('should emit ascendingChange and tableChange events on selection change', () => {
+    const ascendingChangeSpy = jest.spyOn(component.ascendingChange, 'emit');
+    const tableChangeSpy = jest.spyOn(component.tableChange, 'emit');
 
-    component.onChangeAscending(); // Llama directamente la función
+    component.onChangeAscending('category');
+    expect(ascendingChangeSpy).toHaveBeenCalled();
+    expect(tableChangeSpy).toHaveBeenCalledWith('category');
+  });
+
+  it('should populate the select options based on dataOption input', () => {
+    component.dataOption = [
+      { name: 'Option 1', value: 'option1' },
+      { name: 'Option 2', value: 'option2' }
+    ];
     fixture.detectChanges();
 
-    expect(component.ascendingChange.emit).toHaveBeenCalled(); // Verifica si se emitió el evento
+    const options = fixture.debugElement.queryAll(By.css('.styled-select option'));
+    expect(options.length).toBe(2);
+    expect(options[0].nativeElement.textContent).toBe('Option 1');
+    expect(options[1].nativeElement.textContent).toBe('Option 2');
+  });
+
+  it('should emit tableChange event with correct value when an option is selected', () => {
+    const tableChangeSpy = jest.spyOn(component.tableChange, 'emit');
+
+    component.dataOption = [
+      { name: 'Option A', value: 'A' },
+      { name: 'Option B', value: 'B' }
+    ];
+    fixture.detectChanges();
+
+    const selectElement = fixture.debugElement.query(By.css('.styled-select')).nativeElement;
+    selectElement.value = selectElement.options[1].value; // Select "Option B"
+    selectElement.dispatchEvent(new Event('change'));
+
+    expect(tableChangeSpy).toHaveBeenCalledWith('B');
+  });
+
+  it('should emit tableChange with the correct value when onChangeTable is called', () => {
+    // Espía el evento tableChange
+    jest.spyOn(component.tableChange, 'emit');
+
+    // Llama a onChangeTable con un valor de prueba
+    const testValue = 'testOption';
+    component.onChangeTable(testValue);
+
+    // Verifica que el evento se emitió con el valor correcto
+    expect(component.tableChange.emit).toHaveBeenCalledWith(testValue);
   });
 
 });

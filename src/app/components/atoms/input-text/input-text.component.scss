@@ -1,24 +1,33 @@
-@import "../../../../styles/global-colors";
-@import "../../../../styles/fonts";
-@import "../../../../styles/global";
+@import "src/styles/global-colors";
+@import "src/styles/global";
+@import "src/styles/fonts";
 
 
-input{
+.input-element{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-element__input {
   padding: 12px 8px;
   border: 1px solid $color-spacer_light;
-  border-radius: 4px;
-  @extend .main-text__body-xs;
+  border-radius: 3px;
   width: 100%;
 
-  &:focus{
+  &:focus {
     outline-color: $color-purple;
   }
 
-  &:disabled{
+  &:disabled {
     background-color: $color-disabled;
     color: $color-border;
   }
 
+  &.ng-touched.ng-invalid,
+  &.ng-dirty.ng-invalid {
+    outline: 2px solid $color-error;
+  }
 }
 
 .error{
@@ -26,15 +35,10 @@ input{
   @extend .main-text__body-s;
 }
 
-label{
+.input-element__label{
   @extend  .main-text__body-l;
 }
 
-.element-container{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
 
 

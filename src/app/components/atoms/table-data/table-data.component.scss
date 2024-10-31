@@ -1,0 +1,15 @@
+@import "../../../../styles/global-colors";
+@import "../../../../styles/fonts";
+@import "../../../../styles/global";
+
+.data-container__sort-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+

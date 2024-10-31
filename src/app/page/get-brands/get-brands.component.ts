@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {BrandService} from "../../services/brand/brand.service";
+import {Option} from "../../../types/Option";
+import {BrandModel} from "../../../types/brand.model";
 
 @Component({
   selector: 'app-get-brands',
@@ -9,15 +11,19 @@ import {BrandService} from "../../services/brand/brand.service";
 })
 export class GetBrandsComponent implements OnInit {
 
-  private readonly token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGVzIjoiQURNSU4iLCJpYXQiOjE3MjkzOTM0MTEsImV4cCI6MTczMTk4NTQxMX0.cQDOqMKqfvsfGdxsI74CJLdbHrCG_xTDkat9uNWxbhk";
 
-  brandData: any[] = [];
+  brandData: BrandModel[] = [];
 
   page: number = 0;
   size: number = 5;
   totalElements: number = 0;
   totalPages: number = 0;
   ascending: boolean = true;
+
+  orderOptions: Option[] = [
+    { name: '↑ Ascendente', value: true },
+    { name: '↓ Descendente', value: false },
+  ];
 
 
   constructor(private readonly brandService: BrandService) { }
@@ -34,7 +40,7 @@ export class GetBrandsComponent implements OnInit {
     try {
       const response = await firstValueFrom(
         this.brandService.getBrand(
-          this.page, this.size, this.token, this.ascending)
+          this.page, this.size, this.ascending)
       );
 
       if (response) {

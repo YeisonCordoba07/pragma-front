@@ -1,31 +1,20 @@
-<form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
 
   <h2>{{ mainTitle }}</h2>
-  <app-input-text
-    textLabel="Nombre"
-    inputId="name"
-    [maxInputLength]="maxLengthName"
-    type="text"
-    [control]="name"
-  >
-  </app-input-text>
 
-  <app-input-text
-    textLabel="Descripcion"
-    inputId="description"
-    [maxInputLength]="maxLengthDescription"
-    type="text"
-    [control]="description"
-  >
-  </app-input-text>
 
-<div class="buttons-container">
 
-  <app-main-button
-    [disabled]="formUser.invalid"
-    buttonText="Guardar"
-    imgSource="assets/icons/white_save_icon.svg"
-  ></app-main-button>
-</div>
+  <ng-content></ng-content>
+
+
+
+  <div class="buttons-container">
+
+    <app-main-button
+      [disabled]="inputForm.invalid"
+      buttonText="Guardar"
+      imgSource="assets/icons/white_save_icon.svg"
+    ></app-main-button>
+  </div>
 
 </form>
