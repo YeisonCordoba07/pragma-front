@@ -1,15 +1,49 @@
-
 <div class="nav-container">
 
 
   <div class="nav-header-container">
-    <img src="../../../../assets/icons/purple_person_logo.svg" alt="">
+
+    <a
+      class="nav-header-container__login"
+      routerLink="/login"
+      (click)="closeNav.emit()"
+      *ngIf="!userLoginOn"
+    >
+
+      <img
+        class="user-profile__avatar"
+        src="/assets/icons/purple_person_logo.svg" alt="">
+
+      <p>Iniciar Sesión</p>
+
+    </a>
+
+    <div
+      *ngIf="userLoginOn"
+      class="user-profile">
+
+      <img
+        class="user-profile__avatar"
+        src="/assets/icons/avatar_ab_orange.svg" alt="">
+
+      <div class="user-profile__info-container">
+
+        <p
+          class="user-profile__info-container__username user-profile__info-container__text">{{ userLoginData.email }}</p>
+        <small
+          class="user-profile__info-container__role user-profile__info-container__text">{{ userLoginData.role }}</small>
+
+      </div>
+
+    </div>
 
     <app-icon-button
       imgSrc="assets/icons/close_line.svg"
       imgAlt="Cerrar"
+      class="nav-header-container__close"
       (onClick)="closeNav.emit()">
     </app-icon-button>
+
 
   </div>
 
@@ -56,9 +90,10 @@
 
   </ul>
 
-  <div class="nav-container__session">
-    <img src="../../../../assets/icons/logout.svg" alt="">
-    <p>Log out</p>
+
+  <div class="nav-header-container__session" *ngIf="userLoginOn">
+    <img src="/assets/icons/logout.svg" alt="">
+    <p>Cerrar sesión</p>
   </div>
 
 </div>

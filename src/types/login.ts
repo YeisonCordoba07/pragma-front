@@ -8,4 +8,9 @@ export interface LoginResponse {
   role: string,
 }
 
+export interface LoginUserData {
+  email: string,
+  role: string,
+}
+
 

@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(dataLogin).subscribe({
       next: (userToken) =>{
-        console.log(userToken.body?.token);
-        console.log(userToken.body?.role);
+        console.log(userToken.token);
+        console.log(userToken.role);
       },
       error: (errorData) =>{
         console.log(errorData);
@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
 
     })
 
-    console.log("VALORES LOGIN: ", this.formLogin.value);
-    console.log("VALORES FORM: ", dataLogin);
 
   }
 

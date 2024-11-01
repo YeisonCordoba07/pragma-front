@@ -34,7 +34,8 @@ import { GetItemsComponent } from './page/get-items/get-items.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
 import { CreateAuxComponent } from './page/create-aux/create-aux.component';
 import { SelectElementComponent } from './components/atoms/select-element/select-element.component';
-import { LoginComponent } from './auth/login/login.component'; // Importar FormsModule
+import { LoginComponent } from './auth/login/login.component';
+import {LoginPageComponent} from "./page/login/login-page.component"; // Importar FormsModule
 
 
 
@@ -64,7 +65,8 @@ import { LoginComponent } from './auth/login/login.component'; // Importar Forms
     PaginationComponent,
     CreateAuxComponent,
     SelectElementComponent,
-    LoginComponent
+    LoginComponent,
+    LoginPageComponent
   ],
     imports: [
         BrowserModule,
