@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../services/auth/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
 
-  constructor(private readonly fb: FormBuilder, private readonly loginService: LoginService) {
+  constructor(private readonly fb: FormBuilder, private readonly loginService: LoginService, private router: Router) {
     this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -39,6 +40,9 @@ export class LoginComponent implements OnInit {
       },
       complete: () =>{
         console.info("Login completo");
+        this.router.navigateByUrl('/');
+        this.formLogin.reset();
+
       }
 
     })

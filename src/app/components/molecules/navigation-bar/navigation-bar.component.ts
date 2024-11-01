@@ -35,6 +35,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.loginService.currentUserLoginOn.unsubscribe();
+    this.loginService.currentLoginData.unsubscribe();
   }
 
 
