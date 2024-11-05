@@ -9,16 +9,16 @@ import {LoginUserData} from "../../../../types/login";
 })
 export class NavigationBarComponent implements OnInit, OnDestroy {
 
-  userLoginOn: boolean = false;
+  userIsLogin: boolean = false;
   userLoginData: LoginUserData = {email:"", role:""};
 
   @Output() closeNav: EventEmitter<void> = new EventEmitter();
   constructor(private readonly loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.loginService.currentUserLoginOn.subscribe({
+    this.loginService.currentUserIsLogin.subscribe({
       next: (userLoginOn) => {
-        this.userLoginOn = userLoginOn;
+        this.userIsLogin = userLoginOn;
       }
     });
 
@@ -26,7 +26,9 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.userLoginData = data;
       }
-    })
+    });
+
+    this.loginService.getSessionToken();
   }
 
   handleCloseNav() {
@@ -34,7 +36,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginService.currentUserLoginOn.unsubscribe();
+    this.loginService.currentUserIsLogin.unsubscribe();
     this.loginService.currentLoginData.unsubscribe();
   }
 

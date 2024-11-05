@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LoginRequest, LoginResponse, LoginUserData} from "../../../types/login";
-import {HttpClient, HttpHeaders } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 
 import {jwtDecode} from "jwt-decode";
@@ -11,7 +11,7 @@ import {jwtDecode} from "jwt-decode";
 })
 export class LoginService {
 
-  currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currentUserIsLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentLoginData: BehaviorSubject<LoginUserData> = new BehaviorSubject<LoginUserData>(
     {
       email: "",
@@ -24,11 +24,6 @@ export class LoginService {
 
   constructor(private readonly http: HttpClient) { }
 
-  login2(credentials: LoginRequest): Observable<any>{
-    console.log("CREDENCIAL SERVICE LOGIN: ", credentials);
-    return this.http.post(this.loginURL, credentials);
-  }
-
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     const headers = new HttpHeaders({
@@ -40,34 +35,53 @@ export class LoginService {
       observe: "body"
     }).pipe(
       tap((userLogin: LoginResponse) => {
-        this.currentUserLoginOn.next(true);
-
-        // Decodificar el token para extraer el correo y el rol
-        const decodedToken: any = jwtDecode(userLogin.token);
-
-        const email = decodedToken.sub;
-        const role = decodedToken.roles;
-
-        const tempUserLoginData = {
-          email: email,
-          role: role,
-        }
-
-        this.currentLoginData.next(tempUserLoginData);
+        this.currentUserIsLogin.next(true);
+        this.currentLoginData.next(this.extractTokenData(userLogin.token));
         sessionStorage.setItem("token", userLogin.token);
 
       }),
     );
   }
 
-  logout():void{
-    sessionStorage.removeItem("token");
-    this.currentUserLoginOn.next(false);
+  private extractTokenData(token: string | null): LoginUserData{
+    const decodedToken: any = token ? jwtDecode(token) : null;
+
+    return {
+      email: decodedToken?.sub || "",
+      role: decodedToken?.roles || "",
+    };
+  }
+
+  isTokenExpired(token: string | null): boolean {
+    if (!token) return true;
+
+    const decodedToken: any = jwtDecode(token);
+    const expiration = decodedToken.exp ? decodedToken.exp * 1000 : 0;
+    return Date.now() > expiration;
   }
 
 
-  get userLoginOn(): Observable<boolean>{
-    return this.currentUserLoginOn.asObservable();
+  logout():void{
+    sessionStorage.removeItem("token");
+    this.currentUserIsLogin.next(false);
+    this.currentLoginData.next({email: "", role: ""});
+  }
+
+  getSessionToken(): boolean {
+    const token: string | null = sessionStorage.getItem("token");
+
+    if(token && !this.isTokenExpired(token)){
+      this.currentLoginData.next(this.extractTokenData(token));
+      return true;
+    }
+    this.logout();
+    return false;
+
+  }
+
+
+  get userIsLogin(): Observable<boolean>{
+    return this.currentUserIsLogin.asObservable();
   }
 
   get loginData(): Observable<LoginUserData>{
