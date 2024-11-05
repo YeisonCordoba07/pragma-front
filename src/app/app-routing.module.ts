@@ -9,18 +9,20 @@ import {CreateItemComponent} from "./page/create-item/create-item.component";
 import {GetItemsComponent} from "./page/get-items/get-items.component";
 import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
 import {LoginPageComponent} from "./page/login/login-page.component";
+import {AuthGuard} from "./core/auth.guard";
+import {AuthenticatedGuard} from "./core/authenticated.guard";
 
 
 const routes: Routes = [
 
-  { path: 'crear-categoria', component: CreateCategoryComponent },
-  { path: "ver-categorias", component: GetCategoriesComponent },
-  { path: "ver-marcas", component: GetBrandsComponent },
-  { path: "crear-marca", component: CreateBrandComponent },
-  { path: "crear-articulo", component: CreateItemComponent},
-  { path: "ver-articulos", component: GetItemsComponent},
-  { path: "crear-auxiliar", component: CreateAuxComponent},
-  { path: "login", component: LoginPageComponent },
+  { path: 'crear-categoria', component: CreateCategoryComponent, canActivate: [AuthGuard] },
+  { path: "ver-categorias", component: GetCategoriesComponent, canActivate: [AuthGuard] },
+  { path: "ver-marcas", component: GetBrandsComponent, canActivate: [AuthGuard] },
+  { path: "crear-marca", component: CreateBrandComponent, canActivate: [AuthGuard] },
+  { path: "crear-articulo", component: CreateItemComponent, canActivate: [AuthGuard] },
+  { path: "ver-articulos", component: GetItemsComponent, canActivate: [AuthGuard]},
+  { path: "crear-auxiliar", component: CreateAuxComponent, canActivate: [AuthGuard]},
+  { path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard]},
 ];
 
 @NgModule({

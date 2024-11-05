@@ -6,8 +6,7 @@ import {LoginService} from "../services/auth/login.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class AuthenticatedGuard implements CanActivate {
   private readonly authService: LoginService = inject(LoginService);
   private readonly router: Router = inject(Router);
 
@@ -17,13 +16,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-
     if(this.authService.getSessionToken()){
-      return true;
+      return this.router.navigate(['/']);
     }else{
-      return this.router.navigate(['/login']);
+      return true;
     }
   }
-
 
 }
