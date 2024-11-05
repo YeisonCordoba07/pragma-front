@@ -91,9 +91,14 @@
   </ul>
 
 
-  <div class="nav-header-container__session" *ngIf="userLoginOn">
+  <button
+    class="nav-header-container__session"
+    *ngIf="userLoginOn"
+    (click)="logout()"
+  >
     <img src="/assets/icons/logout.svg" alt="">
     <p>Cerrar sesión</p>
-  </div>
+  </button>
+
 
 </div>

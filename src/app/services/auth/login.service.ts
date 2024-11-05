@@ -54,9 +54,15 @@ export class LoginService {
         }
 
         this.currentLoginData.next(tempUserLoginData);
+        sessionStorage.setItem("token", userLogin.token);
 
       }),
     );
+  }
+
+  logout():void{
+    sessionStorage.removeItem("token");
+    this.currentUserLoginOn.next(false);
   }
 
 

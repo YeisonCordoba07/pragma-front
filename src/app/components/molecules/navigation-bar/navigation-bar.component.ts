@@ -39,4 +39,9 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
 
+  logout():void{
+    this.loginService.logout();
+  }
+
+
 }

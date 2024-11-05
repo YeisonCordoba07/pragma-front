@@ -38,8 +38,16 @@ ul{
     gap: 10px;
     @extend .main-text__body-m-regular;
     border-top: 1px solid $color-border;
+    background-color: inherit;
+    cursor: pointer;
+    transition-duration: 0.2s;
+
+    &:hover{
+      background-color: $color-error;
+    }
 
   }
+
 
   &__login{
     display: flex;
@@ -63,6 +71,10 @@ ul{
 
     & img{
       height: 30px;
+    }
+
+    &:hover{
+      background-color: $color-approval;
     }
 
   }
