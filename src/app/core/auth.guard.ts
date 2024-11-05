@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {LoginService} from "../services/auth/login.service";
 
 @Injectable({
@@ -16,11 +16,19 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+    const allowedRoles = route.data?.['allowedRoles'];
+
 
 
     if(this.authService.getSessionToken()){
-      return true;
+      return this.authService.currentLoginData.pipe(
+        map(user =>{
+          console.log("USER RIKE: " + JSON.stringify(user));
+          return Boolean( user && allowedRoles.includes(user.role));
+        })
+      )
     }else{
+      console.log("HACER LOGIN");
       return this.router.navigate(['/login']);
     }
   }
