@@ -1,6 +1,16 @@
 @import "../../../styles/global-colors";
 @import "../../../styles/fonts";
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
 .header{
   width: 100vw;
   z-index: 9;
@@ -33,5 +43,6 @@
   &__active{
     width: 90vw;
     display: flex;
+    z-index: 100;
   }
 }
