@@ -11,6 +11,7 @@ import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
 import {LoginPageComponent} from "./page/login/login-page.component";
 import {AuthGuard} from "./core/auth.guard";
 import {AuthenticatedGuard} from "./core/authenticated.guard";
+import {Page404Component} from "./page/page404/page404.component";
 
 
 const routes: Routes = [
@@ -21,11 +22,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {allowedRoles: ['ADMIN']}
   },
-  {path: "ver-categorias", component: GetCategoriesComponent, canActivate: [AuthGuard]},
+  {
+    path: "ver-categorias", component: GetCategoriesComponent, canActivate: [AuthGuard],
+    data: {allowedRoles: ['ADMIN']}
+  },
   {
     path: "ver-marcas",
     component: GetBrandsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {allowedRoles: ['ADMIN']}
   },
   {
     path: "crear-marca",
@@ -37,16 +42,20 @@ const routes: Routes = [
     path: "crear-articulo",
     component: CreateItemComponent,
     canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN']}
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
   },
-  {path: "ver-articulos", component: GetItemsComponent, canActivate: [AuthGuard]},
+  {path: "ver-articulos", component: GetItemsComponent, canActivate: [AuthGuard],
+    data: {allowedRoles: ['ADMIN']}},
   {
     path: "crear-auxiliar",
     component: CreateAuxComponent,
     canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN']}
+    data: {allowedRoles: ['ADMIN', 'AUX_BODEGA']}
   },
-  {path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard]},
+  {
+    path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard],
+    data: {allowedRoles: ['ADMIN']}
+  }
 ];
 
 @NgModule({

@@ -72,6 +72,7 @@ export class LoginService {
 
     if(token && !this.isTokenExpired(token)){
       this.currentLoginData.next(this.extractTokenData(token));
+      this.currentUserIsLogin.next(true);
       return true;
     }
     this.logout();
