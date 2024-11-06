@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {LoginService} from "../../../services/auth/login.service";
 import {LoginUserData} from "../../../../types/login";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -14,7 +15,8 @@ export class NavigationBarComponent implements OnInit {
 
   @Output() closeNav: EventEmitter<void> = new EventEmitter();
 
-  constructor(private readonly loginService: LoginService) { }
+  constructor(private readonly loginService: LoginService,
+              private readonly router: Router) { }
 
 
 
@@ -48,6 +50,8 @@ export class NavigationBarComponent implements OnInit {
   logout():void{
     this.loginService.logout();
     this.handleCloseNav();
+    this.router.navigate(["/login"]);
+
   }
 
 

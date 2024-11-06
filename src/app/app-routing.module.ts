@@ -11,7 +11,7 @@ import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
 import {LoginPageComponent} from "./page/login/login-page.component";
 import {AuthGuard} from "./core/auth.guard";
 import {AuthenticatedGuard} from "./core/authenticated.guard";
-import {Page404Component} from "./page/page404/page404.component";
+
 
 
 const routes: Routes = [
