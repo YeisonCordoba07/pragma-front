@@ -4,7 +4,7 @@
 
 
 
-form{
+.create-form{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -18,21 +18,20 @@ form{
   @media (min-width: 1024px) {
     width:500px;
   }
+
+  &__title{
+    @extend .desktop__poppins-h1;
+  }
+
+  &__buttons-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 
-h2{
-  @extend .desktop__poppins-h1;
-}
 
 
-app-input-text{
-  width: 100%;
-}
 
 
-.buttons-container{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
