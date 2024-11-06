@@ -7,7 +7,7 @@ import {LoginUserData} from "../../../../types/login";
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.scss']
 })
-export class NavigationBarComponent implements OnInit, OnDestroy {
+export class NavigationBarComponent implements OnInit {
 
   userIsLogin: boolean = false;
   userLoginData: LoginUserData = {email:"", role:""};
@@ -39,10 +39,10 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     this.closeNav.emit(); // Emitir el evento para cerrar la navegación
   }
 
-  ngOnDestroy(): void {
+  /*ngOnDestroy(): void {
     this.loginService.currentUserIsLogin.unsubscribe();
     this.loginService.currentLoginData.unsubscribe();
-  }
+  }*/
 
 
   logout():void{
