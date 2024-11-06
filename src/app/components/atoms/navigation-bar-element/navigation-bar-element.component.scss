@@ -6,6 +6,7 @@
   list-style: none;
   background-color: $color-black;
   height: 60px;
+  transition-duration: 0.2s;
 
   &--border {
     border-left: 8px solid $color-spacer;
@@ -26,12 +27,20 @@
       background-color: $color-hint_text;
       display: flex;
       align-items: center;
+
+      &:hover{
+        background-color: $color-purple;
+      }
     }
   }
 
   &__text {
     @extend .main-text__body-m;
     color: $color-white;
+  }
+
+  &:hover{
+    background-color: $color-purple-hover;
   }
 
 

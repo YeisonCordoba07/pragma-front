@@ -13,7 +13,10 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   userLoginData: LoginUserData = {email:"", role:""};
 
   @Output() closeNav: EventEmitter<void> = new EventEmitter();
+
   constructor(private readonly loginService: LoginService) { }
+
+
 
   ngOnInit(): void {
     this.loginService.currentUserIsLogin.subscribe({
@@ -31,6 +34,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     this.loginService.getSessionToken();
   }
 
+
   handleCloseNav() {
     this.closeNav.emit(); // Emitir el evento para cerrar la navegación
   }
@@ -43,6 +47,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   logout():void{
     this.loginService.logout();
+    this.handleCloseNav();
   }
 
 

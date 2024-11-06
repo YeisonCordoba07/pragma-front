@@ -37,6 +37,7 @@ ul{
     padding: 20px;
     gap: 10px;
     @extend .main-text__body-m-regular;
+    border: none;
     border-top: 1px solid $color-border;
     background-color: inherit;
     cursor: pointer;

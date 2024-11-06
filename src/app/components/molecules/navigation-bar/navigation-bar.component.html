@@ -49,45 +49,53 @@
 
   <ul>
     <app-navigation-bar-element
-      elementText="Ver categorias"
+      *ngIf="userLoginData.role === 'ADMIN' || userLoginData.role === 'CLIENTE'"
+      elementText="Ver categorías"
       pageUrl="/ver-categorias"
+      elementIcon="assets/icons/category_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      elementText="Crear categoria"
+      *ngIf="userLoginData.role === 'ADMIN'"
+      elementText="Crear categoría"
       pageUrl="/crear-categoria"
-      elementIcon="assets/icons/purple_setting.svg"
+      elementIcon="assets/icons/add_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      elementText="Ver marcas (Brand)"
+      *ngIf="userLoginData.role === 'ADMIN' || userLoginData.role === 'CLIENTE'"
+      elementText="Ver marcas"
       pageUrl="/ver-marcas"
+      elementIcon="assets/icons/brand_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      elementText="Crear marca (Brand)"
+      *ngIf="userLoginData.role === 'ADMIN'"
+      elementText="Crear marca"
       pageUrl="/crear-marca"
-      elementIcon="assets/icons/purple_setting.svg"
+      elementIcon="assets/icons/add_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      elementText="Ver articulos (Item)"
+      *ngIf="userLoginData.role === 'ADMIN' || userLoginData.role === 'CLIENTE'"
+      elementText="Ver artículos"
       pageUrl="/ver-articulos"
+      elementIcon="assets/icons/item_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      elementText="Crear articulo (Item)"
+      *ngIf="userLoginData.role === 'ADMIN'"
+      elementText="Crear artículo"
       pageUrl="/crear-articulo"
-      elementIcon="assets/icons/purple_setting.svg"
+      elementIcon="assets/icons/add_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
-
     <app-navigation-bar-element
+      *ngIf="userLoginData.role === 'ADMIN'"
       elementText="Crear auxiliar"
       pageUrl="/crear-auxiliar"
+      elementIcon="assets/icons/user_icon.svg"
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
-
-
   </ul>
 
 

@@ -24,13 +24,13 @@ const routes: Routes = [
   },
   {
     path: "ver-categorias", component: GetCategoriesComponent, canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN']}
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
   },
   {
     path: "ver-marcas",
     component: GetBrandsComponent,
     canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN']}
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
   },
   {
     path: "crear-marca",
@@ -42,19 +42,18 @@ const routes: Routes = [
     path: "crear-articulo",
     component: CreateItemComponent,
     canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
+    data: {allowedRoles: ['ADMIN']}
   },
   {path: "ver-articulos", component: GetItemsComponent, canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN']}},
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}},
   {
     path: "crear-auxiliar",
     component: CreateAuxComponent,
     canActivate: [AuthGuard],
-    data: {allowedRoles: ['ADMIN', 'AUX_BODEGA']}
+    data: {allowedRoles: ['ADMIN']}
   },
   {
-    path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard],
-    data: {allowedRoles: ['ADMIN']}
+    path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard]
   }
 ];
 
