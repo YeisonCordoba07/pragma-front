@@ -23,12 +23,10 @@ export class AuthGuard implements CanActivate {
     if(this.authService.getSessionToken()){
       return this.authService.loginData.pipe(
         map(user =>{
-          console.log("USER RIKE: " + JSON.stringify(user));
           return Boolean( user && allowedRoles.includes(user.role));
         })
       )
     }else{
-      console.log("HACER LOGIN");
       return this.router.navigate(['/login']);
     }
   }
