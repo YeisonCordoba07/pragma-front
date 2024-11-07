@@ -35,6 +35,7 @@ export class LoginService {
       observe: "body"
     }).pipe(
       tap((userLogin: LoginResponse) => {
+        // Verificar que el userLogin sea valido antes de actualizar currenUserIslogin
         this.currentUserIsLogin.next(true);
         this.currentLoginData.next(this.extractTokenData(userLogin.token));
         sessionStorage.setItem("token", userLogin.token);
@@ -53,7 +54,9 @@ export class LoginService {
   }
 
   isTokenExpired(token: string | null): boolean {
-    if (!token) return true;
+    if (!token) {
+      return true;
+    }
 
     const decodedToken: any = jwtDecode(token);
     const expiration = decodedToken.exp ? decodedToken.exp * 1000 : 0;

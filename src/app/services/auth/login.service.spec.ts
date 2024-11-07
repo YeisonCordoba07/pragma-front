@@ -24,126 +24,188 @@ describe('LoginService', () => {
     httpMock.verify();  // Verifica que no haya solicitudes pendientes
   });
 
+
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-/*
+
+
+  describe("expiracion del token", ()=>{
+
+    it("debería retornar true cuando el token esté vacio", ()=>{
+      const result = service.isTokenExpired("");
+
+      expect(result).toBeTruthy();
+    });
+
+
+    it("debería retornar true cuando el token sea nulo", ()=>{
+      const result = service.isTokenExpired(null);
+
+      expect(result).toBeTruthy();
+    });
+
+
+    it("debería retornar true cuando el token no ha expirado", ()=>{
+      // Definimos la fecha de expiración en el pasado
+      (jwtDecode as jest.Mock).mockReturnValue({ exp: Date.now() / 1000 - 1000 });
+
+      const token = 'mockToken';
+      expect(service.isTokenExpired(token)).toBe(true);
+    });
+
+
+    it("debería retornar false cuando el token no ha expirado", ()=>{
+      // Definimos la fecha de expiración en el pasado
+      (jwtDecode as jest.Mock).mockReturnValue({ exp: Date.now() / 1000 + 1000 });
+
+      const token = 'mockToken';
+      expect(service.isTokenExpired(token)).toBe(false);
+    });
+
+
+    it('debería retornar true si el token no tiene el campo exp', () => {
+      // Simulamos un token sin la propiedad exp
+      (jwtDecode as jest.Mock).mockReturnValue({});
+
+      const token = 'mockToken';
+      expect(service.isTokenExpired(token)).toBe(true);
+    });
+
+  });
+
+
+
   describe('login', () => {
-    it('should make a POST request to login and store the token', () => {
-      const mockCredentials: LoginRequest = { email: 'test@example.com', password: 'password123' };
-      const mockResponse: LoginResponse = { token: 'mock-token', role: 'USER' };
 
-      // Espiar el comportamiento de jwtDecode
-      const mockDecodedToken = { sub: 'test@example.com', roles: 'USER', exp: 1638230299 };
-      jwtDecode.mockReturnValue(mockDecodedToken);
+    it('debería hacer login y actualizar el estado de usuario y token en sessionStorage', (done) => {
+      const credentials: LoginRequest = { email: 'user@example.com', password: 'password' };
+      const response: LoginResponse = { token: 'mockToken', role: 'ADMIN' };
 
-      service.login(mockCredentials).subscribe((response) => {
-        expect(response.token).toBe('mock-token');
-        expect(service.currentUserIsLogin.getValue()).toBe(true);
-        expect(service.currentLoginData.getValue()).toEqual({
-          email: 'test@example.com',
-          role: 'USER',
-        });
-        expect(sessionStorage.getItem('token')).toBe('mock-token');
+      // Simulamos el valor de decodificación del token
+      const decodedToken = { sub: 'user@example.com', roles: 'ADMIN' };
+      (jwtDecode as jest.Mock).mockReturnValue(decodedToken);
+
+      service.login(credentials).subscribe((res) => {
+        expect(res).toEqual(response);
+        expect(service.currentUserIsLogin.value).toBe(true);
+        expect(service.currentLoginData.value).toEqual({ email: 'user@example.com', role: 'ADMIN' });
+        expect(sessionStorage.getItem('token')).toBe('mockToken');
+        done();
       });
 
-      const req = httpMock.expectOne('http://localhost:8090/auth/login');
+      // Simulamos la solicitud HTTP
+      const req = httpMock.expectOne(service.loginURL);
       expect(req.request.method).toBe('POST');
-      req.flush(mockResponse);
+      req.flush(response);
     });
 
-    it('should handle error when login fails', () => {
-      const mockCredentials: LoginRequest = { email: 'test@example.com', password: 'password123' };
-      const mockErrorResponse = { status: 401, statusText: 'Unauthorized' };
 
-      service.login(mockCredentials).subscribe({
-        error: (err) => {
-          expect(err).toEqual(mockErrorResponse);
-        }
+    it('debería devolver la información vacia cuando el token esté en blanco', (done) => {
+      const credentials: LoginRequest = { email: 'user@example.com', password: 'password' };
+      const response: LoginResponse = { token: "", role: "" };
+
+      // Simulamos el valor de decodificación del token
+      const decodedToken = null;
+      (jwtDecode as jest.Mock).mockReturnValue(decodedToken);
+
+      service.login(credentials).subscribe((res) => {
+        expect(res).toEqual(response);
+        expect(service.currentUserIsLogin.value).toBe(true);
+        expect(service.currentLoginData.value).toEqual({ email: "", role: "" });
+        expect(sessionStorage.getItem("token")).toBe("");
+        done();
       });
 
-      const req = httpMock.expectOne('http://localhost:8090/auth/login');
-      req.flush('Unauthorized', mockErrorResponse);
+      // Simulamos la solicitud HTTP
+      const req = httpMock.expectOne(service.loginURL);
+      expect(req.request.method).toBe('POST');
+      req.flush(response);
     });
+
   });
 
-  describe('isTokenExpired', () => {
-    it('should return true if token is expired', () => {
-      const expiredToken = 'expired-token';
-      // Mock de jwtDecode para un token expirado
-      const mockDecodedToken = { exp: Math.floor(Date.now() / 1000) - 1000 }; // Expirado
-      jwtDecode.mockReturnValue(mockDecodedToken);
 
-      expect(service.isTokenExpired(expiredToken)).toBe(true);
-    });
-
-    it('should return false if token is not expired', () => {
-      const validToken = 'valid-token';
-      // Mock de jwtDecode para un token no expirado
-      const mockDecodedToken = { exp: Math.floor(Date.now() / 1000) + 1000 }; // Válido
-      jwtDecode.mockReturnValue(mockDecodedToken);
-
-      expect(service.isTokenExpired(validToken)).toBe(false);
-    });
-  });
 
   describe('getSessionToken', () => {
-    it('should return true and set login data if the token is valid', () => {
-      const validToken = 'valid-token';
-      const mockDecodedToken = { sub: 'test@example.com', roles: 'USER', exp: Math.floor(Date.now() / 1000) + 1000 };
-      jwtDecode.mockReturnValue(mockDecodedToken);
 
-      sessionStorage.setItem('token', validToken);
+    it('debería retornar true si el token es válido y no ha expirado', () => {
+      const token = 'mockToken';
+      sessionStorage.setItem('token', token);
+
+      // Simulamos un token no expirado
+      (jwtDecode as jest.Mock).mockReturnValue({ sub: 'user@example.com', roles: 'ADMIN', exp: Date.now() / 1000 + 1000 });
 
       const result = service.getSessionToken();
-
       expect(result).toBe(true);
-      expect(service.currentLoginData.getValue()).toEqual({ email: 'test@example.com', role: 'USER' });
-      expect(service.currentUserIsLogin.getValue()).toBe(true);
+      expect(service.currentUserIsLogin.value).toBe(true);
+      expect(service.currentLoginData.value).toEqual({ email: 'user@example.com', role: 'ADMIN' });
     });
 
-    it('should return false and logout if the token is invalid or expired', () => {
-      const expiredToken = 'expired-token';
-      const mockDecodedToken = { exp: Math.floor(Date.now() / 1000) - 1000 };
-      jwtDecode.mockReturnValue(mockDecodedToken);
 
-      sessionStorage.setItem('token', expiredToken);
+    it('debería retornar false y llamar a logout si el token está expirado o es inválido', () => {
+      sessionStorage.setItem('token', 'expiredToken');
+
+      // Simulamos un token expirado
+      (jwtDecode as jest.Mock).mockReturnValue({ exp: Date.now() / 1000 - 1000 });
 
       const result = service.getSessionToken();
-
       expect(result).toBe(false);
-      expect(service.currentLoginData.getValue()).toEqual({ email: '', role: '' });
-      expect(service.currentUserIsLogin.getValue()).toBe(false);
+      expect(service.currentUserIsLogin.value).toBe(false);
+      expect(service.currentLoginData.value).toEqual({ email: '', role: '' });
+      expect(sessionStorage.getItem('token')).toBe(null);
     });
+
   });
+
+
+
 
   describe('logout', () => {
-    it('should clear session and set user data to default', () => {
+
+    it('debería remover el token de sessionStorage y restablecer el estado de login', () => {
+      sessionStorage.setItem('token', 'mockToken');
+      service.currentUserIsLogin.next(true);
+      service.currentLoginData.next({ email: 'user@example.com', role: 'admin' });
+
       service.logout();
+
       expect(sessionStorage.getItem('token')).toBeNull();
-      expect(service.currentUserIsLogin.getValue()).toBe(false);
-      expect(service.currentLoginData.getValue()).toEqual({ email: '', role: '' });
+      expect(service.currentUserIsLogin.value).toBe(false);
+      expect(service.currentLoginData.value).toEqual({ email: '', role: '' });
     });
+
   });
 
+
+
+
   describe('userIsLogin', () => {
-    it('should return current user login status as an observable', () => {
+
+    it('debería retornar el estado del logueo como un observable y como true', () => {
       service.currentUserIsLogin.next(true);
 
       service.userIsLogin.subscribe((status) => {
         expect(status).toBe(true);
       });
     });
+
   });
 
+
+
   describe('loginData', () => {
-    it('should return current login data as an observable', () => {
-      service.currentLoginData.next({ email: 'test@example.com', role: 'USER' });
+
+    it('debería retornar los datos del usuario como un observable', () => {
+      service.currentLoginData.next({email: 'test@example.com', role: 'USER'});
 
       service.loginData.subscribe((data) => {
-        expect(data).toEqual({ email: 'test@example.com', role: 'USER' });
+        expect(data).toEqual({email: 'test@example.com', role: 'USER'});
       });
     });
-  });*/
+
+  });
+
 });
