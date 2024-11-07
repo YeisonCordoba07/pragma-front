@@ -53,7 +53,9 @@ const routes: Routes = [
     data: {allowedRoles: ['ADMIN']}
   },
   {
-    path: "login", component: LoginPageComponent, canActivate: [AuthenticatedGuard]
+    path: "login",
+    component: LoginPageComponent,
+    canActivate: [AuthenticatedGuard]
   }
 ];
 

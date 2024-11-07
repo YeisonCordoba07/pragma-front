@@ -16,6 +16,7 @@ export class AuthenticatedGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
+    // Si ya está logueado, no deja que entre al login
     if(this.authService.getSessionToken()){
       return this.router.navigate(['/']);
     }else{
