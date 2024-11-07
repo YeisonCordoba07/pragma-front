@@ -1,5 +1,5 @@
-import {Component, forwardRef, Input, OnInit, Optional, Self} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from "@angular/forms";
+import {Component, forwardRef, Input } from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-multi-select-tag',
@@ -19,21 +19,6 @@ export class MultiSelectTagComponent implements ControlValueAccessor {
   selectedItems: string[] = [];
   dropdownOpen: boolean = false;
 
-  /*constructor(
-    @Self() @Optional() private ngControl: NgControl
-  ) {
-    // Si el componente se está usando como control de formulario
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
-    }
-    // En caso contrario se inicializan las funciones de CVA por defecto
-    else {
-      this.onChange = () => null;
-      this.onTouched = () => null;
-    }
-    // Se inicializa el control como habilitado
-    this.disabled = false;
-  }*/
 
   // Metodos de ControlValueAccessor
   onChange: (value: string[]) => void = () => {
@@ -41,6 +26,27 @@ export class MultiSelectTagComponent implements ControlValueAccessor {
   onTouched: () => void = () => {
   };
   disabled: boolean = false;
+
+
+
+  // Métodos de ControlValueAccessor
+
+  writeValue(value: string[]): void {
+    if (value) {
+      this.selectedItems = value;
+    }
+  }
+
+  registerOnChange(fn: (value: string[]) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+
+
 
   // Abrir o cerrar el dropdown
   toggleDropdown() {
@@ -74,24 +80,5 @@ export class MultiSelectTagComponent implements ControlValueAccessor {
     this.onChange(this.selectedItems);
     console.log("MULTI REMOVE:", this.selectedItems);
   }
-
-
-  // Métodos de ControlValueAccessor
-
-  writeValue(value: string[]): void {
-    if (value) {
-      this.selectedItems = value;
-    }
-  }
-
-  registerOnChange(fn: (value: string[]) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-
 
 }
