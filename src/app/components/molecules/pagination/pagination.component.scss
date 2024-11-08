@@ -1,15 +1,18 @@
 
-.pagination-controls{
+.pagination{
   display: flex;
   flex-direction: row;
   gap: 5px;
   justify-content: center;
+
+
+  &__text{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+  }
+
 }
 
 
-.pagination{
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
-}

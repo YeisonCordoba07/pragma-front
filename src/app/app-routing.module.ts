@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {AppComponent} from "./app.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {CreateCategoryComponent} from "./page/create-category/create-category.component";
 
 import {GetCategoriesComponent} from "./page/get-categories/get-categories.component";
@@ -9,21 +8,60 @@ import {CreateBrandComponent} from "./page/create-brand/create-brand.component";
 import {CreateItemComponent} from "./page/create-item/create-item.component";
 import {GetItemsComponent} from "./page/get-items/get-items.component";
 import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
+import {LoginPageComponent} from "./page/login/login-page.component";
+import {HasRoleGuard} from "./core/hasRole.guard";
+import {AuthenticatedGuard} from "./core/authenticated.guard";
+
 
 
 const routes: Routes = [
-  { path: 'home', component: AppComponent },
-  { path: 'crear-categoria', component: CreateCategoryComponent },
-  { path: "ver-categorias", component: GetCategoriesComponent },
-  { path: "ver-marcas", component: GetBrandsComponent },
-  { path: "crear-marca", component: CreateBrandComponent },
-  { path: "crear-articulo", component: CreateItemComponent},
-  { path: "ver-articulos", component: GetItemsComponent},
-  { path: "crear-auxiliar", component: CreateAuxComponent}
+
+  {
+    path: 'crear-categoria',
+    component: CreateCategoryComponent,
+    canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN']}
+  },
+  {
+    path: "ver-categorias", component: GetCategoriesComponent, canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
+  },
+  {
+    path: "ver-marcas",
+    component: GetBrandsComponent,
+    canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
+  },
+  {
+    path: "crear-marca",
+    component: CreateBrandComponent,
+    canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN']}
+  },
+  {
+    path: "crear-articulo",
+    component: CreateItemComponent,
+    canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN']}
+  },
+  {path: "ver-articulos", component: GetItemsComponent, canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN', 'CLIENTE']}},
+  {
+    path: "crear-auxiliar",
+    component: CreateAuxComponent,
+    canActivate: [HasRoleGuard],
+    data: {allowedRoles: ['ADMIN']}
+  },
+  {
+    path: "login",
+    component: LoginPageComponent,
+    canActivate: [AuthenticatedGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

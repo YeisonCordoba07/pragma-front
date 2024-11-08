@@ -1,0 +1,24 @@
+<section>
+  <app-create-form
+    [mainTitle]="'Iniciar sesión'"
+    (formSubmitted)="login($event)"
+    [inputForm]="formLogin">
+
+    <app-input-text
+      [textLabel]="'Usuario o correo'"
+      inputId="username"
+      [maxInputLength]="200"
+      type="email"
+      [control]="email">
+    </app-input-text>
+
+    <app-input-text
+    [textLabel]="'Contraseña'"
+    inputId="password"
+
+    type="password"
+    [control]="password">
+  </app-input-text>
+
+  </app-create-form>
+</section>

@@ -28,6 +28,7 @@
 
 
   </div>
+    <div *ngIf="active" class="overlay" (click)="setActive()"></div>
 
   <app-navigation-bar
     [ngClass]="{'header-element__active' : active}"
