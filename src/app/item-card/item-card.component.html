@@ -5,12 +5,14 @@
   <h3 class="item-card__title">{{name}}</h3>
   <p class="item-card__text"><b>Descripción: </b>{{description}}</p>
   <p class="item-card__text"><b>Cantidad: </b>{{quantity}}</p>
-  <p class="item-card__text"><b>Precio: </b>{{price}}</p>
+  <p class="item-card__text"><b>Precio: </b>${{price}}</p>
   <p class="item-card__text"><b>Marca: </b>{{brand}}</p>
   <p class="item-card__text"><b>Categorías: </b></p>
 
   <ul class="item-card__list">
-    <li *ngFor="let category of categories" class="item-card__element item-card__text">
+    <li
+      *ngFor="let category of categories"
+      class="item-card__element item-card__text">
       {{category.name}}
     </li>
   </ul>
@@ -23,6 +25,7 @@
     (click)="openModal()"
     *ngIf="hasRole"
     buttonText="Agregar suministro"
+    typeButton="primary"
   ></app-main-button>
 
 
@@ -31,12 +34,14 @@
   <div class="modal" *ngIf="isModalOpen">
     <div class="modal__content">
 
+    <!-- X para cerrar el modal
+
     <app-icon-button
        imgSrc="assets/icons/close_line.svg"
        class="close-button" (click)="closeModal()"
        imgHeight="15"
        imgWidth="15"
-      ></app-icon-button>
+      ></app-icon-button>-->
 
       <p class="modal__title">
         <b>Agregar suministro a {{name}} ({{inputId}})</b>
@@ -54,12 +59,25 @@
           type="number"
           [control]="supplyQuantity">
         </app-input-text>
-        <app-main-button
-          class="modal__button"
-          buttonText="agregar"
-          [disabled]="formSupply.invalid"
-          typeButton="secondary">
-        </app-main-button>
+
+        <div class="modal__buttons-container">
+
+          <app-main-button
+            class="modal__button"
+            buttonText="Agregar"
+            [disabled]="formSupply.invalid"
+            typeButton="primary">
+          </app-main-button>
+
+          <app-main-button
+            class="modal__button"
+            buttonText="Cerrar"
+            (click)="closeModal()"
+            type="button"
+            typeButton="secondary">
+          </app-main-button>
+
+        </div>
 
       </form>
 
