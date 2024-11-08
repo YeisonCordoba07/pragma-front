@@ -43,18 +43,14 @@ export class GetItemsComponent implements OnInit {
   userIsLogin: boolean = false;
   userLoginData: LoginUserData = {email:"", role:""};
 
-  formSupply: FormGroup;
+  hasRole: boolean = false;
 
 
   constructor(
     private readonly itemService: ItemService,
     private readonly supplyService: SupplyService,
-    private readonly loginService: LoginService,
-    private readonly fb: FormBuilder) {
+    private readonly loginService: LoginService) {
 
-    this.formSupply = this.fb.group({
-      supply: [0, [Validators.required, Validators.min(1)]],
-    })
   }
 
 
@@ -77,32 +73,27 @@ export class GetItemsComponent implements OnInit {
     this.loginService.getSessionToken();
 
     if(this.userLoginData.role == "AUX_BODEGA"){
-      this.dataColumns.push('Agregar suministro');
-      console.log(this.dataColumns);
-
+      this.hasRole = true;
     }
 
-
   }
 
-  get supply() {
-    return this.formSupply.get('supply') as FormControl;
-  }
 
   // GET REQUEST
-  addSupply(): void{
-    if (this.formSupply.valid) {
+  async addSupply(formData: any){
       // Emitir los datos del formulario al componente padre
       //this.formSubmitted.emit(this.inputForm.value);
 
       const newSupply = {
-        idItem: 18,
-        quantity: this.formSupply.get('supply')?.value
+        idItem: formData.supplyItemId,
+        quantity: formData.supplyQuantity
       };
 
-      this.supplyService.addSupply(newSupply);
+      const response = await lastValueFrom( this.supplyService.addSupply(newSupply));
+      console.log("RESPONSE" + JSON.stringify(response));
 
-    }
+      await this.loadItems();
+
   }
 
 

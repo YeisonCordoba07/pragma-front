@@ -81,6 +81,16 @@
     background-color: $color-spacer_light;
   }
 
+  &__supply{
+    margin:auto;
+  }
+
+  &__form{
+    display: flex;
+    flex-direction: row;
+
+  }
+
 }
 
 

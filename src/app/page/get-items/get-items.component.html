@@ -7,6 +7,8 @@
     <app-item-card
       *ngFor="let dataElement of itemData"
       class="get-items__items"
+      [id]="dataElement.id"
+
       [inputId]="dataElement.id"
       [name]="dataElement.name"
       [description]="dataElement.description"
@@ -15,7 +17,11 @@
       [brand]="dataElement.brand.name"
       [categories]="dataElement.categories"
 
+      [hasRole]="hasRole"
+      (formSubmitted)="addSupply($event)"
+
     ></app-item-card>
+
 
   </div>
 
@@ -49,6 +55,16 @@
   </app-pagination>
 
 </section>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Data form -->
@@ -89,7 +105,7 @@
         </table>
       </td>
       <td class="data-container__table-cell">
-        <form (ngSubmit)="addSupply()" [formGroup]="formSupply">
+        <!--<form (ngSubmit)="addSupply()" [formGroup]="formSupply">
 
           <app-input-text
             [textLabel]="'Suministro'"
@@ -103,7 +119,7 @@
             [disabled]="formSupply.invalid"
           ></app-main-button>
 
-        </form>
+        </form>-->
       </td>
     </tr>
   </ng-container>

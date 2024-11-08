@@ -274,10 +274,21 @@
     }
   }
 
-
-
-
 }
+
+
+
+// SORT -------------------
+.data-container__sort-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 
 // Componentes --------------------------------------
 app-create-form, app-input-text, app-select-element, app-login{

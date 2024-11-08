@@ -19,4 +19,29 @@
 
   </ul>
 
+  <!--<app-main-button
+    class="item-card__supply"
+    buttonText="Agregar suministro"
+  ></app-main-button>-->
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="formSupply"
+    class="item-card__form"
+    *ngIf="hasRole">
+
+    <app-input-text
+      [textLabel]="'Suministro'"
+      [inputId]="'suministro'"
+      type="number"
+      [control]="supplyQuantity">
+    </app-input-text>
+    <app-main-button
+      buttonText="agregar"
+      [disabled]="formSupply.invalid"
+    ></app-main-button>
+
+  </form>
+
+
+
 </article>
