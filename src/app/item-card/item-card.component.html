@@ -1,6 +1,7 @@
 <article class="item-card">
 
   <span class="item-card__id">#{{inputId}}</span>
+
   <h3 class="item-card__title">{{name}}</h3>
   <p class="item-card__text"><b>Descripción: </b>{{description}}</p>
   <p class="item-card__text"><b>Cantidad: </b>{{quantity}}</p>
@@ -8,40 +9,61 @@
   <p class="item-card__text"><b>Marca: </b>{{brand}}</p>
   <p class="item-card__text"><b>Categorías: </b></p>
 
-  <ul
-    class="item-card__list"
-    >
-    <li
-      *ngFor="let category of categories"
-      class="item-card__element item-card__text">
+  <ul class="item-card__list">
+    <li *ngFor="let category of categories" class="item-card__element item-card__text">
       {{category.name}}
     </li>
-
   </ul>
 
-  <!--<app-main-button
-    class="item-card__supply"
+
+
+  <!-- Botón para abrir el modal -->
+  <app-main-button
+    class="item-card__add-supply-button"
+    (click)="openModal()"
+    *ngIf="hasRole"
     buttonText="Agregar suministro"
-  ></app-main-button>-->
-  <form
-    (ngSubmit)="onSubmit()"
-    [formGroup]="formSupply"
-    class="item-card__form"
-    *ngIf="hasRole">
-
-    <app-input-text
-      [textLabel]="'Suministro'"
-      [inputId]="'suministro'"
-      type="number"
-      [control]="supplyQuantity">
-    </app-input-text>
-    <app-main-button
-      buttonText="agregar"
-      [disabled]="formSupply.invalid"
-    ></app-main-button>
-
-  </form>
+  ></app-main-button>
 
 
+
+  <!-- Modal para agregar suministro -->
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal__content">
+
+    <app-icon-button
+       imgSrc="assets/icons/close_line.svg"
+       class="close-button" (click)="closeModal()"
+       imgHeight="15"
+       imgWidth="15"
+      ></app-icon-button>
+
+      <p class="modal__title">
+        <b>Agregar suministro a {{name}} ({{inputId}})</b>
+      </p>
+
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="formSupply"
+        class="modal__form">
+
+        <app-input-text
+          class="modal__input"
+          [textLabel]="''"
+          [inputId]="'suministro'"
+          type="number"
+          [control]="supplyQuantity">
+        </app-input-text>
+        <app-main-button
+          class="modal__button"
+          buttonText="agregar"
+          [disabled]="formSupply.invalid"
+          typeButton="secondary">
+        </app-main-button>
+
+      </form>
+
+    </div>
+  </div>
 
 </article>

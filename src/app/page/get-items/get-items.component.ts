@@ -5,8 +5,7 @@ import {Option} from "../../../types/Option";
 import {ItemModel} from "../../../types/item.model";
 import {LoginService} from "../../services/auth/login.service";
 import {LoginUserData} from "../../../types/login";
-import {CATEGORY_SUCCESSFULLY_CREATED, FIELD_NAME, ID_FIELD_NAME} from "../../constants/category.constants";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { FIELD_NAME, ID_FIELD_NAME} from "../../constants/category.constants";
 import {SupplyService} from "../../services/supply/supply.service";
 
 @Component({

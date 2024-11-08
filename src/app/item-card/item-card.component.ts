@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CategoryModel} from "../../types/category.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CategoryModel } from "../../types/category.model";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-item-card',
@@ -8,7 +8,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
-
   @Input() inputId: number = 0;
   @Input() name: string = "Articulo";
   @Input() description: string = "Descripción";
@@ -19,20 +18,15 @@ export class ItemCardComponent implements OnInit {
   @Input() hasRole: boolean = false;
 
   formSupply: FormGroup;
+  isModalOpen: boolean = false;
 
   @Output() formSubmitted = new EventEmitter<any>();
 
   constructor(private readonly fb: FormBuilder) {
-
     this.formSupply = this.fb.group({
       supplyItemId: [0, Validators.required],
       supplyQuantity: [0, [Validators.required, Validators.min(1)]],
     })
-  }
-
-
-  get supplyQuantity() {
-    return this.formSupply.get('supplyQuantity') as FormControl;
   }
 
   ngOnInit(): void {
@@ -41,12 +35,23 @@ export class ItemCardComponent implements OnInit {
     });
   }
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
   onSubmit() {
     if (this.formSupply.valid && this.hasRole) {
-      // Emitir los datos del formulario al componente padre
       this.formSubmitted.emit(this.formSupply.value);
       this.formSupply.reset();
+      this.closeModal(); // Cierra el modal después de enviar el formulario
     }
+  }
+
+  get supplyQuantity() {
+    return this.formSupply.get('supplyQuantity') as FormControl;
   }
 }

@@ -11,21 +11,24 @@
   flex-direction: column;
   padding: 20px;
   width: 90vw;
+  //min-height: 400px;
+
+
   @extend .shadow__small;
   transition-duration: 0.2s;
+
   position: relative;
   gap: 10px;
 
 
   @media (min-width: 768px) and (max-width: 1023px) {
     width: 45vw;
-    height: 400px;
-
+    //height: 460px;
   }
 
   @media (min-width: 1024px) {
     width: 310px;
-    height: 400px;
+    //height: 400px;
   }
 
 
@@ -85,12 +88,81 @@
     margin:auto;
   }
 
-  &__form{
-    display: flex;
-    flex-direction: row;
 
+  &__supply-text{
+    margin-top: 20px;
+  }
+
+
+
+  &__add-supply-button{
+    margin-top: 25px;
+    align-self: center;
+    bottom: 20px;
   }
 
 }
+
+
+
+
+
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+
+  &__content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    z-index: 201;
+  }
+
+  &__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+  }
+
+  &__input{
+    height: 50px;
+  }
+
+  &__button{
+    height: 50px;
+  }
+
+  &__title{
+    @extend .desktop__poppins-h3;
+  }
+}
+
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 202;
+}
+
+
 
 
