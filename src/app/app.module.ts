@@ -14,9 +14,9 @@ import { CreateCategoryComponent } from './page/create-category/create-category.
 import { NavigationBarElementComponent } from './components/atoms/navigation-bar-element/navigation-bar-element.component';
 import { NavigationBarComponent } from './components/molecules/navigation-bar/navigation-bar.component';
 import { MainButtonComponent } from './components/atoms/main-button/main-button.component';
-import { FooterComponent } from './components/molecules/footer/footer.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HeaderComponent } from './components/molecules/header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import { TableDataComponent } from './components/atoms/table-data/table-data.component';
 import { IconLinkComponent } from './components/atoms/icon-link/icon-link.component';
@@ -33,7 +33,10 @@ import { MultiSelectTagComponent } from './components/atoms/multi-select-tag/mul
 import { GetItemsComponent } from './page/get-items/get-items.component';
 import { PaginationComponent } from './components/molecules/pagination/pagination.component';
 import { CreateAuxComponent } from './page/create-aux/create-aux.component';
-import { SelectElementComponent } from './components/atoms/select-element/select-element.component'; // Importar FormsModule
+import { SelectElementComponent } from './components/atoms/select-element/select-element.component';
+import { LoginComponent } from './auth/login/login.component';
+import {LoginPageComponent} from "./page/login/login-page.component";
+import { Page404Component } from './page/page404/page404.component'; // Importar FormsModule
 
 
 
@@ -62,7 +65,10 @@ import { SelectElementComponent } from './components/atoms/select-element/select
     GetItemsComponent,
     PaginationComponent,
     CreateAuxComponent,
-    SelectElementComponent
+    SelectElementComponent,
+    LoginComponent,
+    LoginPageComponent,
+    Page404Component
   ],
     imports: [
         BrowserModule,

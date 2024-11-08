@@ -1,6 +1,6 @@
-<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()" class="create-form">
 
-  <h2>{{ mainTitle }}</h2>
+  <h2 class="create-form__title">{{ mainTitle }}</h2>
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-  <div class="buttons-container">
+  <div class="create-form__buttons-container">
 
     <app-main-button
       [disabled]="inputForm.invalid"

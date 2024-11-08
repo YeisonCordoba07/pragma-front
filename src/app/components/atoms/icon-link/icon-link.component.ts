@@ -6,11 +6,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./icon-link.component.scss']
 })
 export class IconLinkComponent implements OnInit {
-  @Input() pageUrl: string = "favicon.ico";
+  @Input() pageUrl: string = "#";
   @Input() imgAlt: string = "";
   @Input() imgWidth: string = "25";
   @Input() imgHeight: string = "25";
-  @Input() imgSource: string = "";
+  @Input() imgSource: string = "favicon.ico";
 
   constructor() { }
 
