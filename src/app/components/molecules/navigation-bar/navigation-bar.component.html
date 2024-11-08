@@ -77,7 +77,7 @@
       (closeNav)="handleCloseNav()"></app-navigation-bar-element>
 
     <app-navigation-bar-element
-      *ngIf="userLoginData.role === 'ADMIN' || userLoginData.role === 'CLIENTE'"
+      *ngIf="userLoginData.role === 'ADMIN' || userLoginData.role === 'CLIENTE' || userLoginData.role === 'AUX_BODEGA'"
       elementText="Ver artículos"
       pageUrl="/ver-articulos"
       elementIcon="assets/icons/item_icon.svg"

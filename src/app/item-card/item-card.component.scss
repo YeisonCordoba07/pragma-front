@@ -1,0 +1,69 @@
+@import "src/styles/global-colors";
+@import "src/styles/global";
+@import "src/styles/fonts";
+
+
+
+.item-card{
+  border: 1px solid $color-spacer;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 310px;
+  height: 400px;
+  @extend .shadow__small;
+  transition-duration: 0.2s;
+  position: relative;
+  gap: 10px;
+
+
+  &:hover{
+
+  }
+
+  &__id{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid $color-purple-click;
+    border-top-right-radius: 3px;
+    background-color: $color-purple-hover;
+    padding: 5px;
+    color: $color-black;
+    font-weight: bold;
+    @extend .main-text__body-s;
+
+
+  }
+
+  &__title{
+    @extend .desktop__poppins-h2;
+    text-align: center;
+  }
+
+  &__text{
+    @extend .main-text__body-m;
+  }
+
+  &__list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-left: 10px;
+
+  }
+
+  &__element{
+    border: 2px solid $color-purple-hover;
+    border-radius: 4px;
+    padding: 3px 5px;
+    color: $color-purple;
+    background-color: $color-spacer_light;
+  }
+
+}
+
+

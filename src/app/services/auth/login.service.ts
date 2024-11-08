@@ -38,7 +38,7 @@ export class LoginService {
         // Verificar que el userLogin sea valido antes de actualizar currenUserIslogin
         this.currentUserIsLogin.next(true);
         this.currentLoginData.next(this.extractTokenData(userLogin.token));
-        sessionStorage.setItem("token", userLogin.token);
+        localStorage.setItem("token", userLogin.token);
 
       }),
     );
@@ -65,13 +65,13 @@ export class LoginService {
 
 
   logout():void{
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     this.currentUserIsLogin.next(false);
     this.currentLoginData.next({email: "", role: ""});
   }
 
   getSessionToken(): boolean {
-    const token: string | null = sessionStorage.getItem("token");
+    const token: string | null = localStorage.getItem("token");
 
     if(token && !this.isTokenExpired(token)){
       this.currentLoginData.next(this.extractTokenData(token));

@@ -24,13 +24,13 @@ const routes: Routes = [
   },
   {
     path: "ver-categorias", component: GetCategoriesComponent, canActivate: [HasRoleGuard],
-    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
+    data: {allowedRoles: ['ADMIN', 'CLIENTE', 'AUX_BODEGA']}
   },
   {
     path: "ver-marcas",
     component: GetBrandsComponent,
     canActivate: [HasRoleGuard],
-    data: {allowedRoles: ['ADMIN', 'CLIENTE']}
+    data: {allowedRoles: ['ADMIN', 'CLIENTE', 'AUX_BODEGA']}
   },
   {
     path: "crear-marca",
@@ -45,7 +45,7 @@ const routes: Routes = [
     data: {allowedRoles: ['ADMIN']}
   },
   {path: "ver-articulos", component: GetItemsComponent, canActivate: [HasRoleGuard],
-    data: {allowedRoles: ['ADMIN', 'CLIENTE']}},
+    data: {allowedRoles: ['ADMIN', 'CLIENTE', 'AUX_BODEGA']}},
   {
     path: "crear-auxiliar",
     component: CreateAuxComponent,

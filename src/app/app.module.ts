@@ -36,7 +36,8 @@ import { CreateAuxComponent } from './page/create-aux/create-aux.component';
 import { SelectElementComponent } from './components/atoms/select-element/select-element.component';
 import { LoginComponent } from './auth/login/login.component';
 import {LoginPageComponent} from "./page/login/login-page.component";
-import { Page404Component } from './page/page404/page404.component'; // Importar FormsModule
+import { Page404Component } from './page/page404/page404.component';
+import { ItemCardComponent } from './item-card/item-card.component'; // Importar FormsModule
 
 
 
@@ -68,7 +69,8 @@ import { Page404Component } from './page/page404/page404.component'; // Importar
     SelectElementComponent,
     LoginComponent,
     LoginPageComponent,
-    Page404Component
+    Page404Component,
+    ItemCardComponent
   ],
     imports: [
         BrowserModule,

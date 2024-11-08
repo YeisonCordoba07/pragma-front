@@ -1,8 +1,60 @@
 
+<section class="">
+  <h1>articulos</h1>
+  <div
+    class="items-container"
+  >
+
+    <app-item-card
+      [inputId]="dataElement.id"
+      [name]="dataElement.name"
+      [description]="dataElement.description"
+      [quantity]="dataElement.quantity"
+      [price]="dataElement.price"
+      [brand]="dataElement.brand.name"
+      [categories]="dataElement.categories"
+      *ngFor="let dataElement of itemData"
+
+    ></app-item-card>
+
+  </div>
+
+  <!-- Sort by -->
+  <div class="data-container__sort-container">
+
+    <app-table-sort-direction
+      *ngIf="orderOptions.length > 0"
+      [dataOption]="orderOptions"
+      inputTitle="Ordenar"
+      (ascendingChange)="changeAscending()">
+    </app-table-sort-direction>
+
+    <app-table-sort-direction
+      *ngIf="dataOptions.length > 0"
+      [dataOption]="dataOptions"
+      inputTitle="Ordenar por tabla"
+      (tableChange)="changeAscending2($event)">
+    </app-table-sort-direction>
+
+  </div>
+  <!-- Pagination + buttons -->
+  <app-pagination
+    [page]="page"
+    [size]="size"
+    [totalElements]="totalElements"
+    [totalPages]="totalPages"
+    (leftClick)="prevPage()"
+    (rightClick)="nextPage()"
+  >
+  </app-pagination>
+
+</section>
+
+
 <!-- Data form -->
 <app-table-data
   [inputData]="itemData"
-  [columnHeaders]="['ID', 'Nombre', 'Descripción', 'Cantidad', 'Precio', 'Marca', 'Categorías']"
+  [columnHeaders]="dataColumns"
   mainTitle="Articulos"
   [orderOptions]="orderOptions"
   [dataOptions]="dataOptions"
@@ -36,11 +88,30 @@
           </tbody>
         </table>
       </td>
+      <td class="data-container__table-cell">
+        <form (ngSubmit)="addSupply()" [formGroup]="formSupply">
+
+          <app-input-text
+            [textLabel]="'Suministro'"
+            [inputId]="'suministro'"
+            type="number"
+            [control]="supply">
+          </app-input-text>
+          <button [disabled]="formSupply.invalid" class="main-button primary-buttons">+</button>
+          <app-main-button
+            buttonText="agregar"
+            [disabled]="formSupply.invalid"
+          ></app-main-button>
+
+        </form>
+      </td>
     </tr>
   </ng-container>
 
 
-
 </app-table-data>
+
+
+
 
 

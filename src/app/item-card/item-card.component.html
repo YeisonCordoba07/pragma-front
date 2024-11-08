@@ -1,0 +1,22 @@
+<article class="item-card">
+
+  <span class="item-card__id">#{{inputId}}</span>
+  <h3 class="item-card__title">{{name}}</h3>
+  <p class="item-card__text"><b>Descripción: </b>{{description}}</p>
+  <p class="item-card__text"><b>Cantidad: </b>{{quantity}}</p>
+  <p class="item-card__text"><b>Precio: </b>{{price}}</p>
+  <p class="item-card__text"><b>Marca: </b>{{brand}}</p>
+  <p class="item-card__text"><b>Categorías: </b></p>
+
+  <ul
+    class="item-card__list"
+    >
+    <li
+      *ngFor="let category of categories"
+      class="item-card__element item-card__text">
+      {{category.name}}
+    </li>
+
+  </ul>
+
+</article>
