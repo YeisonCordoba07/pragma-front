@@ -5,7 +5,6 @@ import {Option} from "../../../types/Option";
 import {ItemModel} from "../../../types/item.model";
 import {LoginService} from "../../services/auth/login.service";
 import {LoginUserData} from "../../../types/login";
-import { FIELD_NAME, ID_FIELD_NAME} from "../../constants/category.constants";
 import {SupplyService} from "../../services/supply/supply.service";
 
 @Component({
@@ -23,7 +22,6 @@ export class GetItemsComponent implements OnInit {
   ascending: boolean = true;
   orderBy: string = "itemEntity";
 
-  dataColumns: string[] = ['ID', 'Nombre', 'Descripción', 'Cantidad', 'Precio', 'Marca', 'Categorías']
 
   dataOptions: Option[] = [
     { name: 'Item', value: 'itemEntity' },
@@ -43,7 +41,6 @@ export class GetItemsComponent implements OnInit {
   userLoginData: LoginUserData = {email:"", role:""};
 
   hasRole: boolean = false;
-
 
   constructor(
     private readonly itemService: ItemService,
@@ -78,10 +75,10 @@ export class GetItemsComponent implements OnInit {
   }
 
 
+
   // GET REQUEST
   async addSupply(formData: any){
       // Emitir los datos del formulario al componente padre
-      //this.formSubmitted.emit(this.inputForm.value);
 
       const newSupply = {
         idItem: formData.supplyItemId,
@@ -89,11 +86,11 @@ export class GetItemsComponent implements OnInit {
       };
 
       const response = await lastValueFrom( this.supplyService.addSupply(newSupply));
-      console.log("RESPONSE" + JSON.stringify(response));
 
       await this.loadItems();
 
   }
+
 
 
   async loadItems(): Promise<void> {
@@ -116,6 +113,8 @@ export class GetItemsComponent implements OnInit {
 
     }
   }
+
+
 
   prevPage(): void {
     if (this.page > 0) {
@@ -144,6 +143,4 @@ export class GetItemsComponent implements OnInit {
     this.loadItems();
   }
 
-  protected readonly FIELD_NAME = FIELD_NAME;
-  protected readonly ID_FIELD_NAME = ID_FIELD_NAME;
 }

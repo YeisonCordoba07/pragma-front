@@ -1,8 +1,8 @@
 <section class="get-items">
+
   <h1 class="get-items__title">Articulos</h1>
-  <div
-    class="get-items__cards"
-  >
+
+  <div class="get-items__cards">
 
     <app-item-card
       *ngFor="let dataElement of itemData"
@@ -22,8 +22,9 @@
 
     ></app-item-card>
 
-
   </div>
+
+
 
   <!-- Sort by -->
   <div class="data-container__sort-container">
@@ -43,6 +44,9 @@
     </app-table-sort-direction>
 
   </div>
+
+
+
   <!-- Pagination + buttons -->
   <app-pagination
     [page]="page"
