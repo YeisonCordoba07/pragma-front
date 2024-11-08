@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { AuthGuard } from './auth.guard';
+import { HasRoleGuard } from './hasRole.guard';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/auth/login.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { of, isObservable } from 'rxjs';
 
 describe('AuthGuard', () => {
-  let authGuard: AuthGuard;
+  let authGuard: HasRoleGuard;
   let loginService: jest.Mocked<LoginService>;
   let router: jest.Mocked<Router>;
   let route: ActivatedRouteSnapshot;
@@ -21,13 +21,13 @@ describe('AuthGuard', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        AuthGuard,
+        HasRoleGuard,
         { provide: LoginService, useValue: loginServiceMock },
         { provide: Router, useValue: routerMock },
       ],
     });
 
-    authGuard = TestBed.inject(AuthGuard);
+    authGuard = TestBed.inject(HasRoleGuard);
     loginService = TestBed.inject(LoginService) as jest.Mocked<LoginService>;
     router = TestBed.inject(Router) as jest.Mocked<Router>;
 

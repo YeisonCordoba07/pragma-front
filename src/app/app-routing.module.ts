@@ -9,7 +9,7 @@ import {CreateItemComponent} from "./page/create-item/create-item.component";
 import {GetItemsComponent} from "./page/get-items/get-items.component";
 import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
 import {LoginPageComponent} from "./page/login/login-page.component";
-import {AuthGuard} from "./core/auth.guard";
+import {HasRoleGuard} from "./core/hasRole.guard";
 import {AuthenticatedGuard} from "./core/authenticated.guard";
 
 
@@ -19,37 +19,37 @@ const routes: Routes = [
   {
     path: 'crear-categoria',
     component: CreateCategoryComponent,
-    canActivate: [AuthGuard],
+    canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN']}
   },
   {
-    path: "ver-categorias", component: GetCategoriesComponent, canActivate: [AuthGuard],
+    path: "ver-categorias", component: GetCategoriesComponent, canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN', 'CLIENTE']}
   },
   {
     path: "ver-marcas",
     component: GetBrandsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN', 'CLIENTE']}
   },
   {
     path: "crear-marca",
     component: CreateBrandComponent,
-    canActivate: [AuthGuard],
+    canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN']}
   },
   {
     path: "crear-articulo",
     component: CreateItemComponent,
-    canActivate: [AuthGuard],
+    canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN']}
   },
-  {path: "ver-articulos", component: GetItemsComponent, canActivate: [AuthGuard],
+  {path: "ver-articulos", component: GetItemsComponent, canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN', 'CLIENTE']}},
   {
     path: "crear-auxiliar",
     component: CreateAuxComponent,
-    canActivate: [AuthGuard],
+    canActivate: [HasRoleGuard],
     data: {allowedRoles: ['ADMIN']}
   },
   {
