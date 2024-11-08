@@ -1,11 +1,12 @@
-
-<section class="">
-  <h1>articulos</h1>
+<section class="get-items">
+  <h1 class="get-items__title">Articulos</h1>
   <div
-    class="items-container"
+    class="get-items__cards"
   >
 
     <app-item-card
+      *ngFor="let dataElement of itemData"
+      class="get-items__items"
       [inputId]="dataElement.id"
       [name]="dataElement.name"
       [description]="dataElement.description"
@@ -13,7 +14,6 @@
       [price]="dataElement.price"
       [brand]="dataElement.brand.name"
       [categories]="dataElement.categories"
-      *ngFor="let dataElement of itemData"
 
     ></app-item-card>
 

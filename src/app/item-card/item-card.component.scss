@@ -10,12 +10,23 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 310px;
-  height: 400px;
+  width: 90vw;
   @extend .shadow__small;
   transition-duration: 0.2s;
   position: relative;
   gap: 10px;
+
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 45vw;
+    height: 400px;
+
+  }
+
+  @media (min-width: 1024px) {
+    width: 310px;
+    height: 400px;
+  }
 
 
   &:hover{
@@ -26,14 +37,20 @@
     position: absolute;
     top: 0;
     right: 0;
-    border: 1px solid $color-purple-click;
+
     border-top-right-radius: 3px;
+    border: 1px solid $color-purple-click;
     background-color: $color-purple-hover;
-    padding: 5px;
     color: $color-black;
+
+    width: 40px;
+    height: 40px;
     font-weight: bold;
     @extend .main-text__body-s;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
   }
 
