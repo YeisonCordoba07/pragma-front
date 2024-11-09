@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 @Component({
   selector: 'app-item-card',
   templateUrl: './item-card.component.html',
-  styleUrls: ['./item-card.component.scss']
+  styleUrls: ['./item-card.component.sc:ss']
 })
 export class ItemCardComponent implements OnInit {
   @Input() inputId: number = 0;
