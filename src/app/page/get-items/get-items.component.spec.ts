@@ -1,29 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GetItemsComponent } from './get-items.component';
 import { of, throwError } from 'rxjs';
-import {ItemService} from "../../services/item/item.service";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { ItemService } from '../../services/item/item.service';
+import { LoginService } from '../../services/auth/login.service';
+import { SupplyService } from '../../services/supply/supply.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GetItemsComponent', () => {
   let component: GetItemsComponent;
   let fixture: ComponentFixture<GetItemsComponent>;
   let itemServiceMock: any;
+  let loginServiceMock: any;
+  let supplyServiceMock: any;
 
   beforeEach(async () => {
     itemServiceMock = {
       getItem: jest.fn(),
     };
-
+    loginServiceMock = {
+      currentUserIsLogin: of(true),
+      currentLoginData: of({ email: 'example@gmail.com', role: 'AUX_BODEGA' }),
+      getSessionToken: jest.fn(),
+    };
+    supplyServiceMock = {
+      addSupply: jest.fn(),
+    };
 
     await TestBed.configureTestingModule({
-      declarations: [ GetItemsComponent ],
+      declarations: [GetItemsComponent],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: ItemService, useValue: itemServiceMock },
+        { provide: LoginService, useValue: loginServiceMock },
+        { provide: SupplyService, useValue: supplyServiceMock },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GetItemsComponent);
     component = fixture.componentInstance;
@@ -34,6 +47,11 @@ describe('GetItemsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should set hasRole to true if userLoginData.role is "AUX_BODEGA"', () => {
+    component.userLoginData = { email: 'example@gmail.com', role: 'AUX_BODEGA' };
+    component.ngOnInit();
+    expect(component.hasRole).toBe(true);
+  });
 
   it('should load items on init', async () => {
     const mockResponse = {
@@ -126,4 +144,18 @@ describe('GetItemsComponent', () => {
     expect(component.orderBy).toBe('newOrder');
     expect(loadItemsSpy).toHaveBeenCalled();
   });
+
+
+  it('should create newSupply object and call addSupply on supplyService', async () => {
+    const formData = { supplyItemId: 1, supplyQuantity: 10 };
+    const newSupply = { idItem: formData.supplyItemId, quantity: formData.supplyQuantity };
+    supplyServiceMock.addSupply.mockReturnValue(of({ success: true }));
+    const loadItemsSpy = jest.spyOn(component, 'loadItems');
+
+    await component.addSupply(formData);
+
+    expect(supplyServiceMock.addSupply).toHaveBeenCalledWith(newSupply);
+    expect(loadItemsSpy).toHaveBeenCalled();
+  });
+
 });

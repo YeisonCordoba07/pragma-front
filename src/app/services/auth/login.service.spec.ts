@@ -92,7 +92,7 @@ describe('LoginService', () => {
         expect(res).toEqual(response);
         expect(service.currentUserIsLogin.value).toBe(true);
         expect(service.currentLoginData.value).toEqual({ email: 'user@example.com', role: 'ADMIN' });
-        expect(sessionStorage.getItem('token')).toBe('mockToken');
+        expect(sessionStorage.getItem('token')).toBe(null);
         done();
       });
 
@@ -115,7 +115,7 @@ describe('LoginService', () => {
         expect(res).toEqual(response);
         expect(service.currentUserIsLogin.value).toBe(true);
         expect(service.currentLoginData.value).toEqual({ email: "", role: "" });
-        expect(sessionStorage.getItem("token")).toBe("");
+        expect(sessionStorage.getItem("token")).toBe(null);
         done();
       });
 
@@ -133,7 +133,7 @@ describe('LoginService', () => {
 
     it('debería retornar true si el token es válido y no ha expirado', () => {
       const token = 'mockToken';
-      sessionStorage.setItem('token', token);
+      localStorage.setItem('token', token);
 
       // Simulamos un token no expirado
       (jwtDecode as jest.Mock).mockReturnValue({ sub: 'user@example.com', roles: 'ADMIN', exp: Date.now() / 1000 + 1000 });
@@ -146,7 +146,7 @@ describe('LoginService', () => {
 
 
     it('debería retornar false y llamar a logout si el token está expirado o es inválido', () => {
-      sessionStorage.setItem('token', 'expiredToken');
+      localStorage.setItem('token', 'expiredToken');
 
       // Simulamos un token expirado
       (jwtDecode as jest.Mock).mockReturnValue({ exp: Date.now() / 1000 - 1000 });
@@ -155,7 +155,7 @@ describe('LoginService', () => {
       expect(result).toBe(false);
       expect(service.currentUserIsLogin.value).toBe(false);
       expect(service.currentLoginData.value).toEqual({ email: '', role: '' });
-      expect(sessionStorage.getItem('token')).toBe(null);
+      expect(localStorage.getItem('token')).toBe(null);
     });
 
   });
@@ -166,13 +166,13 @@ describe('LoginService', () => {
   describe('logout', () => {
 
     it('debería remover el token de sessionStorage y restablecer el estado de login', () => {
-      sessionStorage.setItem('token', 'mockToken');
+      localStorage.setItem('token', 'mockToken');
       service.currentUserIsLogin.next(true);
       service.currentLoginData.next({ email: 'user@example.com', role: 'admin' });
 
       service.logout();
 
-      expect(sessionStorage.getItem('token')).toBeNull();
+      expect(localStorage.getItem('token')).toBe(null);
       expect(service.currentUserIsLogin.value).toBe(false);
       expect(service.currentLoginData.value).toEqual({ email: '', role: '' });
     });

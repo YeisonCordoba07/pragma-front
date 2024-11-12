@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ItemService} from "../../services/item/item.service";
 import {firstValueFrom, lastValueFrom} from "rxjs";
 import {Option} from "../../../types/Option";
@@ -24,21 +24,19 @@ export class GetItemsComponent implements OnInit {
 
 
   dataOptions: Option[] = [
-    { name: 'Item', value: 'itemEntity' },
-    { name: 'Brand', value: 'brand' },
-    { name: 'Category', value: 'category' }
+    {name: 'Item', value: 'itemEntity'},
+    {name: 'Brand', value: 'brand'},
+    {name: 'Category', value: 'category'}
   ];
 
   orderOptions: Option[] = [
-    { name: '↑ Ascendente', value: true },
-    { name: '↓ Descendente', value: false },
+    {name: '↑ Ascendente', value: true},
+    {name: '↓ Descendente', value: false},
   ];
 
 
-
-
   userIsLogin: boolean = false;
-  userLoginData: LoginUserData = {email:"", role:""};
+  userLoginData: LoginUserData = {email: "", role: ""};
 
   hasRole: boolean = false;
 
@@ -48,7 +46,6 @@ export class GetItemsComponent implements OnInit {
     private readonly loginService: LoginService) {
 
   }
-
 
 
   ngOnInit(): void {
@@ -68,29 +65,37 @@ export class GetItemsComponent implements OnInit {
 
     this.loginService.getSessionToken();
 
-    if(this.userLoginData.role == "AUX_BODEGA"){
+    if (this.userLoginData.role == "AUX_BODEGA") {
       this.hasRole = true;
     }
 
   }
 
 
-
   // GET REQUEST
-  async addSupply(formData: any){
-      // Emitir los datos del formulario al componente padre
+  async addSupply(formData: any) {
+    // Emitir los datos del formulario al componente padre
 
-      const newSupply = {
-        idItem: formData.supplyItemId,
-        quantity: formData.supplyQuantity
-      };
+    const newSupply = {
+      idItem: formData.supplyItemId,
+      quantity: formData.supplyQuantity
+    };
 
-      const response = await lastValueFrom( this.supplyService.addSupply(newSupply));
+    const response = await lastValueFrom( this.supplyService.addSupply(newSupply));
 
-      await this.loadItems();
+    // mejor forma de hacerlo
+    /*this.supplyService.addSupply(newSupply).subscribe({
+      next: (response) => {
+        console.log('Supply added successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error adding supply:', error);
+      }
+    });*/
+
+    await this.loadItems();
 
   }
-
 
 
   async loadItems(): Promise<void> {
@@ -115,7 +120,6 @@ export class GetItemsComponent implements OnInit {
   }
 
 
-
   prevPage(): void {
     if (this.page > 0) {
       this.page--;
@@ -132,7 +136,7 @@ export class GetItemsComponent implements OnInit {
   }
 
 
-  changeAscending(): void{
+  changeAscending(): void {
     this.ascending = !this.ascending;
     console.log("cambio");
     this.loadItems();
