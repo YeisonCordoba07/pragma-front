@@ -37,7 +37,7 @@ import { SelectElementComponent } from './components/atoms/select-element/select
 import { LoginComponent } from './auth/login/login.component';
 import {LoginPageComponent} from "./page/login/login-page.component";
 import { Page404Component } from './page/page404/page404.component';
-import { ItemCardComponent } from './item-card/item-card.component'; // Importar FormsModule
+import { ItemCardComponent } from './components/molecules/item-card/item-card.component'; // Importar FormsModule
 
 
 

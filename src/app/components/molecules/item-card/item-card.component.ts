@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CategoryModel } from "../../types/category.model";
+import { CategoryModel } from "../../../../types/category.model";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-item-card',
   templateUrl: './item-card.component.html',
-  styleUrls: ['./item-card.component.sc:ss']
+  styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
   @Input() inputId: number = 0;
