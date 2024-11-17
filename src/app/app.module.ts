@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +37,9 @@ import { SelectElementComponent } from './components/atoms/select-element/select
 import { LoginComponent } from './auth/login/login.component';
 import {LoginPageComponent} from "./page/login/login-page.component";
 import { Page404Component } from './page/page404/page404.component';
-import { ItemCardComponent } from './components/molecules/item-card/item-card.component'; // Importar FormsModule
+import { ItemCardComponent } from './components/molecules/item-card/item-card.component';
+import {LoadingInterceptor} from "./interceptors/loading.interceptor";
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component'; // Importar FormsModule
 
 
 
@@ -70,7 +72,8 @@ import { ItemCardComponent } from './components/molecules/item-card/item-card.co
     LoginComponent,
     LoginPageComponent,
     Page404Component,
-    ItemCardComponent
+    ItemCardComponent,
+    LoadingSpinnerComponent
   ],
     imports: [
         BrowserModule,
@@ -82,7 +85,13 @@ import { ItemCardComponent } from './components/molecules/item-card/item-card.co
         ReactiveFormsModule
 
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
