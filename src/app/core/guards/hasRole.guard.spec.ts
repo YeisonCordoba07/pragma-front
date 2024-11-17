@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HasRoleGuard } from './hasRole.guard';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/auth/login.service';
+import { LoginService } from '../../services/auth/login.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { of, isObservable } from 'rxjs';
 

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AuthenticatedGuard } from './authenticated.guard';
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from "@angular/router";
-import {LoginService} from "../services/auth/login.service";
+import {LoginService} from "../../services/auth/login.service";
 
 
 describe('AuthenticatedGuard', () => {

@@ -9,12 +9,16 @@ import {CreateItemComponent} from "./page/create-item/create-item.component";
 import {GetItemsComponent} from "./page/get-items/get-items.component";
 import {CreateAuxComponent} from "./page/create-aux/create-aux.component";
 import {LoginPageComponent} from "./page/login/login-page.component";
-import {HasRoleGuard} from "./core/hasRole.guard";
-import {AuthenticatedGuard} from "./core/authenticated.guard";
+import {HasRoleGuard} from "./core/guards/hasRole.guard";
+import {AuthenticatedGuard} from "./core/guards/authenticated.guard";
+import {HomePageComponent} from "./page/home-page/home-page.component";
 
 
 
 const routes: Routes = [
+  {
+    path: '', component: HomePageComponent
+  },
 
   {
     path: 'crear-categoria',

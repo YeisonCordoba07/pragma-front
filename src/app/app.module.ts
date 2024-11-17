@@ -38,8 +38,9 @@ import { LoginComponent } from './auth/login/login.component';
 import {LoginPageComponent} from "./page/login/login-page.component";
 import { Page404Component } from './page/page404/page404.component';
 import { ItemCardComponent } from './components/molecules/item-card/item-card.component';
-import {LoadingInterceptor} from "./interceptors/loading.interceptor";
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component'; // Importar FormsModule
+import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { HomePageComponent } from './page/home-page/home-page.component'; // Importar FormsModule
 
 
 
@@ -73,7 +74,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     LoginPageComponent,
     Page404Component,
     ItemCardComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    HomePageComponent
   ],
     imports: [
         BrowserModule,

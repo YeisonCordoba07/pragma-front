@@ -1,0 +1,33 @@
+@import "src/styles/global-colors";
+@import "src/styles/global";
+@import "src/styles/fonts";
+
+.homepage {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  padding: 50px 20px;
+
+
+  &__title {
+    color: #673ab7;
+
+    text-align: center;
+    @extend .desktop__poppins-h1;
+  }
+
+  &__text {
+    margin: 20px 0;
+    @extend .main-text__body-m-regular;
+
+    &-resalted{
+      font-weight: bold;
+
+    }
+
+  }
+
+
+}

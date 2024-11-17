@@ -1,12 +1,13 @@
 import {inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import { Observable } from 'rxjs';
-import {LoginService} from "../services/auth/login.service";
+import {map, Observable} from 'rxjs';
+import {LoginService} from "../../services/auth/login.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticatedGuard implements CanActivate {
+export class HasRoleGuard implements CanActivate {
+
   private readonly authService: LoginService = inject(LoginService);
   private readonly router: Router = inject(Router);
 
@@ -15,13 +16,20 @@ export class AuthenticatedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+    const allowedRoles = route.data?.['allowedRoles'];
 
-    // Si ya está logueado, no deja que entre al login
+
+
     if(this.authService.getSessionToken()){
-      return this.router.navigate(['/']);
+      return this.authService.loginData.pipe(
+        map(user =>{
+          return Boolean( user && allowedRoles.includes(user.role));
+        })
+      )
     }else{
-      return true;
+      return this.router.navigate(['/login']);
     }
   }
+
 
 }
