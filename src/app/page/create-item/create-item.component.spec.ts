@@ -5,7 +5,7 @@ import { BrandService } from '../../services/brand/brand.service';
 import { ItemService } from '../../services/item/item.service'; // Asegúrate de importar tu ItemService
 import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importa el módulo de pruebas para HttpClient
 import {of, throwError} from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, FormControl} from '@angular/forms';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 // Definiciones de los tipos de respuesta
@@ -210,5 +210,27 @@ describe('CreateItemComponent', () => {
   }));
 
 
+
+
+  it('should return null when the array length is less than or equal to the max value', () => {
+    const control = new FormControl([1, 2, 3]);
+    const validator = component.maxArrayLength(3);
+
+    expect(validator(control)).toBeNull();  // Null significa que el valor es válido
+  });
+
+  it('should return an error object when the array length exceeds the max value', () => {
+    const control = new FormControl([1, 2, 3, 4]);
+    const validator = component.maxArrayLength(3);
+
+    expect(validator(control)).toEqual({ maxlength: true });
+  });
+
+  it('should return null when the array is empty', () => {
+    const control = new FormControl([]);
+    const validator = component.maxArrayLength(3);
+
+    expect(validator(control)).toBeNull();  // Null ya que un array vacío es considerado válido
+  });
 
 });
