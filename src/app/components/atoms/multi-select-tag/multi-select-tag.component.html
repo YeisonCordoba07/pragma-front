@@ -7,7 +7,7 @@
       <span *ngFor="let item of selectedItems" class="multi-select-dropdown__tag">
         <span class="multi-select-dropdown__tag__text">{{ item }}</span>
         <img
-          src="../../../../assets/icons/close_tag_line.svg"
+          src="assets/icons/close_tag_line.svg"
           class="multi-select-dropdown__tag__remove"
           (click)="removeItem(item)"
           (keydown.enter)="removeItem(item)"
@@ -21,7 +21,7 @@
 
       <!-- Flecha al final -->
       <img
-        src="../../../../assets/icons/down_arrow.svg"
+        src="assets/icons/down_arrow.svg"
         class="multi-select-dropdown__arrow" (click)="toggleDropdown()"
         (keydown.enter)="toggleDropdown()"
         [ngClass]="{'rotate': dropdownOpen}" alt="">

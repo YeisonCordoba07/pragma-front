@@ -1,6 +1,26 @@
 @import "../../../styles/global-colors";
 @import "../../../styles/fonts";
 
+.header {
+  position: sticky; /* Fija el header cuando se empieza a desplazar */
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 68px;
+    padding: 20px;
+    border-bottom: 2px solid $color-border;
+  }
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -8,39 +28,18 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99;
-}
-
-.header{
-  width: 100vw;
   z-index: 9;
-  position: relative;
-  transition-duration: 0.5s;
 }
 
-.header-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 68px;
-  padding: 20px;
-  border-radius: 20px 20px 0 0;
-  border-bottom: 2px solid $color-border;
-}
-
-
-.header-element{
+.header-element {
   display: none;
   position: absolute;
   right: 0;
   top: 0;
-  transition-duration: 0.5s;
-  transition-timing-function: ease;
+  transition: all 0.5s ease;
   width: 0;
 
-  &__active{
+  &__active {
     width: 90vw;
     display: flex;
     z-index: 100;
@@ -52,6 +51,6 @@
     @media (min-width: 1024px) {
       width: 30vw;
     }
-
   }
 }
+
