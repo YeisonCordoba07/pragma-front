@@ -20,4 +20,13 @@ describe('ToggleComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should change the toggle state', () =>{
+    component.toggleState();
+    expect(component.isActive).toBe(true);
+
+    component.toggleState();
+    expect(component.isActive).toBe(false);
+
+  });
 });
