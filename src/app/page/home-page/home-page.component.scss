@@ -9,10 +9,11 @@
   align-items: center;
   flex-direction: column;
   padding: 50px 20px;
+  background-color: $color-white;
 
 
   &__title {
-    color: #673ab7;
+    color: $color-purple;
 
     text-align: center;
     @extend .desktop__poppins-h1;
