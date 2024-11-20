@@ -1,0 +1,11 @@
+<!-- toggler.component.html -->
+<div class="toggle-switch">
+  <input
+    type="checkbox"
+    id="toggle"
+    (change)="toggleState()"
+    [checked]="isActive"
+    class="toggle-switch__checkbox">
+
+  <label for="toggle" class="toggle-switch__slider"></label>
+</div>

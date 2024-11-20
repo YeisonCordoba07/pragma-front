@@ -40,7 +40,8 @@ import { Page404Component } from './page/page404/page404.component';
 import { ItemCardComponent } from './components/molecules/item-card/item-card.component';
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { HomePageComponent } from './page/home-page/home-page.component'; // Importar FormsModule
+import { HomePageComponent } from './page/home-page/home-page.component';
+import { ToggleComponent } from './components/molecules/toggle/toggle.component'; // Importar FormsModule
 
 
 
@@ -75,7 +76,8 @@ import { HomePageComponent } from './page/home-page/home-page.component'; // Imp
     Page404Component,
     ItemCardComponent,
     LoadingSpinnerComponent,
-    HomePageComponent
+    HomePageComponent,
+    ToggleComponent
   ],
     imports: [
         BrowserModule,

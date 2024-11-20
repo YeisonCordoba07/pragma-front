@@ -1,0 +1,57 @@
+@import "../../../../styles/global-colors";
+@import "../../../../styles/global";
+@import "../../../../styles/fonts";
+
+
+.toggle-switch {
+  position: relative;
+  width: 51px;
+  height: 32px;
+
+  &__checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color-spacer; /* Color inactivo */
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &::before {
+      content: '\2600'; /* Unicode del ícono del sol */
+      font-size: 18px;  /* Tamaño del ícono */
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      left: 2px;
+      bottom: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+  }
+
+}
+
+
+
+/* Se aplica cuando el toggle o checkbox está activo */
+.toggle-switch__checkbox:checked + .toggle-switch__slider {
+  background-color: $color-purple; /* Color activo */
+}
+
+.toggle-switch__checkbox:checked + .toggle-switch__slider::before {
+  transform: translateX(19px);
+  content: '\1F319'; /* Unicode del ícono de la luna */
+}
